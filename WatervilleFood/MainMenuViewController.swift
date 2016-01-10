@@ -10,6 +10,8 @@ import UIKit
 
 class MainMenuViewController: UIViewController {
 
+    let screenBounds = UIScreen.mainScreen().bounds
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -24,7 +26,7 @@ class MainMenuViewController: UIViewController {
     
     func createNavBar() {
         // Create the navigation bar
-        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, self.view.frame.size.width, 60)) // Offset by 20 pixels vertically to take the status bar into account
+        let navigationBar = UINavigationBar(frame: CGRectMake(0, 20, self.view.frame.size.width, 44)) // Offset by 20 pixels vertically to take the status bar into account
         
         navigationBar.backgroundColor = UIColor.whiteColor()
         //navigationBar.delegate =
@@ -61,6 +63,28 @@ class MainMenuViewController: UIViewController {
     
     func createImages() {
         
+        let PTimage = UIImage(named: "PadThaiToo")
+        let PTimageView = UIImageView(image: PTimage!)
+        PTimageView.frame = CGRect(x: 2, y: 66, width: screenBounds.width/2-4, height: 150)
+        view.addSubview(PTimageView)
+        let PTtapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("PTimageTapped:"))
+        PTimageView.userInteractionEnabled = true
+        PTimageView.addGestureRecognizer(PTtapGestureRecognizer)
+        
+        let WHOPimage = UIImage(named: "WHOP")
+        let WHOPimageView = UIImageView(image: WHOPimage!)
+        WHOPimageView.frame = CGRect(x: screenBounds.width/2 + 2, y: 66, width: screenBounds.width/2-4, height: 150)
+        view.addSubview(WHOPimageView)
+        
+        let GCimage = UIImage(named: "GrandCentral")
+        let GCimageView = UIImageView(image: GCimage!)
+        GCimageView.frame = CGRect(x: 2, y: 218, width: screenBounds.width/2-4, height: 150)
+        view.addSubview(GCimageView)
+        
+        let DEimage = UIImage(named: "DancingElephant")
+        let DEimageView = UIImageView(image: DEimage!)
+        DEimageView.frame = CGRect(x: screenBounds.width/2 + 2, y: 218, width: screenBounds.width/2-4, height: 150)
+        view.addSubview(DEimageView)
     }
     
     func back(sender: UIBarButtonItem) {
@@ -68,6 +92,9 @@ class MainMenuViewController: UIViewController {
         print("BACK")
     }
     
+    func PTimageTapped(img: AnyObject) {
+        print("Pad Thai Tapped")
+    }
 
 }
 
