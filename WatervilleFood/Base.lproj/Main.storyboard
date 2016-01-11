@@ -56,15 +56,18 @@
                             <outlet property="delegate" destination="T9f-ac-EeW" id="FJ2-NZ-H1n"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="xBW-C7-29B" kind="presentation" identifier="ItemsToOptions" modalTransitionStyle="flipHorizontal" id="zwM-rY-pn3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AsV-dp-eld" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1186" y="218"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Options Table View Controller-->
         <scene sceneID="MRG-Ys-wri">
             <objects>
-                <tableViewController id="xBW-C7-29B" sceneMemberID="viewController">
+                <tableViewController id="xBW-C7-29B" customClass="OptionsTableViewController" customModule="WatervilleFood" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1WY-qr-vDG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

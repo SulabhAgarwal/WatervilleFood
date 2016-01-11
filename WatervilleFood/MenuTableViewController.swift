@@ -13,6 +13,7 @@ import UIKit
 class MenuTableViewController: UITableViewController {
     
     internal var ItemArray : [PFObject]?
+    var options : AnyObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +45,15 @@ class MenuTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let optionsArray = ItemArray![indexPath.row].valueForKey("Options") as! [String]!
-        print(optionsArray)
+        let optionsArray = ItemArray![indexPath.row].valueForKey("Options")
+        self.options = optionsArray
+        self.performSegueWithIdentifier("ItemsToOptions", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        let detailVC = segue.destinationViewController as! OptionsTableViewController;
+        print(self.options)
+        detailVC.optionArray = self.options
     }
     
 }
