@@ -65,40 +65,39 @@ class MainMenuViewController: UIViewController {
     
     func createImages() {
         let PTimage = UIImage(named: "PadThaiToo")
-        let PTimageView = UIImageView(image: PTimage!)
+        let PTimageView = UIButton()
         PTimageView.frame = CGRect(x: 2, y: 66, width: screenBounds.width/2-4, height: 150)
+        PTimageView.setImage(PTimage, forState: .Normal)
+        PTimageView.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(PTimageView)
         PTimageView.tag = 1
-        PTimageView.userInteractionEnabled = true
-        let PTtapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
-        PTimageView.addGestureRecognizer(PTtapGestureRecognizer)
+
         
         let WHOPimage = UIImage(named: "WHOP")
-        let WHOPimageView = UIImageView(image: WHOPimage!)
+        let WHOPimageView = UIButton()
         WHOPimageView.frame = CGRect(x: screenBounds.width/2 + 2, y: 66, width: screenBounds.width/2-4, height: 150)
+        WHOPimageView.setImage(WHOPimage, forState: .Normal)
+        WHOPimageView.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         WHOPimageView.tag = 2
         view.addSubview(WHOPimageView)
-        WHOPimageView.userInteractionEnabled = true
-        let WHOPtapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
-        WHOPimageView.addGestureRecognizer(WHOPtapGestureRecognizer)
+
         
         let GCimage = UIImage(named: "GrandCentral")
-        let GCimageView = UIImageView(image: GCimage!)
+        let GCimageView = UIButton()
         GCimageView.frame = CGRect(x: 2, y: 218, width: screenBounds.width/2-4, height: 150)
+        GCimageView.setImage(GCimage, forState: .Normal)
+        GCimageView.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         GCimageView.tag = 3
         view.addSubview(GCimageView)
-        GCimageView.userInteractionEnabled = true
-        let GCtapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
-        GCimageView.addGestureRecognizer(GCtapGestureRecognizer)
         
         let DEimage = UIImage(named: "DancingElephant")
-        let DEimageView = UIImageView(image: DEimage!)
+        let DEimageView = UIButton()
         DEimageView.frame = CGRect(x: screenBounds.width/2 + 2, y: 218, width: screenBounds.width/2-4, height: 150)
+        DEimageView.setImage(DEimage, forState: .Normal)
+        DEimageView.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         DEimageView.tag = 4
         view.addSubview(DEimageView)
-        DEimageView.userInteractionEnabled = true
-        let DEtapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
-        DEimageView.addGestureRecognizer(DEtapGestureRecognizer)
+
     }
     
     func back(sender: UIBarButtonItem) {
@@ -106,9 +105,9 @@ class MainMenuViewController: UIViewController {
         print("BACK")
     }
     
-    func imageTapped(sender: UITapGestureRecognizer) {
+    func imageTapped(sender: UIButton) {
         var restaurant : String!
-        switch sender.view!.tag {
+        switch sender.tag {
         case 1:
             restaurant = "PadThaiToo"
         case 2:
@@ -144,7 +143,7 @@ class MainMenuViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
             let detailVC = segue.destinationViewController as! MenuTableViewController;
             print(self.array)
-            detailVC.array = self.array
+            detailVC.ItemArray = self.array
     }
 
 }

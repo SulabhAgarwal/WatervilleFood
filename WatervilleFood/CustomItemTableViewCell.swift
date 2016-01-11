@@ -10,7 +10,7 @@ import Foundation
 
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
+class CustomItemTableViewCell: UITableViewCell {
     
     let imgUser = UIImageView()
     let labUerName = UILabel()
