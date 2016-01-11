@@ -21,6 +21,8 @@ class MenuTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -42,7 +44,6 @@ class MenuTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("sldkfj")
         let optionsArray = ItemArray![indexPath.row].valueForKey("Options") as! [String]!
         print(optionsArray)
     }
