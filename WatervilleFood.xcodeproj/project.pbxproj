@@ -14,6 +14,7 @@
 		1ABEB1971C42C92000EC0331 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEB1951C42C92000EC0331 /* LaunchScreen.storyboard */; };
 		1ABEB1A21C42C92000EC0331 /* WatervilleFoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEB1A11C42C92000EC0331 /* WatervilleFoodTests.swift */; };
 		1ABEB1AD1C42C92000EC0331 /* WatervilleFoodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEB1AC1C42C92000EC0331 /* WatervilleFoodUITests.swift */; };
+		AA139D5C3E011C42C25EF99E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0904535E817F74D4B08386F5 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0904535E817F74D4B08386F5 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEB1891C42C92000EC0331 /* WatervilleFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatervilleFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEB18C1C42C92000EC0331 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1ABEB18E1C42C92000EC0331 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +49,8 @@
 		1ABEB1A81C42C92000EC0331 /* WatervilleFoodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatervilleFoodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEB1AC1C42C92000EC0331 /* WatervilleFoodUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatervilleFoodUITests.swift; sourceTree = "<group>"; };
 		1ABEB1AE1C42C92000EC0331 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D2A92EC8528D33ECD2EEF60 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		FB14E4EDBD1008D716001003 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA139D5C3E011C42C25EF99E /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +79,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		079A975D9AFF1B46397BFD47 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FB14E4EDBD1008D716001003 /* Pods.debug.xcconfig */,
+				3D2A92EC8528D33ECD2EEF60 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		1ABEB1801C42C92000EC0331 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +95,8 @@
 				1ABEB1A01C42C92000EC0331 /* WatervilleFoodTests */,
 				1ABEB1AB1C42C92000EC0331 /* WatervilleFoodUITests */,
 				1ABEB18A1C42C92000EC0331 /* Products */,
+				079A975D9AFF1B46397BFD47 /* Pods */,
+				1B641957B67385C5C069856D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +141,14 @@
 			path = WatervilleFoodUITests;
 			sourceTree = "<group>";
 		};
+		1B641957B67385C5C069856D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0904535E817F74D4B08386F5 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +156,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1ABEB1B11C42C92000EC0331 /* Build configuration list for PBXNativeTarget "WatervilleFood" */;
 			buildPhases = (
+				06A4C298811EAF6903C39C5F /* Check Pods Manifest.lock */,
 				1ABEB1851C42C92000EC0331 /* Sources */,
 				1ABEB1861C42C92000EC0331 /* Frameworks */,
 				1ABEB1871C42C92000EC0331 /* Resources */,
+				960C9B06EF4F93DF6EFADB15 /* Embed Pods Frameworks */,
+				4E3AD9FED1CA1462CBF4BA87 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -250,6 +277,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06A4C298811EAF6903C39C5F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4E3AD9FED1CA1462CBF4BA87 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		960C9B06EF4F93DF6EFADB15 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1ABEB1851C42C92000EC0331 /* Sources */ = {
@@ -397,10 +472,19 @@
 		};
 		1ABEB1B21C42C92000EC0331 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB14E4EDBD1008D716001003 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/Pods/ParseCrashReporting",
+				);
 				INFOPLIST_FILE = WatervilleFood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/ParseCrashReporting",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = dhvogel.WatervilleFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -408,10 +492,19 @@
 		};
 		1ABEB1B31C42C92000EC0331 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D2A92EC8528D33ECD2EEF60 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/Pods/ParseCrashReporting",
+				);
 				INFOPLIST_FILE = WatervilleFood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/ParseCrashReporting",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = dhvogel.WatervilleFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -484,6 +577,7 @@
 				1ABEB1B31C42C92000EC0331 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1ABEB1B41C42C92000EC0331 /* Build configuration list for PBXNativeTarget "WatervilleFoodTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +586,7 @@
 				1ABEB1B61C42C92000EC0331 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1ABEB1B71C42C92000EC0331 /* Build configuration list for PBXNativeTarget "WatervilleFoodUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +595,7 @@
 				1ABEB1B91C42C92000EC0331 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
