@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A11EDB31C4433AA00A612DB /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A11EDB21C4433AA00A612DB /* CustomTableViewCell.swift */; };
+		1A11EDB51C4433DE00A612DB /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A11EDB41C4433DE00A612DB /* MenuTableViewController.swift */; };
 		1ABEB18D1C42C92000EC0331 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEB18C1C42C92000EC0331 /* AppDelegate.swift */; };
 		1ABEB18F1C42C92000EC0331 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEB18E1C42C92000EC0331 /* MainMenuViewController.swift */; };
 		1ABEB1921C42C92000EC0331 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEB1901C42C92000EC0331 /* Main.storyboard */; };
@@ -37,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		0904535E817F74D4B08386F5 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A11EDB21C4433AA00A612DB /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		1A11EDB41C4433DE00A612DB /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		1ABEB1891C42C92000EC0331 /* WatervilleFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatervilleFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEB18C1C42C92000EC0331 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1ABEB18E1C42C92000EC0331 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 				1ABEB1951C42C92000EC0331 /* LaunchScreen.storyboard */,
 				1ABEB1981C42C92000EC0331 /* Info.plist */,
 				1AC22B721C43758D000FD40F /* MenuOptionsViewController.swift */,
+				1A11EDB21C4433AA00A612DB /* CustomTableViewCell.swift */,
+				1A11EDB41C4433DE00A612DB /* MenuTableViewController.swift */,
 			);
 			path = WatervilleFood;
 			sourceTree = "<group>";
@@ -336,6 +342,8 @@
 			files = (
 				1ABEB18F1C42C92000EC0331 /* MainMenuViewController.swift in Sources */,
 				1ABEB18D1C42C92000EC0331 /* AppDelegate.swift in Sources */,
+				1A11EDB51C4433DE00A612DB /* MenuTableViewController.swift in Sources */,
+				1A11EDB31C4433AA00A612DB /* CustomTableViewCell.swift in Sources */,
 				1AC22B731C43758D000FD40F /* MenuOptionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

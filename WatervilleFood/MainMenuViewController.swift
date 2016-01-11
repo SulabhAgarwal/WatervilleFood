@@ -126,11 +126,11 @@ class MainMenuViewController: UIViewController {
     
         
         
-        var query = PFQuery(className: restaurant)
+        let query = PFQuery(className: restaurant)
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if let error = error {
-                let alertController = UIAlertController(title:"Error", message: "Cannot retrieve restaurant information", preferredStyle: UIAlertControllerStyle.Alert)
+                let alertController = UIAlertController(title:"Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alertController, animated: true, completion: nil)
                 return
@@ -141,11 +141,10 @@ class MainMenuViewController: UIViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-            var detailVC = segue!.destinationViewController as! MenuOptionsViewController;
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+            let detailVC = segue.destinationViewController as! MenuTableViewController;
             print(self.array)
             detailVC.array = self.array
-        
     }
 
 }
