@@ -14,6 +14,7 @@
 		1ABEB1971C42C92000EC0331 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEB1951C42C92000EC0331 /* LaunchScreen.storyboard */; };
 		1ABEB1A21C42C92000EC0331 /* WatervilleFoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEB1A11C42C92000EC0331 /* WatervilleFoodTests.swift */; };
 		1ABEB1AD1C42C92000EC0331 /* WatervilleFoodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEB1AC1C42C92000EC0331 /* WatervilleFoodUITests.swift */; };
+		1AC22B711C436FBD000FD40F /* CustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC22B701C436FBD000FD40F /* CustomSegue.swift */; };
 		AA139D5C3E011C42C25EF99E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0904535E817F74D4B08386F5 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		1ABEB1A81C42C92000EC0331 /* WatervilleFoodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatervilleFoodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEB1AC1C42C92000EC0331 /* WatervilleFoodUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatervilleFoodUITests.swift; sourceTree = "<group>"; };
 		1ABEB1AE1C42C92000EC0331 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AC22B701C436FBD000FD40F /* CustomSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegue.swift; sourceTree = "<group>"; };
 		3D2A92EC8528D33ECD2EEF60 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FB14E4EDBD1008D716001003 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 				1ABEB1931C42C92000EC0331 /* Assets.xcassets */,
 				1ABEB1951C42C92000EC0331 /* LaunchScreen.storyboard */,
 				1ABEB1981C42C92000EC0331 /* Info.plist */,
+				1AC22B701C436FBD000FD40F /* CustomSegue.swift */,
 			);
 			path = WatervilleFood;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ABEB18F1C42C92000EC0331 /* MainMenuViewController.swift in Sources */,
+				1AC22B711C436FBD000FD40F /* CustomSegue.swift in Sources */,
 				1ABEB18D1C42C92000EC0331 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

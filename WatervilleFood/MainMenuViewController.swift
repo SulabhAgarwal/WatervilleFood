@@ -63,29 +63,41 @@ class MainMenuViewController: UIViewController {
     }
     
     func createImages() {
-        
         let PTimage = UIImage(named: "PadThaiToo")
         let PTimageView = UIImageView(image: PTimage!)
         PTimageView.frame = CGRect(x: 2, y: 66, width: screenBounds.width/2-4, height: 150)
         view.addSubview(PTimageView)
-        let PTtapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("PTimageTapped:"))
+        PTimageView.tag = 1
         PTimageView.userInteractionEnabled = true
+        let PTtapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
         PTimageView.addGestureRecognizer(PTtapGestureRecognizer)
         
         let WHOPimage = UIImage(named: "WHOP")
         let WHOPimageView = UIImageView(image: WHOPimage!)
         WHOPimageView.frame = CGRect(x: screenBounds.width/2 + 2, y: 66, width: screenBounds.width/2-4, height: 150)
+        WHOPimageView.tag = 2
         view.addSubview(WHOPimageView)
+        WHOPimageView.userInteractionEnabled = true
+        let WHOPtapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
+        WHOPimageView.addGestureRecognizer(WHOPtapGestureRecognizer)
         
         let GCimage = UIImage(named: "GrandCentral")
         let GCimageView = UIImageView(image: GCimage!)
         GCimageView.frame = CGRect(x: 2, y: 218, width: screenBounds.width/2-4, height: 150)
+        GCimageView.tag = 3
         view.addSubview(GCimageView)
+        GCimageView.userInteractionEnabled = true
+        let GCtapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
+        GCimageView.addGestureRecognizer(GCtapGestureRecognizer)
         
         let DEimage = UIImage(named: "DancingElephant")
         let DEimageView = UIImageView(image: DEimage!)
         DEimageView.frame = CGRect(x: screenBounds.width/2 + 2, y: 218, width: screenBounds.width/2-4, height: 150)
+        DEimageView.tag = 4
         view.addSubview(DEimageView)
+        DEimageView.userInteractionEnabled = true
+        let DEtapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
+        DEimageView.addGestureRecognizer(DEtapGestureRecognizer)
     }
     
     func back(sender: UIBarButtonItem) {
@@ -93,8 +105,41 @@ class MainMenuViewController: UIViewController {
         print("BACK")
     }
     
-    func PTimageTapped(img: AnyObject) {
-        print("Pad Thai Tapped")
+    func imageTapped(sender: UITapGestureRecognizer) {
+        var restaurant : String!
+        switch sender.view!.tag {
+        case 1:
+            restaurant = "PadThaiToo"
+        case 2:
+            restaurant = "WHOP"
+        case 3:
+            restaurant = "GrandCentral"
+        case 4:
+            restaurant = "DancingElephant"
+        default:
+            let alertController = UIAlertController(title:"Error", message: "Cannot retrieve restaurant information", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return
+        }
+        
+//        var menuArray = NSMutableArray()
+//        
+//        var query = PFQuery(className: restaurant)
+//        query.findObjectsInBackgroundWithBlock {
+//            (objects: [PFObject]?, error: NSError?) -> Void in
+//            if let error = error {
+//                let alertController = UIAlertController(title:"Error", message: "Cannot retrieve restaurant information", preferredStyle: UIAlertControllerStyle.Alert)
+//                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+//                self.presentViewController(alertController, animated: true, completion: nil)
+//                return
+//            } else {
+//                for object in objects {
+//                    
+//                }
+//            }
+//        }
+        
     }
 
 }
