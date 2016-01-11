@@ -12,6 +12,7 @@ import Parse
 class MainMenuViewController: UIViewController {
 
     let screenBounds = UIScreen.mainScreen().bounds
+    var array:[PFObject]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,23 +123,28 @@ class MainMenuViewController: UIViewController {
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
+    
         
-//        var menuArray = NSMutableArray()
-//        
-//        var query = PFQuery(className: restaurant)
-//        query.findObjectsInBackgroundWithBlock {
-//            (objects: [PFObject]?, error: NSError?) -> Void in
-//            if let error = error {
-//                let alertController = UIAlertController(title:"Error", message: "Cannot retrieve restaurant information", preferredStyle: UIAlertControllerStyle.Alert)
-//                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//                self.presentViewController(alertController, animated: true, completion: nil)
-//                return
-//            } else {
-//                for object in objects {
-//                    
-//                }
-//            }
-//        }
+        
+        var query = PFQuery(className: restaurant)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if let error = error {
+                let alertController = UIAlertController(title:"Error", message: "Cannot retrieve restaurant information", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+                return
+            } else {
+                self.array = objects
+                self.performSegueWithIdentifier("MainToMenuOptions", sender: sender)
+            }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+            var detailVC = segue!.destinationViewController as! MenuOptionsViewController;
+            print(self.array)
+            detailVC.array = self.array
         
     }
 

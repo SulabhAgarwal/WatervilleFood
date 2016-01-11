@@ -19,16 +19,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="8vo-bB-t3V" kind="custom" identifier="mainToOptions" customClass="CustomSegue" id="6Yr-U1-t0U"/>
+                        <segue destination="8vo-bB-t3V" kind="modal" identifier="MainToMenuOptions" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="6Yr-U1-t0U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--View Controller-->
+        <!--Menu Options View Controller-->
         <scene sceneID="7BS-1b-kwM">
             <objects>
-                <viewController id="8vo-bB-t3V" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuOptions" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8vo-bB-t3V" customClass="MenuOptionsViewController" customModule="WatervilleFood" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D9Z-H7-H98"/>
                         <viewControllerLayoutGuide type="bottom" id="fZt-TN-gNC"/>
