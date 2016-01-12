@@ -20,8 +20,6 @@ class CustomItemTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        imgUser.backgroundColor = UIColor.blueColor()
-        
         imgUser.translatesAutoresizingMaskIntoConstraints = false
         labUerName.translatesAutoresizingMaskIntoConstraints = false
         labMessage.translatesAutoresizingMaskIntoConstraints = false
