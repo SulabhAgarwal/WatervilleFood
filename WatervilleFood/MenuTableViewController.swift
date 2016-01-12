@@ -53,7 +53,7 @@ class MenuTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         let detailVC = segue.destinationViewController as! OptionsTableViewController;
         print(self.options)
-        detailVC.optionArray = self.options
+        detailVC.optionArray = self.options as! NSArray
     }
     
 }
