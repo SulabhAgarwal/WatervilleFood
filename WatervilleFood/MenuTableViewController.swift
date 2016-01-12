@@ -21,9 +21,15 @@ class MenuTableViewController: UITableViewController {
         //Auto-set the UITableViewCells height (requires iOS8+)
         //tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
-        tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         tableView.delegate = self
         tableView.dataSource = self
+        
+        let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
+        titleButton.setTitle("Test", forState: UIControlState.Normal)
+        titleButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 25.0)
+        titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        titleButton.addTarget(self, action: "titlePressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.navigationItem.titleView = titleButton
     }
     
     func createNavBar() {

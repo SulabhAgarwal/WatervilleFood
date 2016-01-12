@@ -17,14 +17,23 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.title = "Title"
+        self.title = "Main Menu"
         
         let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
-        titleButton.setTitle("Test", forState: UIControlState.Normal)
-        titleButton.titleLabel?.font = UIFont(name: "Raleway", size: 25.0)
+        titleButton.setTitle("Main Menu", forState: UIControlState.Normal)
+        titleButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 25.0)
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         titleButton.addTarget(self, action: "titlePressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.titleView = titleButton
+        
+        let cartButton = UIButton()
+        cartButton.setImage(UIImage(named: "shoppingCart"), forState: .Normal)
+        cartButton.frame = CGRectMake(0, 0, 30, 30)
+        cartButton.addTarget(self, action: "toCheckout:", forControlEvents: .TouchUpInside)
+        let rightButton = UIBarButtonItem()
+        rightButton.customView = cartButton
+        self.navigationItem.rightBarButtonItem = rightButton
+        
         
         
         self.createImages()
@@ -111,8 +120,10 @@ class MainMenuViewController: UIViewController {
                 self.presentViewController(alertController, animated: true, completion: nil)
                 return
             } else {
-                self.array = objects
-                self.performSegueWithIdentifier("MainToMenuOptions", sender: sender)
+                
+                let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("MenuTableVC") as? MenuTableViewController
+                mapViewControllerObejct?.ItemArray = objects
+                self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
             }
         }
     }

@@ -30,7 +30,7 @@
         <!--Menu Table View Controller-->
         <scene sceneID="dXd-lO-DBp">
             <objects>
-                <tableViewController id="T9f-ac-EeW" customClass="MenuTableViewController" customModule="WatervilleFood" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MenuTableVC" id="T9f-ac-EeW" customClass="MenuTableViewController" customModule="WatervilleFood" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="VXA-pa-0cZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
