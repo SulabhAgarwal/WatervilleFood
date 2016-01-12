@@ -46,7 +46,7 @@ class OptionsTableViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("optionCell", forIndexPath: indexPath) as! CustomItemTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("optionCell", forIndexPath: indexPath) as! CustomOptionTableViewCell
         if checkBoxArray[indexPath.section][indexPath.row] == false {
             cell.imgUser.image = UIImage(named: "buttonOff")
         }
@@ -57,9 +57,7 @@ class OptionsTableViewController : UITableViewController {
         guard let option = self.optionArray[indexPath.section][2][indexPath.row] else {
             return UITableViewCell()
         }
-        cell.labUerName.text = option as! String
-        cell.labMessage.text = "Testt"
-        cell.labTime.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .ShortStyle, timeStyle: .ShortStyle)
+        cell.labUerName.text = option as? String
         
         return cell
     }
@@ -72,6 +70,10 @@ class OptionsTableViewController : UITableViewController {
            checkBoxArray[indexPath.section][indexPath.row] = true
         }
         self.tableView.reloadData()
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 40
     }
     
 }
