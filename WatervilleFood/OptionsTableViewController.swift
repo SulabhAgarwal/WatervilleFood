@@ -22,6 +22,7 @@ class OptionsTableViewController : UITableViewController {
         tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         tableView.delegate = self
         tableView.dataSource = self
+        optionArray = optionArray as Array
         for i in 0...optionArray.count-1{
             let sectionData = optionArray[i]
             var sectionBoxArray:[Bool] = []
@@ -53,7 +54,10 @@ class OptionsTableViewController : UITableViewController {
             cell.imgUser.image = UIImage(named: "buttonOn")
         }
         
-        cell.labUerName.text = "Test"
+        guard let option = self.optionArray[indexPath.section][2][indexPath.row] else {
+            return UITableViewCell()
+        }
+        cell.labUerName.text = option as! String
         cell.labMessage.text = "Testt"
         cell.labTime.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .ShortStyle, timeStyle: .ShortStyle)
         
