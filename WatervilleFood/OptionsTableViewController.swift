@@ -10,17 +10,18 @@ import Foundation
 import UIKit
 import Parse
 
-class OptionsTableViewController : UITableViewController {
+class OptionsTableViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var tableView: UITableView!
     internal var optionArray : NSArray = []
     var checkBoxArray:[[Bool]] = []
+    let bounds = UIScreen.mainScreen().bounds
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.createNavBar()
-        tableView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         tableView.delegate = self
         tableView.dataSource = self
+        
         optionArray = optionArray as Array
         for i in 0...optionArray.count-1{
             let sectionData = optionArray[i]
@@ -30,60 +31,37 @@ class OptionsTableViewController : UITableViewController {
             }
             checkBoxArray.append(sectionBoxArray)
         }
+        
+        self.title = "Options"
+        let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
+        titleButton.setTitle("Options", forState: UIControlState.Normal)
+        titleButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 25.0)
+        titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        titleButton.addTarget(self, action: "titlePressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.navigationItem.titleView = titleButton
+        
+        let checkoutButton : UIButton = UIButton(frame: CGRectMake(20,bounds.height-50,bounds.width-40,40))
+        checkoutButton.setTitle("Add To Order", forState: UIControlState.Normal)
+        checkoutButton.layer.backgroundColor = UIColor.blackColor().CGColor
+        checkoutButton.addTarget(self, action:"addToOrder:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(checkoutButton)
+        
     }
     
-    func createNavBar() {
-        // Create the navigation bar
-        let navigationBar = UINavigationBar(frame: CGRectMake(0, 20, self.view.frame.size.width, 44)) // Offset by 20 pixels vertically to take the status bar into account
-        
-        navigationBar.backgroundColor = UIColor.whiteColor()
-        //navigationBar.delegate =
-        
-        // Create a navigation item with a title
-        let navigationItem = UINavigationItem()
-        navigationItem.title = "Waterville Food"
-        
-        // Create left and right button for navigation item
-        let backButton = UIButton()
-        backButton.setImage(UIImage(named: "backButton"), forState: .Normal)
-        backButton.frame = CGRectMake(0, 0, 30, 30)
-        backButton.addTarget(self, action: "back:", forControlEvents: .TouchUpInside)
-        let leftButton = UIBarButtonItem()
-        leftButton.customView = backButton
-        
-        let cartButton = UIButton()
-        cartButton.setImage(UIImage(named: "shoppingCart"), forState: .Normal)
-        cartButton.frame = CGRectMake(0, 0, 30, 30)
-        cartButton.addTarget(self, action: "back:", forControlEvents: .TouchUpInside)
-        let rightButton = UIBarButtonItem()
-        rightButton.customView = cartButton
-        
-        // Create two buttons for the navigation item
-        navigationItem.leftBarButtonItem = leftButton
-        navigationItem.rightBarButtonItem = rightButton
-        
-        // Assign the navigation item to the navigation bar
-        navigationBar.items = [navigationItem]
-        
-        // Make the navigation bar a subview of the current view controller
-        self.view.addSubview(navigationBar)
-    }
-
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.optionArray.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.optionArray[section][2].count
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "\(self.optionArray[section][1])"
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("optionCell", forIndexPath: indexPath) as! CustomOptionTableViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("optionsCell", forIndexPath: indexPath) as! CustomOptionTableViewCell
         if checkBoxArray[indexPath.section][indexPath.row] == false {
             cell.imgUser.image = UIImage(named: "buttonOff")
         }
@@ -99,7 +77,7 @@ class OptionsTableViewController : UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if checkBoxArray[indexPath.section][indexPath.row] == true {
             checkBoxArray[indexPath.section][indexPath.row] = false
         }
@@ -109,7 +87,7 @@ class OptionsTableViewController : UITableViewController {
         self.tableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 40
     }
     

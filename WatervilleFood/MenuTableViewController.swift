@@ -23,9 +23,9 @@ class MenuTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 44
         tableView.delegate = self
         tableView.dataSource = self
-        
+        self.title = "Menu Items"
         let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
-        titleButton.setTitle("Test", forState: UIControlState.Normal)
+        titleButton.setTitle("Menu Items", forState: UIControlState.Normal)
         titleButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 25.0)
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         titleButton.addTarget(self, action: "titlePressed:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -89,14 +89,10 @@ class MenuTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let optionsArray = ItemArray![indexPath.row].valueForKey("Options")
-        self.options = optionsArray
-        self.performSegueWithIdentifier("ItemsToOptions", sender: self)
+        let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("OptionsTableVC") as? OptionsTableViewController
+        mapViewControllerObejct?.optionArray = optionsArray as! NSArray
+        self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        let detailVC = segue.destinationViewController as! OptionsTableViewController;
-        print(self.options)
-        detailVC.optionArray = self.options as! NSArray
-    }
     
 }
