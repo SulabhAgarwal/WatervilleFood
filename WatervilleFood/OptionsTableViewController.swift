@@ -51,14 +51,41 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
     }
     
     func checkoutPressed(sender: UIButton) {
+        //check number of buttons pressed?
+        if (!checkQuantities()) {
+            return
+        }
+
         let options = getOptionsForOrder()
         Order.items.append([item,options,price])
         print(Order.items)
-        item = String()
-        optionArray = []
         self.navigationController?.popViewControllerAnimated(true)
         JSSAlertView().success(self, title: "Great success", text: "Item added to order!")
         
+    }
+    
+    func checkQuantities() -> Bool{
+        for section in 0...self.optionArray.count-1 {
+            let specifier = optionArray[section][0] as! [Int]
+            let sectionSelected = returnSelectedInSection(section)
+            if (specifier[0] == specifier[1]) {
+                if (sectionSelected.count != specifier[0]) {
+                    JSSAlertView().warning(self, title: "\(optionArray[section][1]) Error", text: "Must pick \(specifier[0])")
+                    return false
+                }
+            }
+            else {
+                if (sectionSelected.count < specifier[0]) {
+                    JSSAlertView().warning(self, title: "\(optionArray[section][1]) Error", text: "Must pick at least \(specifier[0])")
+                    return false
+                }
+                else if (sectionSelected.count > specifier[1]) {
+                    JSSAlertView().warning(self, title: "\(optionArray[section][1]) Error", text: "Cannot pick more than \(specifier[1])")
+                    return false
+                }
+            }
+        }
+        return true
     }
     
     func getOptionsForOrder() -> [[AnyObject]] {
@@ -114,9 +141,9 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
             checkBoxArray[indexPath.section][indexPath.row] = false
         }
         else {
-            let specifier = optionArray[indexPath.section][0] as! String!
+            let specifier = optionArray[indexPath.section][0] as! [Int]
             let sectionSelected = returnSelectedInSection(indexPath.section)
-            if (specifier == "PICK_ONE" && sectionSelected.count == 1) {
+            if (specifier[0] == specifier[1] && specifier[1] == 1 && sectionSelected.count == 1) {
                 checkBoxArray[indexPath.section][sectionSelected[0]] = false
             }
             checkBoxArray[indexPath.section][indexPath.row] = true
