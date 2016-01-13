@@ -60,6 +60,7 @@ class MenuTableViewController: UITableViewController {
         let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("OptionsTableVC") as? OptionsTableViewController
         mapViewControllerObejct?.optionArray = optionsArray as! NSArray
         mapViewControllerObejct?.item = ItemArray![indexPath.row].valueForKey("Item") as! String!
+        mapViewControllerObejct?.price = ItemArray![indexPath.row].valueForKey("Price") as! Double!
         self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
     }
     

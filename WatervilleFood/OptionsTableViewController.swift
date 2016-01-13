@@ -16,6 +16,7 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var tableView: UITableView!
     internal var optionArray : NSArray = []
     internal var item : String = String()
+    internal var price : Double = Double()
     var checkBoxArray:[[Bool]] = []
     let bounds = UIScreen.mainScreen().bounds
     
@@ -50,8 +51,9 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
     }
     
     func checkoutPressed(sender: UIButton) {
-        var options = getOptionsForOrder()
-        Order.items.append([item,[],1.00])
+        let options = getOptionsForOrder()
+        Order.items.append([item,options,price])
+        print(Order.items)
         item = String()
         optionArray = []
         self.navigationController?.popViewControllerAnimated(true)
@@ -59,8 +61,23 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
         
     }
     
-    func getOptionsForOrder() {
-        
+    func getOptionsForOrder() -> [[AnyObject]] {
+        var orderOptions:[[AnyObject]] = [[AnyObject]]()
+        for section in 0...self.optionArray.count-1 {
+            let title = self.optionArray[section][1] as! String!
+            let optionsSelected = optionArraytoOptionString(section, optionSelected: returnSelectedInSection(section))
+            let sectionOptions:[AnyObject] = [title, optionsSelected]
+            orderOptions.append(sectionOptions)
+        }
+        return orderOptions
+    }
+    
+    func optionArraytoOptionString(section: Int, optionSelected:[Int]) -> [String]! {
+        var options:[String]! = []
+        for option in optionSelected {
+            options.append(self.optionArray[section][2][option] as! String!)
+        }
+        return options
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
