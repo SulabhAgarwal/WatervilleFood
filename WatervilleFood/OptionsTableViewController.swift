@@ -15,6 +15,7 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
     
     @IBOutlet weak var tableView: UITableView!
     internal var optionArray : NSArray = []
+    internal var item : String = String()
     var checkBoxArray:[[Bool]] = []
     let bounds = UIScreen.mainScreen().bounds
     
@@ -49,7 +50,17 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
     }
     
     func checkoutPressed(sender: UIButton) {
+        var options = getOptionsForOrder()
+        Order.items.append([item,[],1.00])
+        item = String()
+        optionArray = []
+        self.navigationController?.popViewControllerAnimated(true)
         JSSAlertView().success(self, title: "Great success", text: "Item added to order!")
+        
+    }
+    
+    func getOptionsForOrder() {
+        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -86,9 +97,24 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
             checkBoxArray[indexPath.section][indexPath.row] = false
         }
         else {
-           checkBoxArray[indexPath.section][indexPath.row] = true
+            let specifier = optionArray[indexPath.section][0] as! String!
+            let sectionSelected = returnSelectedInSection(indexPath.section)
+            if (specifier == "PICK_ONE" && sectionSelected.count == 1) {
+                checkBoxArray[indexPath.section][sectionSelected[0]] = false
+            }
+            checkBoxArray[indexPath.section][indexPath.row] = true
         }
         self.tableView.reloadData()
+    }
+    
+    func returnSelectedInSection(section: Int) -> [Int] {
+        var selectedIndexes:[Int] = []
+        for cell in 0...checkBoxArray[section].count-1 {
+            if checkBoxArray[section][cell] == true {
+                selectedIndexes.append(cell)
+            }
+        }
+        return selectedIndexes
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
