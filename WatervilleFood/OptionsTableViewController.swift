@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Parse
 
+
 class OptionsTableViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
@@ -40,12 +41,15 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
         titleButton.addTarget(self, action: "titlePressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.titleView = titleButton
         
-        let checkoutButton : UIButton = UIButton(frame: CGRectMake(20,bounds.height-50,bounds.width-40,40))
-        checkoutButton.setTitle("Add To Order", forState: UIControlState.Normal)
-        checkoutButton.layer.backgroundColor = UIColor.blackColor().CGColor
-        checkoutButton.addTarget(self, action:"addToOrder:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(checkoutButton)
-        
+        let addToOrderButton : UIButton = UIButton(frame: CGRectMake(20,bounds.height-50,bounds.width-40,40))
+        addToOrderButton.setTitle("Add To Order", forState: UIControlState.Normal)
+        addToOrderButton.layer.backgroundColor = UIColor.blackColor().CGColor
+        addToOrderButton.addTarget(self, action: "checkoutPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(addToOrderButton)
+    }
+    
+    func checkoutPressed(sender: UIButton) {
+        JSSAlertView().success(self, title: "Great success", text: "Item added to order!")
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
