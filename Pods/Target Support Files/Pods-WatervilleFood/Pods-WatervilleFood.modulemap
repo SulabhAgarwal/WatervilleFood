@@ -1,0 +1,6 @@
+framework module Pods_WatervilleFood {
+  umbrella header "Pods-WatervilleFood-umbrella.h"
+
+  export *
+  module * { export * }
+}

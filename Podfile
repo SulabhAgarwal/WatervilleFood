@@ -1,11 +1,14 @@
 use_frameworks!
 platform :ios, '9.0'
 
-pod 'Bolts'
-pod 'Parse'
-pod 'ParseUI'
-pod 'ParseCrashReporting'
-pod 'ParseFacebookUtilsV4'
+target ‘WatervilleFood’ do
+	pod 'Bolts'
+	pod 'Parse'
+	pod 'ParseUI'
+	pod 'ParseCrashReporting'
+	pod 'ParseFacebookUtilsV4'
+    pod 'Stripe'
+end
 
 post_install do |installer|
     installer.pods_project.build_configuration_list.build_configurations.each do |configuration|

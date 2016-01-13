@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import Parse
-
+import Stripe
 
 class OptionsTableViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
