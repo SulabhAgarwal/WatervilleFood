@@ -32,14 +32,25 @@ class CartCheckoutViewController: UIViewController, UITableViewDelegate, UITable
         
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 50;
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 5
+        return Order.items.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CheckoutCell", forIndexPath: indexPath) as! CustomCartCell
         
-        cell.itemName.text = "Test"
+        cell.itemName.text = Order.items[indexPath.row][0] as? String
+        cell.itemPrice.text = "$\(String.localizedStringWithFormat("%.2f %@", (Order.items[indexPath.row][2] as? Double)!,""))"
+        for section in Order.items[indexPath.row][1] as! [[AnyObject]] {
+            for option in section[1] as! [AnyObject]{
+                cell.itemOptions.text = cell.itemOptions.text! + " " + (option as! String) as String
+            }
+            
+        }
         
         return cell
     }

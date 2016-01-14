@@ -10,6 +10,10 @@ import UIKit
 import Parse
 import SwiftSpinner
 
+struct Order {
+    //[["<order item>","[<options>]","price"], ["<order item>","[<options>]","price"]]
+    static var items:[[AnyObject]] = [[AnyObject]]()
+}
 
 class MainMenuViewController: UIViewController {
 

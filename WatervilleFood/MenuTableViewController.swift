@@ -10,10 +10,7 @@ import Foundation
 import Parse
 import UIKit
 
-struct Order {
-    //[["<order item>","[<options>]","price"], ["<order item>","[<options>]","price"]]
-    static var items:[[AnyObject]] = [[AnyObject]]()
-}
+
 
 class MenuTableViewController: UITableViewController {
     
@@ -24,7 +21,7 @@ class MenuTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Auto-set the UITableViewCells height (requires iOS8+)
-        //tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         tableView.delegate = self
         tableView.dataSource = self
