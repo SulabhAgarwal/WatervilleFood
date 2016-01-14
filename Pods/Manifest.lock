@@ -26,6 +26,7 @@ PODS:
   - Stripe (6.0.1):
     - Stripe/Core (= 6.0.1)
   - Stripe/Core (6.0.1)
+  - SwiftSpinner (0.8.0)
 
 DEPENDENCIES:
   - Bolts
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - ParseFacebookUtilsV4
   - ParseUI
   - Stripe
+  - SwiftSpinner
 
 SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
@@ -44,5 +46,6 @@ SPEC CHECKSUMS:
   ParseFacebookUtilsV4: 216e03bd560404eed09a4875c75f0c1cdf758070
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   Stripe: 04f215191702c268b89fe0cdf28dc24a9688a71b
+  SwiftSpinner: 11c2c5ec7443d92f3026d3067ca8a91d4adef13f
 
 COCOAPODS: 0.39.0

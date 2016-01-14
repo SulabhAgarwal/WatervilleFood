@@ -8,7 +8,7 @@
 
 import UIKit
 import Parse
-
+import SwiftSpinner
 
 
 class MainMenuViewController: UIViewController {
@@ -39,6 +39,11 @@ class MainMenuViewController: UIViewController {
         
         
         self.createImages()
+    }
+    
+    func toCheckout(sender:UIButton) {
+        let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("cartCheckoutVC") as? CartCheckoutViewController
+        self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
     }
     
     @IBAction func titlePressed(sender: UIButton) {
@@ -94,6 +99,7 @@ class MainMenuViewController: UIViewController {
     }
     
     func imageTapped(sender: UIButton) {
+        SwiftSpinner.show("Retrieving restaurant menu...")
         var restaurant : String!
         switch sender.tag {
         case 1:
@@ -117,12 +123,13 @@ class MainMenuViewController: UIViewController {
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if let error = error {
+                SwiftSpinner.hide()
                 let alertController = UIAlertController(title:"Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alertController, animated: true, completion: nil)
                 return
             } else {
-                
+                SwiftSpinner.hide()
                 let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("MenuTableVC") as? MenuTableViewController
                 mapViewControllerObejct?.ItemArray = objects
                 self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)

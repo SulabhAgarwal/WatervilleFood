@@ -92,6 +92,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WatervilleFood/ParseFacebookUtilsV4.framework"
   install_framework "Pods-WatervilleFood/ParseUI.framework"
   install_framework "Pods-WatervilleFood/Stripe.framework"
+  install_framework "Pods-WatervilleFood/SwiftSpinner.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WatervilleFood/Bolts.framework"
@@ -102,4 +103,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WatervilleFood/ParseFacebookUtilsV4.framework"
   install_framework "Pods-WatervilleFood/ParseUI.framework"
   install_framework "Pods-WatervilleFood/Stripe.framework"
+  install_framework "Pods-WatervilleFood/SwiftSpinner.framework"
 fi

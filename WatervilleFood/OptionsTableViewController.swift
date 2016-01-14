@@ -11,6 +11,7 @@ import UIKit
 import Parse
 import Stripe
 
+
 class OptionsTableViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
@@ -58,7 +59,6 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
 
         let options = getOptionsForOrder()
         Order.items.append([item,options,price])
-        print(Order.items)
         self.navigationController?.popViewControllerAnimated(true)
         JSSAlertView().success(self, title: "Great success", text: "Item added to order!")
         

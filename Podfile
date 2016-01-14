@@ -7,7 +7,8 @@ target ‘WatervilleFood’ do
 	pod 'ParseUI'
 	pod 'ParseCrashReporting'
 	pod 'ParseFacebookUtilsV4'
-    pod 'Stripe'
+    	pod 'Stripe'
+	pod ‘SwiftSpinner’
 end
 
 post_install do |installer|
