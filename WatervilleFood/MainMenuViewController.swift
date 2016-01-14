@@ -99,7 +99,7 @@ class MainMenuViewController: UIViewController {
     }
     
     func imageTapped(sender: UIButton) {
-        SwiftSpinner.show("Retrieving restaurant menu...")
+        SwiftSpinner.show("")
         var restaurant : String!
         switch sender.tag {
         case 1:
