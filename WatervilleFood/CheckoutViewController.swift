@@ -15,6 +15,8 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     let TABLE_NAMES:[String] = ["<Restaurant>", "Add Payment Method", "Add Delivery Address"]
     let TABLE_ICONS:[UIImage] = [UIImage(named: "Restaurant")!, UIImage(named: "creditCard")!, UIImage(named: "House")!]
+    let detailsTableView:UITableView = UITableView()
+    let orderTableView:UITableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +28,19 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.navigationItem.titleView = titleButton
         
-        let tableView:UITableView = UITableView(frame: CGRectMake(10,10,SCREEN_BOUNDS.width-20,SCREEN_BOUNDS.height-60))
-        tableView.delegate      =   self
-        tableView.dataSource    =   self
-        tableView.scrollEnabled = false
-        tableView.registerNib(UINib(nibName: "CheckoutCell", bundle: nil), forCellReuseIdentifier: "CheckoutCell")
-        self.view.addSubview(tableView)
+        detailsTableView.frame = CGRectMake(5,5,SCREEN_BOUNDS.width-10,SCREEN_BOUNDS.height/2-10)
+        detailsTableView.delegate      =   self
+        detailsTableView.dataSource    =   self
+        detailsTableView.scrollEnabled = false
+        detailsTableView.registerNib(UINib(nibName: "CheckoutCell", bundle: nil), forCellReuseIdentifier: "CheckoutCell")
+        self.view.addSubview(detailsTableView)
         
-        
-        
+        orderTableView.frame = CGRectMake(5,SCREEN_BOUNDS.height/2,SCREEN_BOUNDS.width-10,SCREEN_BOUNDS.height/2-50)
+        orderTableView.delegate      =   self
+        orderTableView.dataSource    =   self
+        orderTableView.scrollEnabled = true
+        orderTableView.registerNib(UINib(nibName: "CustomCartCell", bundle: nil), forCellReuseIdentifier: "CartCell")
+        self.view.addSubview(orderTableView)
         
         let CheckoutButton : UIButton = UIButton(frame: CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40))
         CheckoutButton.setTitle("Checkout", forState: UIControlState.Normal)
@@ -48,22 +54,56 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if (tableView == detailsTableView) {
+            return "Order Details"
+        }
+        else {
+            return "Order Summary"
+        }
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 50;
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 3
+        if (tableView == detailsTableView) {
+            return 3
+        }
+        else {
+            return Order.items.count
+        }
     }
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CheckoutCell", forIndexPath: indexPath) as! CheckoutCell
-        
-        cell.itemName.text = TABLE_NAMES[indexPath.row]
-        cell.itemImage.image = TABLE_ICONS[indexPath.row]
+        if (tableView == detailsTableView) {
+            let cell = tableView.dequeueReusableCellWithIdentifier("CheckoutCell", forIndexPath: indexPath) as! CheckoutCell
+            
+            cell.itemName.text = TABLE_NAMES[indexPath.row]
+            cell.itemImage.image = TABLE_ICONS[indexPath.row]
 
-        return cell
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("CartCell", forIndexPath: indexPath) as! CustomCartCell
+            cell.itemName.text = Order.items[indexPath.row][0] as? String
+            cell.itemPrice.text = "$\(String.localizedStringWithFormat("%.2f %@", (Order.items[indexPath.row][2] as? Double)!,""))"
+            
+            for section in Order.items[indexPath.row][1] as! [[AnyObject]] {
+                for option in section[1] as! [AnyObject]{
+                    cell.itemOptions.text = cell.itemOptions.text! + " " + (option as! String) as String
+                    
+                }
+                
+            }
+            
+            return cell
+
+        }
     }
+    
+    
     
 }

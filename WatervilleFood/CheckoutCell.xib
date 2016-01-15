@@ -21,10 +21,10 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYt-I7-ljz">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gYt-I7-ljz">
                         <rect key="frame" x="8" y="8" width="30" height="27"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="37" id="aTb-gD-DoY"/>
+                            <constraint firstAttribute="width" constant="30" id="aTb-gD-DoY"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -34,7 +34,7 @@
                     <constraint firstItem="gYt-I7-ljz" firstAttribute="leading" secondItem="kR7-gy-vnP" secondAttribute="leadingMargin" id="89b-V3-zaL"/>
                     <constraint firstItem="gYt-I7-ljz" firstAttribute="centerY" secondItem="K9a-l4-hg4" secondAttribute="centerY" id="OMb-pK-csQ"/>
                     <constraint firstItem="K9a-l4-hg4" firstAttribute="trailing" secondItem="kR7-gy-vnP" secondAttribute="trailingMargin" id="hTP-zO-myH"/>
-                    <constraint firstItem="K9a-l4-hg4" firstAttribute="leading" secondItem="gYt-I7-ljz" secondAttribute="trailing" constant="34" id="j5U-XR-1HM"/>
+                    <constraint firstItem="K9a-l4-hg4" firstAttribute="leading" secondItem="gYt-I7-ljz" secondAttribute="trailing" constant="41" id="j5U-XR-1HM"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
