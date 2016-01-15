@@ -23,7 +23,7 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.title = "Main Menu"
+        self.title = "Main"
         
         let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
         titleButton.setTitle("Main Menu", forState: UIControlState.Normal)

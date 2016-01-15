@@ -3,6 +3,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,25 +17,41 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jj5-ed-Dhg">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jj5-ed-Dhg">
                         <rect key="frame" x="8" y="0.0" width="153" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbC-ZQ-YQc">
-                        <rect key="frame" x="169" y="0.0" width="151" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbC-ZQ-YQc">
+                        <rect key="frame" x="169" y="0.0" width="143" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="143" id="8ny-SG-TSr"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPe-uO-KpD">
-                        <rect key="frame" x="8" y="22" width="312" height="27"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPe-uO-KpD">
+                        <rect key="frame" x="8" y="22" width="304" height="27"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="TPe-uO-KpD" firstAttribute="top" secondItem="jj5-ed-Dhg" secondAttribute="bottom" constant="1" id="54F-RR-zYU"/>
+                    <constraint firstItem="HbC-ZQ-YQc" firstAttribute="baseline" secondItem="jj5-ed-Dhg" secondAttribute="firstBaseline" id="AzJ-K3-29V"/>
+                    <constraint firstItem="HbC-ZQ-YQc" firstAttribute="trailing" secondItem="XAO-qO-5CY" secondAttribute="trailingMargin" id="Q22-Zb-EGu"/>
+                    <constraint firstItem="HbC-ZQ-YQc" firstAttribute="baseline" secondItem="jj5-ed-Dhg" secondAttribute="baseline" id="bKJ-XK-8AO"/>
+                    <constraint firstAttribute="trailing" secondItem="TPe-uO-KpD" secondAttribute="trailing" constant="8" id="hhN-7r-og2"/>
+                    <constraint firstItem="TPe-uO-KpD" firstAttribute="leading" secondItem="jj5-ed-Dhg" secondAttribute="leading" id="pGd-oJ-5QI"/>
+                    <constraint firstItem="jj5-ed-Dhg" firstAttribute="baseline" secondItem="HbC-ZQ-YQc" secondAttribute="firstBaseline" id="rRl-YS-QUy"/>
+                    <constraint firstItem="jj5-ed-Dhg" firstAttribute="top" secondItem="XAO-qO-5CY" secondAttribute="top" id="s5Z-EI-7Do"/>
+                    <constraint firstItem="HbC-ZQ-YQc" firstAttribute="leading" secondItem="jj5-ed-Dhg" secondAttribute="trailing" constant="8" symbolic="YES" id="v91-Zs-eEE"/>
+                    <constraint firstItem="jj5-ed-Dhg" firstAttribute="leading" secondItem="XAO-qO-5CY" secondAttribute="leadingMargin" id="vT6-Jy-VG6"/>
+                    <constraint firstAttribute="bottom" secondItem="TPe-uO-KpD" secondAttribute="bottom" id="vev-3S-5KN"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="itemName" destination="jj5-ed-Dhg" id="yK9-c6-UnL"/>
