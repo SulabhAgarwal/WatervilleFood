@@ -42,7 +42,7 @@ class CartCheckoutViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Order Summary"
+        return "Order Summary (Swipe Items to Delete)"
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -63,7 +63,10 @@ class CartCheckoutViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
-            print("more button tapped")
+            Order.items.removeAtIndex(indexPath.row)
+            print(Order.items)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            JSSAlertView().danger(self, title: "Item deleted from order", text: "")
         }
         delete.backgroundColor = UIColor.redColor()
 
