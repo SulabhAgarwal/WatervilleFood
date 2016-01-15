@@ -66,10 +66,10 @@
             </objects>
             <point key="canvasLocation" x="1998" y="218"/>
         </scene>
-        <!--Cart Checkout View Controller-->
+        <!--Order Summary View Controller-->
         <scene sceneID="eWE-f3-86o">
             <objects>
-                <viewController storyboardIdentifier="cartCheckoutVC" id="WnI-On-gG6" customClass="CartCheckoutViewController" customModule="WatervilleFood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrderSummaryVC" id="WnI-On-gG6" customClass="OrderSummaryViewController" customModule="WatervilleFood" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5uM-Ax-Iuk"/>
                         <viewControllerLayoutGuide type="bottom" id="R91-zl-sOx"/>
@@ -83,6 +83,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nqD-Bd-CNI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3487" y="218"/>
+        </scene>
+        <!--Checkout View Controller-->
+        <scene sceneID="1Xw-eF-I5J">
+            <objects>
+                <viewController storyboardIdentifier="CheckoutVC" id="lIU-Nt-Sum" customClass="CheckoutViewController" customModule="WatervilleFood" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fY3-l1-coe"/>
+                        <viewControllerLayoutGuide type="bottom" id="atS-H2-nA8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Ma-T1-FC3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PdF-V8-xUg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4138" y="218"/>
         </scene>
         <!--Options Table View Controller-->
         <scene sceneID="PJJ-M7-38e">

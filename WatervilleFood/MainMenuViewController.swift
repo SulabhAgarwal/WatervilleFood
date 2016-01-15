@@ -12,7 +12,7 @@ import SwiftSpinner
 
 struct Order {
     //[["<order item>","[<options>]","price"], ["<order item>","[<options>]","price"]]
-    static var items:[[AnyObject]] = [[AnyObject]]()
+    static var items:[[AnyObject]] = [["Danny Special", [["Stuff", ["Bless Up"]]], 69.69]]
 }
 
 class MainMenuViewController: UIViewController {
@@ -46,7 +46,7 @@ class MainMenuViewController: UIViewController {
     }
     
     func toCheckout(sender:UIButton) {
-        let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("cartCheckoutVC") as? CartCheckoutViewController
+        let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("OrderSummaryVC") as? OrderSummaryViewController
         self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
     }
     

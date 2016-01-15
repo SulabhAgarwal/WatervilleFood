@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CheckoutCell" id="Hfe-cw-yLO" customClass="CheckoutCell" customModule="WatervilleFood" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hfe-cw-yLO" id="kR7-gy-vnP">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9a-l4-hg4">
+                        <rect key="frame" x="79" y="11" width="233" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYt-I7-ljz">
+                        <rect key="frame" x="8" y="8" width="30" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="37" id="aTb-gD-DoY"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="gYt-I7-ljz" firstAttribute="bottom" secondItem="kR7-gy-vnP" secondAttribute="bottomMargin" id="4KX-TI-igd"/>
+                    <constraint firstItem="gYt-I7-ljz" firstAttribute="top" secondItem="kR7-gy-vnP" secondAttribute="topMargin" id="7st-4s-0yJ"/>
+                    <constraint firstItem="gYt-I7-ljz" firstAttribute="leading" secondItem="kR7-gy-vnP" secondAttribute="leadingMargin" id="89b-V3-zaL"/>
+                    <constraint firstItem="gYt-I7-ljz" firstAttribute="centerY" secondItem="K9a-l4-hg4" secondAttribute="centerY" id="OMb-pK-csQ"/>
+                    <constraint firstItem="K9a-l4-hg4" firstAttribute="trailing" secondItem="kR7-gy-vnP" secondAttribute="trailingMargin" id="hTP-zO-myH"/>
+                    <constraint firstItem="K9a-l4-hg4" firstAttribute="leading" secondItem="gYt-I7-ljz" secondAttribute="trailing" constant="34" id="j5U-XR-1HM"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="itemImage" destination="gYt-I7-ljz" id="2d6-s2-4On"/>
+                <outlet property="itemName" destination="K9a-l4-hg4" id="N0k-xH-B31"/>
+            </connections>
+            <point key="canvasLocation" x="244" y="329"/>
+        </tableViewCell>
+    </objects>
+</document>

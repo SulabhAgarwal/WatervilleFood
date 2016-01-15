@@ -8,16 +8,15 @@
 
 import Foundation
 import UIKit
-import Stripe
 
-class CartCheckoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class OrderSummaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Order Summary"
+        self.title = "Order"
         let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
         titleButton.setTitle("Order Summary", forState: UIControlState.Normal)
         titleButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 25.0)
@@ -28,7 +27,7 @@ class CartCheckoutViewController: UIViewController, UITableViewDelegate, UITable
         tableView.delegate      =   self
         tableView.dataSource    =   self
         tableView.scrollEnabled = false
-        tableView.registerNib(UINib(nibName: "CustomCartCell", bundle: nil), forCellReuseIdentifier: "CheckoutCell")
+        tableView.registerNib(UINib(nibName: "CustomCartCell", bundle: nil), forCellReuseIdentifier: "CartCell")
         self.view.addSubview(tableView)
         
         let CheckoutButton : UIButton = UIButton(frame: CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40))
@@ -44,7 +43,7 @@ class CartCheckoutViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func checkoutPressed(sender: UIButton) {
-        let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("PaymentVC") as? CartCheckoutViewController
+        let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("CheckoutVC") as? CheckoutViewController
         self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
     }
     
@@ -61,10 +60,11 @@ class CartCheckoutViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CheckoutCell", forIndexPath: indexPath) as! CustomCartCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("CartCell", forIndexPath: indexPath) as! CustomCartCell
         
         cell.itemName.text = Order.items[indexPath.row][0] as? String
         cell.itemPrice.text = "$\(String.localizedStringWithFormat("%.2f %@", (Order.items[indexPath.row][2] as? Double)!,""))"
+        print(Order.items)
         for section in Order.items[indexPath.row][1] as! [[AnyObject]] {
             for option in section[1] as! [AnyObject]{
                 cell.itemOptions.text = cell.itemOptions.text! + " " + (option as! String) as String
