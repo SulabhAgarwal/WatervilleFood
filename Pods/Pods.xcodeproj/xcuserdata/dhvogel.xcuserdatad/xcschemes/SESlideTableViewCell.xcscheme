@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '0070172CD2068514380399B9'
-               BlueprintName = 'Parse'
+               BlueprintIdentifier = 'B20CC8C54A3709C4B5C73C11'
+               BlueprintName = 'SESlideTableViewCell'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Parse.framework'>
+               BuildableName = 'SESlideTableViewCell.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

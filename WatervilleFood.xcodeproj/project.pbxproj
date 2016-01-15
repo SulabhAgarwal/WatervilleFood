@@ -22,7 +22,7 @@
 		1ABEB1971C42C92000EC0331 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEB1951C42C92000EC0331 /* LaunchScreen.storyboard */; };
 		1ABEB1A21C42C92000EC0331 /* WatervilleFoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEB1A11C42C92000EC0331 /* WatervilleFoodTests.swift */; };
 		1ABEB1AD1C42C92000EC0331 /* WatervilleFoodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEB1AC1C42C92000EC0331 /* WatervilleFoodUITests.swift */; };
-		4DA718925F0EC74CE3931B49 /* Pods_WatervilleFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D76E6C81D609D160EDB427A9 /* Pods_WatervilleFood.framework */; };
+		293E0F1A723C2F002EE68F08 /* Pods_WatervilleFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7933D0982D57E1DB13CB83B8 /* Pods_WatervilleFood.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,9 +64,9 @@
 		1ABEB1A81C42C92000EC0331 /* WatervilleFoodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatervilleFoodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEB1AC1C42C92000EC0331 /* WatervilleFoodUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatervilleFoodUITests.swift; sourceTree = "<group>"; };
 		1ABEB1AE1C42C92000EC0331 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2F698E1AF17F3DDAA2DA7758 /* Pods-WatervilleFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatervilleFood.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatervilleFood/Pods-WatervilleFood.release.xcconfig"; sourceTree = "<group>"; };
-		32218412AD69737536AB9358 /* Pods-WatervilleFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatervilleFood.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatervilleFood/Pods-WatervilleFood.debug.xcconfig"; sourceTree = "<group>"; };
-		D76E6C81D609D160EDB427A9 /* Pods_WatervilleFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatervilleFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		56AD750266B7CF973FB1ED03 /* Pods-WatervilleFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatervilleFood.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatervilleFood/Pods-WatervilleFood.release.xcconfig"; sourceTree = "<group>"; };
+		62F50596CAC8845A850ACB1E /* Pods-WatervilleFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatervilleFood.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatervilleFood/Pods-WatervilleFood.debug.xcconfig"; sourceTree = "<group>"; };
+		7933D0982D57E1DB13CB83B8 /* Pods_WatervilleFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatervilleFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DA718925F0EC74CE3931B49 /* Pods_WatervilleFood.framework in Frameworks */,
+				293E0F1A723C2F002EE68F08 /* Pods_WatervilleFood.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,8 +98,8 @@
 		079A975D9AFF1B46397BFD47 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				32218412AD69737536AB9358 /* Pods-WatervilleFood.debug.xcconfig */,
-				2F698E1AF17F3DDAA2DA7758 /* Pods-WatervilleFood.release.xcconfig */,
+				62F50596CAC8845A850ACB1E /* Pods-WatervilleFood.debug.xcconfig */,
+				56AD750266B7CF973FB1ED03 /* Pods-WatervilleFood.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -140,8 +140,8 @@
 				1A11EDB61C4472DC00A612DB /* OptionsTableViewController.swift */,
 				1A11EDB81C45672D00A612DB /* CustomOptionTableViewCell.swift */,
 				1A3CAC611C461A7D007E5D1C /* JSSAlertView.swift */,
-				1A742A631C483FFB006CAD3A /* CartCheckoutViewController.swift */,
 				1A742A651C484450006CAD3A /* CustomCartCell.xib */,
+				1A742A631C483FFB006CAD3A /* CartCheckoutViewController.swift */,
 				1A742A671C4847A5006CAD3A /* CustomCartCell.swift */,
 			);
 			path = WatervilleFood;
@@ -168,7 +168,7 @@
 		1B641957B67385C5C069856D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D76E6C81D609D160EDB427A9 /* Pods_WatervilleFood.framework */,
+				7933D0982D57E1DB13CB83B8 /* Pods_WatervilleFood.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -506,7 +506,7 @@
 		};
 		1ABEB1B21C42C92000EC0331 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32218412AD69737536AB9358 /* Pods-WatervilleFood.debug.xcconfig */;
+			baseConfigurationReference = 62F50596CAC8845A850ACB1E /* Pods-WatervilleFood.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
@@ -520,7 +520,7 @@
 		};
 		1ABEB1B31C42C92000EC0331 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F698E1AF17F3DDAA2DA7758 /* Pods-WatervilleFood.release.xcconfig */;
+			baseConfigurationReference = 56AD750266B7CF973FB1ED03 /* Pods-WatervilleFood.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";

@@ -24,10 +24,11 @@ class CartCheckoutViewController: UIViewController, UITableViewDelegate, UITable
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.navigationItem.titleView = titleButton
 
-        let tableView:UITableView = UITableView(frame: CGRectMake(10,10,SCREEN_BOUNDS.width-20,150))
+        let tableView:UITableView = UITableView(frame: CGRectMake(10,10,SCREEN_BOUNDS.width-20,SCREEN_BOUNDS.height/2))
         tableView.delegate      =   self
         tableView.dataSource    =   self
         tableView.registerNib(UINib(nibName: "CustomCartCell", bundle: nil), forCellReuseIdentifier: "CheckoutCell")
+        
         self.view.addSubview(tableView)
         
     }
@@ -40,6 +41,10 @@ class CartCheckoutViewController: UIViewController, UITableViewDelegate, UITable
         return Order.items.count
     }
     
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Order Summary"
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CheckoutCell", forIndexPath: indexPath) as! CustomCartCell
         
@@ -48,11 +53,36 @@ class CartCheckoutViewController: UIViewController, UITableViewDelegate, UITable
         for section in Order.items[indexPath.row][1] as! [[AnyObject]] {
             for option in section[1] as! [AnyObject]{
                 cell.itemOptions.text = cell.itemOptions.text! + " " + (option as! String) as String
+                
             }
             
         }
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
+            print("more button tapped")
+        }
+        delete.backgroundColor = UIColor.redColor()
+
+        
+        let favorite = UITableViewRowAction(style: .Normal, title: "Info") { action, index in
+            print("favorite button tapped")
+        }
+        favorite.backgroundColor = UIColor.lightGrayColor()
+        
+        return [delete, favorite]
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // the cells you would like the actions to appear needs to be editable
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // you need to implement this method too or you can't swipe to display the actions
     }
         
 }

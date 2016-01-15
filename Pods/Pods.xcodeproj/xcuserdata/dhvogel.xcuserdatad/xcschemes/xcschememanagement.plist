@@ -44,6 +44,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SESlideTableViewCell.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Stripe.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,7 +62,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4FD7422099E6BD102C09B313B92E8410</key>
+		<key>29E4DF4D7650B237CB7052884C366975</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>555C430CBD4FD31B4A91B28B3B996D9F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -68,6 +78,11 @@
 			<true/>
 		</dict>
 		<key>63A18C6A528BD7E47DDAF39B2AEAF1D1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>68A99C890D3E381E375B3B75ABDE34A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,17 +102,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E186D716136D3875A76895643C1C9596</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EF2A19FBC02F3F73DBD4BC3EABC73902</key>
+		<key>E45A08ECA867C2118C76E25369DDD4C2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
