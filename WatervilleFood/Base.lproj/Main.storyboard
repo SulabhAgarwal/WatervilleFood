@@ -115,7 +115,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z6i-NQ-yR5">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="535"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="optionsCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="optionsCell" id="Ynl-CP-HMz" customClass="CustomOptionTableViewCell" customModule="WatervilleFood" customModuleProvider="target">
@@ -133,7 +133,7 @@
                         <constraints>
                             <constraint firstItem="Z6i-NQ-yR5" firstAttribute="leading" secondItem="C1a-DI-6X9" secondAttribute="leading" id="3In-ZZ-KYP"/>
                             <constraint firstAttribute="trailing" secondItem="Z6i-NQ-yR5" secondAttribute="trailing" id="iRI-lG-lee"/>
-                            <constraint firstItem="elY-8f-LLw" firstAttribute="top" secondItem="Z6i-NQ-yR5" secondAttribute="bottom" id="icw-G3-xIp"/>
+                            <constraint firstItem="elY-8f-LLw" firstAttribute="top" secondItem="Z6i-NQ-yR5" secondAttribute="bottom" constant="65" id="icw-G3-xIp"/>
                             <constraint firstItem="Z6i-NQ-yR5" firstAttribute="top" secondItem="C1a-DI-6X9" secondAttribute="top" id="quZ-tY-IUQ"/>
                         </constraints>
                     </view>

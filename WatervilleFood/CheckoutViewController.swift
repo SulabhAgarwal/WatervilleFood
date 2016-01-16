@@ -28,18 +28,20 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.navigationItem.titleView = titleButton
         
-        detailsTableView.frame = CGRectMake(5,5,SCREEN_BOUNDS.width-10,SCREEN_BOUNDS.height/2-10)
+        detailsTableView.frame = CGRectMake(5,5,SCREEN_BOUNDS.width-10,214)
+        detailsTableView.layer.borderWidth = 2
         detailsTableView.delegate      =   self
         detailsTableView.dataSource    =   self
         detailsTableView.scrollEnabled = false
         detailsTableView.registerNib(UINib(nibName: "CheckoutCell", bundle: nil), forCellReuseIdentifier: "CheckoutCell")
         self.view.addSubview(detailsTableView)
         
-        orderTableView.frame = CGRectMake(5,SCREEN_BOUNDS.height/2,SCREEN_BOUNDS.width-10,SCREEN_BOUNDS.height/2-50)
+        orderTableView.frame = CGRectMake(5,SCREEN_BOUNDS.height/2,SCREEN_BOUNDS.width-10,SCREEN_BOUNDS.height/2-55)
         orderTableView.delegate      =   self
         orderTableView.dataSource    =   self
         orderTableView.scrollEnabled = true
         orderTableView.registerNib(UINib(nibName: "CustomCartCell", bundle: nil), forCellReuseIdentifier: "CartCell")
+        orderTableView.layer.borderWidth = 2
         self.view.addSubview(orderTableView)
         
         let CheckoutButton : UIButton = UIButton(frame: CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40))
@@ -64,7 +66,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 50;
+        return 40;
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{

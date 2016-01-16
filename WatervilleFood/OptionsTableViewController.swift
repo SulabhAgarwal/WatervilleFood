@@ -25,6 +25,7 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.layer.borderWidth = 2
         
         optionArray = optionArray as Array
         for i in 0...optionArray.count-1{
