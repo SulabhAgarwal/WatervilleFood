@@ -28,6 +28,7 @@ PODS:
     - Stripe/Core (= 6.0.1)
   - Stripe/Core (6.0.1)
   - SwiftSpinner (0.8.0)
+  - UIColor_Hex_Swift (1.8)
 
 DEPENDENCIES:
   - AIFlatSwitch (~> 0.0.1)
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - ParseUI
   - Stripe
   - SwiftSpinner
+  - UIColor_Hex_Swift
 
 SPEC CHECKSUMS:
   AIFlatSwitch: 30b67439ed2d695fdb81ec5ae26f0b004fa83c66
@@ -50,5 +52,6 @@ SPEC CHECKSUMS:
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   Stripe: 04f215191702c268b89fe0cdf28dc24a9688a71b
   SwiftSpinner: 11c2c5ec7443d92f3026d3067ca8a91d4adef13f
+  UIColor_Hex_Swift: a66b9d5f6e8fddbd9fe32996504f0b7e9d20d680
 
 COCOAPODS: 0.39.0

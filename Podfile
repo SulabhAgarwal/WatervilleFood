@@ -10,6 +10,7 @@ target ‘WatervilleFood’ do
     	pod 'Stripe'
 	pod ‘SwiftSpinner’
 	pod 'AIFlatSwitch', '~> 0.0.1'
+	pod ‘UIColor_Hex_Swift’
 end
 
 post_install do |installer|

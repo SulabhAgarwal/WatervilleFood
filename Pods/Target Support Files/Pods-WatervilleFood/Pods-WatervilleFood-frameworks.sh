@@ -94,6 +94,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WatervilleFood/ParseUI.framework"
   install_framework "Pods-WatervilleFood/Stripe.framework"
   install_framework "Pods-WatervilleFood/SwiftSpinner.framework"
+  install_framework "Pods-WatervilleFood/UIColor_Hex_Swift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WatervilleFood/AIFlatSwitch.framework"
@@ -106,4 +107,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WatervilleFood/ParseUI.framework"
   install_framework "Pods-WatervilleFood/Stripe.framework"
   install_framework "Pods-WatervilleFood/SwiftSpinner.framework"
+  install_framework "Pods-WatervilleFood/UIColor_Hex_Swift.framework"
 fi

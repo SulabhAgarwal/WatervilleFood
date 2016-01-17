@@ -9,18 +9,22 @@
 import UIKit
 import Parse
 import SwiftSpinner
+import UIColor_Hex_Swift
 
 struct Order {
     //[["<order item>","[<options>]","price"], ["<order item>","[<options>]","price"]]
     static var items:[[AnyObject]] = [["Danny Special", [["Stuff", ["Bless Up"]]], 69.69]]
     static var tax:Double = 1.00
     static var tip:Double = 1.00
+    static var Restaurant:PFObject!
 }
 
 class MainMenuViewController: UIViewController {
 
     let screenBounds = UIScreen.mainScreen().bounds
     var array:[PFObject]?
+    let COLOR_PALLETTE:[String] = ["#0ccca0", "#e708a6", "#11a2c1", "#20ec00", "#13ebfd"]
+    var RestaurantArray:[PFObject]! = [PFObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +32,7 @@ class MainMenuViewController: UIViewController {
         self.title = "Main"
         
         let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
-        titleButton.setTitle("Main Menu", forState: UIControlState.Normal)
+        titleButton.setTitle("Restaurants", forState: UIControlState.Normal)
         titleButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 25.0)
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         titleButton.addTarget(self, action: "titlePressed:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -63,40 +67,34 @@ class MainMenuViewController: UIViewController {
     
     
     func createImages() {
-        let PTimage = UIImage(named: "PadThaiToo")
-        let PTimageView = UIButton()
-        PTimageView.frame = CGRect(x: 2, y: 66, width: screenBounds.width/2-4, height: 150)
-        PTimageView.setImage(PTimage, forState: .Normal)
-        PTimageView.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
-        view.addSubview(PTimageView)
-        PTimageView.tag = 1
-
-        
-        let WHOPimage = UIImage(named: "WHOP")
-        let WHOPimageView = UIButton()
-        WHOPimageView.frame = CGRect(x: screenBounds.width/2 + 2, y: 66, width: screenBounds.width/2-4, height: 150)
-        WHOPimageView.setImage(WHOPimage, forState: .Normal)
-        WHOPimageView.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
-        WHOPimageView.tag = 2
-        view.addSubview(WHOPimageView)
-
-        
-        let GCimage = UIImage(named: "GrandCentral")
-        let GCimageView = UIButton()
-        GCimageView.frame = CGRect(x: 2, y: 218, width: screenBounds.width/2-4, height: 150)
-        GCimageView.setImage(GCimage, forState: .Normal)
-        GCimageView.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
-        GCimageView.tag = 3
-        view.addSubview(GCimageView)
-        
-        let DEimage = UIImage(named: "DancingElephant")
-        let DEimageView = UIButton()
-        DEimageView.frame = CGRect(x: screenBounds.width/2 + 2, y: 218, width: screenBounds.width/2-4, height: 150)
-        DEimageView.setImage(DEimage, forState: .Normal)
-        DEimageView.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
-        DEimageView.tag = 4
-        view.addSubview(DEimageView)
-
+        SwiftSpinner.show("")
+        let query = PFQuery(className: "Restaurants")
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if let error = error {
+                SwiftSpinner.hide()
+                let alertController = UIAlertController(title:"Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+                return
+            } else {
+                SwiftSpinner.hide()
+                var count:Int = 0
+                for object in objects! {
+                    self.RestaurantArray.append(object)
+                    let imageView = UIButton()
+                    imageView.frame = CGRectMake(2, CGFloat(66 + 102*(count)), self.screenBounds.width-4, 100)
+                    imageView.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+                    imageView.setTitle(object.valueForKey("Name") as! String!, forState: UIControlState.Normal)
+                    imageView.titleLabel!.font =  UIFont(name: "Helvetica Neue", size: 20)
+                    imageView.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                    imageView.backgroundColor = UIColor(rgba: self.COLOR_PALLETTE[count])
+                    self.view.addSubview(imageView)
+                    imageView.tag = count
+                    count++
+                }
+            }
+        }
     }
     
     func back(sender: UIBarButtonItem) {
@@ -106,26 +104,7 @@ class MainMenuViewController: UIViewController {
     
     func imageTapped(sender: UIButton) {
         SwiftSpinner.show("")
-        var restaurant : String!
-        switch sender.tag {
-        case 1:
-            restaurant = "PadThaiToo"
-        case 2:
-            restaurant = "WHOP"
-        case 3:
-            restaurant = "GrandCentral"
-        case 4:
-            restaurant = "DancingElephant"
-        default:
-            let alertController = UIAlertController(title:"Error", message: "Cannot retrieve restaurant information", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alertController, animated: true, completion: nil)
-            return
-        }
-    
-        
-        
-        let query = PFQuery(className: restaurant)
+        let query = PFQuery(className: self.RestaurantArray[sender.tag].valueForKey("ClassAccessName") as! String!)
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if let error = error {

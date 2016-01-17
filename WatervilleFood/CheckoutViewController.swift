@@ -146,6 +146,11 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (tableView == detailsTableView) {
+            if (indexPath.row == 0) {
+                let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("PaymentVC") as? PaymentInfoViewController
+                mapViewControllerObejct!.delegate = self
+                self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
+            }
             if (indexPath.row == 1) {
                 let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("PaymentVC") as? PaymentInfoViewController
                 mapViewControllerObejct!.delegate = self
