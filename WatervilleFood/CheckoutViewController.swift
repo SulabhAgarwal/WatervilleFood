@@ -69,7 +69,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     
     func createTableArray() {
         TABLE_NAMES = [String]()
-        TABLE_NAMES.append("<Restaurant>")
+        TABLE_NAMES.append(Order.Restaurant.valueForKey("Name") as! String!)
         if (PmtInfo.lastFour == nil) {
             print("\n\nnil")
             TABLE_NAMES.append("Add Payment Method")
@@ -147,9 +147,12 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (tableView == detailsTableView) {
             if (indexPath.row == 0) {
-                let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("PaymentVC") as? PaymentInfoViewController
-                mapViewControllerObejct!.delegate = self
-                self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
+                if (UIApplication.sharedApplication().canOpenURL(NSURL(string:"comgooglemaps://")!)) {
+                    UIApplication.sharedApplication().openURL(NSURL(string:
+                        "comgooglemapsurl://\(Order.Restaurant.valueForKey("GoogMapsAddress") as! String!)")!)
+                } else {
+                    UIApplication.sharedApplication().openURL(NSURL(string:"https://\(Order.Restaurant.valueForKey("GoogMapsAddress") as! String!)")!);
+                }
             }
             if (indexPath.row == 1) {
                 let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("PaymentVC") as? PaymentInfoViewController

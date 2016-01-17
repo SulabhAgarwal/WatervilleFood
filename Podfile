@@ -11,6 +11,7 @@ target ‘WatervilleFood’ do
 	pod ‘SwiftSpinner’
 	pod 'AIFlatSwitch', '~> 0.0.1'
 	pod ‘UIColor_Hex_Swift’
+	pod ‘GoogleMaps’
 end
 
 post_install do |installer|
