@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B20CC8C54A3709C4B5C73C11'
-               BlueprintName = 'SESlideTableViewCell'
+               BlueprintIdentifier = '5AD1F236E22D532B81D2B479'
+               BlueprintName = 'AIFlatSwitch'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SESlideTableViewCell.framework'>
+               BuildableName = 'AIFlatSwitch.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

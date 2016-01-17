@@ -9,6 +9,7 @@ target ‘WatervilleFood’ do
 	pod 'ParseFacebookUtilsV4'
     	pod 'Stripe'
 	pod ‘SwiftSpinner’
+	pod 'AIFlatSwitch', '~> 0.0.1'
 end
 
 post_install do |installer|

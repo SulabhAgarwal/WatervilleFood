@@ -102,6 +102,24 @@
             </objects>
             <point key="canvasLocation" x="4138" y="218"/>
         </scene>
+        <!--Payment Info View Controller-->
+        <scene sceneID="CBd-F0-qou">
+            <objects>
+                <viewController storyboardIdentifier="PaymentVC" id="zeb-vU-gNE" customClass="PaymentInfoViewController" customModule="WatervilleFood" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nUQ-bO-jOL"/>
+                        <viewControllerLayoutGuide type="bottom" id="PCe-Qu-UVK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cOV-Pd-KUD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qXM-fb-NFp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4812" y="9"/>
+        </scene>
         <!--Options Table View Controller-->
         <scene sceneID="PJJ-M7-38e">
             <objects>

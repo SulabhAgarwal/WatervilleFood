@@ -84,6 +84,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-WatervilleFood/AIFlatSwitch.framework"
   install_framework "Pods-WatervilleFood/Bolts.framework"
   install_framework "Pods-WatervilleFood/FBSDKCoreKit.framework"
   install_framework "Pods-WatervilleFood/FBSDKLoginKit.framework"
@@ -91,11 +92,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WatervilleFood/ParseCrashReporting.framework"
   install_framework "Pods-WatervilleFood/ParseFacebookUtilsV4.framework"
   install_framework "Pods-WatervilleFood/ParseUI.framework"
-  install_framework "Pods-WatervilleFood/SESlideTableViewCell.framework"
   install_framework "Pods-WatervilleFood/Stripe.framework"
   install_framework "Pods-WatervilleFood/SwiftSpinner.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-WatervilleFood/AIFlatSwitch.framework"
   install_framework "Pods-WatervilleFood/Bolts.framework"
   install_framework "Pods-WatervilleFood/FBSDKCoreKit.framework"
   install_framework "Pods-WatervilleFood/FBSDKLoginKit.framework"
@@ -103,7 +104,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WatervilleFood/ParseCrashReporting.framework"
   install_framework "Pods-WatervilleFood/ParseFacebookUtilsV4.framework"
   install_framework "Pods-WatervilleFood/ParseUI.framework"
-  install_framework "Pods-WatervilleFood/SESlideTableViewCell.framework"
   install_framework "Pods-WatervilleFood/Stripe.framework"
   install_framework "Pods-WatervilleFood/SwiftSpinner.framework"
 fi
