@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import Stripe
 
 class PaymentInfo {
-    
+    var token: STPToken!
+    var lastFour: String!
 }

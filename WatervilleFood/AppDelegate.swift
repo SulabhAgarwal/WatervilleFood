@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+        Stripe.setDefaultPublishableKey("pk_test_UwUtbAoSnJxzVhC2roJKOoUx")
 
         
         return true

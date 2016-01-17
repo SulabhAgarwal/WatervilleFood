@@ -10,16 +10,19 @@ import Foundation
 import UIKit
 import Stripe
 
-class CheckoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CheckoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PaymentInfoDelegate {
 
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
-    let TABLE_NAMES:[String] = ["<Restaurant>", "Add Payment Method", "Add Delivery Address"]
+    var TABLE_NAMES:[String] = []
     let TABLE_ICONS:[UIImage] = [UIImage(named: "Restaurant")!, UIImage(named: "creditCard")!, UIImage(named: "House")!]
     let detailsTableView:UITableView = UITableView()
     let orderTableView:UITableView = UITableView()
+    var PmtInfo:PaymentInfo = PaymentInfo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.createTableArray()
         
         self.title = "Checkout"
         let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
@@ -45,7 +48,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.addSubview(orderTableView)
         
         let CheckoutButton : UIButton = UIButton(frame: CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40))
-        CheckoutButton.setTitle("Tap to pay:", forState: UIControlState.Normal)
+        CheckoutButton.setTitle("Tap to pay: $\(String.localizedStringWithFormat("%.2f %@", (self.calculateTotalPrice()),""))", forState: UIControlState.Normal)
         CheckoutButton.layer.backgroundColor = UIColor.blackColor().CGColor
         CheckoutButton.addTarget(self, action: "checkoutPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         if (Order.items.count == 0) {
@@ -54,6 +57,27 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         }
         self.view.addSubview(CheckoutButton)
         
+    }
+    
+    
+    func didFinishPaymentVC(controller: PaymentInfoViewController, PmtInfo: PaymentInfo) {
+        self.PmtInfo = PmtInfo
+        print(self.PmtInfo.lastFour)
+        self.createTableArray()
+        detailsTableView.reloadData()
+    }
+    
+    func createTableArray() {
+        TABLE_NAMES = [String]()
+        TABLE_NAMES.append("<Restaurant>")
+        if (PmtInfo.lastFour == nil) {
+            print("\n\nnil")
+            TABLE_NAMES.append("Add Payment Method")
+        } else {
+            print("\n\nnot nil")
+            TABLE_NAMES.append("Card ending in \(PmtInfo.lastFour)")
+        }
+        TABLE_NAMES.append("Add Delivery Address")
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -124,6 +148,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         if (tableView == detailsTableView) {
             if (indexPath.row == 1) {
                 let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("PaymentVC") as? PaymentInfoViewController
+                mapViewControllerObejct!.delegate = self
                 self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
             }
         }
