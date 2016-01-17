@@ -117,16 +117,12 @@ class MainMenuViewController: UIViewController {
                 SwiftSpinner.hide()
                 let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("MenuTableVC") as? MenuTableViewController
                 mapViewControllerObejct?.ItemArray = objects
+                Order.Restaurant = self.RestaurantArray[sender.tag]
                 self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
             }
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-            let detailVC = segue.destinationViewController as! MenuTableViewController;
-            print(self.array)
-            detailVC.ItemArray = self.array
-    }
 
 }
 
