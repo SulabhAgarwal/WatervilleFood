@@ -12,6 +12,7 @@ import UIKit
 class OrderSummaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
+    let CheckoutButton : UIButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,7 @@ class OrderSummaryViewController: UIViewController, UITableViewDelegate, UITable
         tableView.registerNib(UINib(nibName: "CustomCartCell", bundle: nil), forCellReuseIdentifier: "CartCell")
         self.view.addSubview(tableView)
         
-        let CheckoutButton : UIButton = UIButton(frame: CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40))
+        CheckoutButton.frame = CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40)
         CheckoutButton.setTitle("Checkout", forState: UIControlState.Normal)
         CheckoutButton.layer.backgroundColor = UIColor.blackColor().CGColor
         CheckoutButton.addTarget(self, action: "checkoutPressed:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -80,7 +81,10 @@ class OrderSummaryViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
             Order.items.removeAtIndex(indexPath.row)
-            print(Order.items)
+            if (Order.items.count == 0) {
+                self.CheckoutButton.alpha = 0.5
+                self.CheckoutButton.enabled = false
+            }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             JSSAlertView().danger(self, title: "Item deleted from order", text: "")
         }

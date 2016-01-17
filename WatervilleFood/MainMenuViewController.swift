@@ -13,6 +13,8 @@ import SwiftSpinner
 struct Order {
     //[["<order item>","[<options>]","price"], ["<order item>","[<options>]","price"]]
     static var items:[[AnyObject]] = [["Danny Special", [["Stuff", ["Bless Up"]]], 69.69]]
+    static var tax:Double = 1.00
+    static var tip:Double = 1.00
 }
 
 class MainMenuViewController: UIViewController {

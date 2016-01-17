@@ -45,7 +45,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.addSubview(orderTableView)
         
         let CheckoutButton : UIButton = UIButton(frame: CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40))
-        CheckoutButton.setTitle("Checkout", forState: UIControlState.Normal)
+        CheckoutButton.setTitle("Tap to pay:", forState: UIControlState.Normal)
         CheckoutButton.layer.backgroundColor = UIColor.blackColor().CGColor
         CheckoutButton.addTarget(self, action: "checkoutPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         if (Order.items.count == 0) {
@@ -74,7 +74,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
             return 3
         }
         else {
-            return Order.items.count
+            return Order.items.count + 3
         }
     }
 
@@ -90,20 +90,34 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else {
             let cell = tableView.dequeueReusableCellWithIdentifier("CartCell", forIndexPath: indexPath) as! CustomCartCell
-            cell.itemName.text = Order.items[indexPath.row][0] as? String
-            cell.itemPrice.text = "$\(String.localizedStringWithFormat("%.2f %@", (Order.items[indexPath.row][2] as? Double)!,""))"
-            
-            for section in Order.items[indexPath.row][1] as! [[AnyObject]] {
-                for option in section[1] as! [AnyObject]{
-                    cell.itemOptions.text = cell.itemOptions.text! + " " + (option as! String) as String
+            if (indexPath.row < Order.items.count) {
+                
+                cell.itemName.text = Order.items[indexPath.row][0] as? String
+                cell.itemPrice.text = "$\(String.localizedStringWithFormat("%.2f %@", (Order.items[indexPath.row][2] as? Double)!,""))"
+                
+                for section in Order.items[indexPath.row][1] as! [[AnyObject]] {
+                    for option in section[1] as! [AnyObject]{
+                        cell.itemOptions.text = cell.itemOptions.text! + " " + (option as! String) as String
+                        
+                    }
                     
                 }
-                
             }
-            
+            else if (indexPath.row == Order.items.count) {
+                cell.itemName.text = "Tax"
+                cell.itemPrice.text = "$\(String.localizedStringWithFormat("%.2f %@", (Order.tax),""))"
+            }
+            else if (indexPath.row == Order.items.count + 1) {
+                cell.itemName.text = "Tip"
+                cell.itemPrice.text = "$\(String.localizedStringWithFormat("%.2f %@", (Order.tip),""))"
+            }
+            else if (indexPath.row == Order.items.count + 2) {
+                cell.itemName.text = "Total"
+                cell.itemPrice.text = "$\(String.localizedStringWithFormat("%.2f %@", (self.calculateTotalPrice()),""))"
+            }
             return cell
-
         }
+        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -113,6 +127,16 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                 self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
             }
         }
+    }
+    
+    func calculateTotalPrice() -> Double {
+        var sum:Double = 0
+        for item in Order.items {
+            sum += (item[2] as? Double)!
+        }
+        sum += Order.tax
+        sum += Order.tip
+        return sum
     }
     
     
