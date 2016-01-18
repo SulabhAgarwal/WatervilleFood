@@ -118,7 +118,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXM-fb-NFp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4812" y="9"/>
+            <point key="canvasLocation" x="4782" y="-169"/>
+        </scene>
+        <!--Delivery Address View Controller-->
+        <scene sceneID="uO0-6r-1LE">
+            <objects>
+                <viewController storyboardIdentifier="DeliveryVC" id="QDs-Y2-oDG" customClass="DeliveryAddressViewController" customModule="WatervilleFood" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="suY-EB-63N"/>
+                        <viewControllerLayoutGuide type="bottom" id="iJ2-rd-Ndx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pvc-8y-NM1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R8u-by-0Ut" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4782" y="503"/>
         </scene>
         <!--Options Table View Controller-->
         <scene sceneID="PJJ-M7-38e">

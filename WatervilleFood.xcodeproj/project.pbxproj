@@ -27,6 +27,10 @@
 		1ABEB1AD1C42C92000EC0331 /* WatervilleFoodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEB1AC1C42C92000EC0331 /* WatervilleFoodUITests.swift */; };
 		1AD045671C4B0D2700D1696C /* PaymentInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD045661C4B0D2700D1696C /* PaymentInfoViewController.swift */; };
 		1AD045691C4B0D8F00D1696C /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD045681C4B0D8F00D1696C /* PaymentInfo.swift */; };
+		1AD0456D1C4C934A00D1696C /* DeliveryAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0456C1C4C934A00D1696C /* DeliveryAddressViewController.swift */; };
+		1AD0456F1C4C935E00D1696C /* DeliveryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0456E1C4C935E00D1696C /* DeliveryInfo.swift */; };
+		1AD045731C4C988A00D1696C /* DeliveryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD045721C4C988A00D1696C /* DeliveryTableCell.swift */; };
+		1AD045751C4C9CB100D1696C /* DeliveryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD045741C4C9CB100D1696C /* DeliveryTableCell.xib */; };
 		7D97D557546FDE8AC3F7DC3F /* Pods_WatervilleFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 074377B1A5907988BC5DE8C0 /* Pods_WatervilleFood.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +79,10 @@
 		1ABEB1AE1C42C92000EC0331 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AD045661C4B0D2700D1696C /* PaymentInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentInfoViewController.swift; sourceTree = "<group>"; };
 		1AD045681C4B0D8F00D1696C /* PaymentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
+		1AD0456C1C4C934A00D1696C /* DeliveryAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryAddressViewController.swift; sourceTree = "<group>"; };
+		1AD0456E1C4C935E00D1696C /* DeliveryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryInfo.swift; sourceTree = "<group>"; };
+		1AD045721C4C988A00D1696C /* DeliveryTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryTableCell.swift; sourceTree = "<group>"; };
+		1AD045741C4C9CB100D1696C /* DeliveryTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliveryTableCell.xib; sourceTree = "<group>"; };
 		609FD5D361452C2947DEAF06 /* Pods-WatervilleFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatervilleFood.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatervilleFood/Pods-WatervilleFood.debug.xcconfig"; sourceTree = "<group>"; };
 		CC7D5BDF057910D5C9D67C7E /* Pods-WatervilleFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatervilleFood.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatervilleFood/Pods-WatervilleFood.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,25 +147,14 @@
 		1ABEB18B1C42C92000EC0331 /* WatervilleFood */ = {
 			isa = PBXGroup;
 			children = (
-				1ABEB18C1C42C92000EC0331 /* AppDelegate.swift */,
-				1ABEB18E1C42C92000EC0331 /* MainMenuViewController.swift */,
+				1AD0457D1C4C9E5600D1696C /* Other */,
+				1AD045781C4C9D3700D1696C /* Checkout */,
+				1AD045771C4C9D1600D1696C /* Ordering */,
+				1AD045761C4C9D0500D1696C /* Main */,
 				1ABEB1901C42C92000EC0331 /* Main.storyboard */,
 				1ABEB1931C42C92000EC0331 /* Assets.xcassets */,
 				1ABEB1951C42C92000EC0331 /* LaunchScreen.storyboard */,
 				1ABEB1981C42C92000EC0331 /* Info.plist */,
-				1A11EDB21C4433AA00A612DB /* CustomItemTableViewCell.swift */,
-				1A11EDB41C4433DE00A612DB /* MenuTableViewController.swift */,
-				1A11EDB61C4472DC00A612DB /* OptionsTableViewController.swift */,
-				1A11EDB81C45672D00A612DB /* CustomOptionTableViewCell.swift */,
-				1A3CAC611C461A7D007E5D1C /* JSSAlertView.swift */,
-				1A742A651C484450006CAD3A /* CustomCartCell.xib */,
-				1A742A631C483FFB006CAD3A /* OrderSummaryViewController.swift */,
-				1A742A671C4847A5006CAD3A /* CustomCartCell.swift */,
-				1A742A691C49913A006CAD3A /* CheckoutViewController.swift */,
-				1A742A6B1C499C0B006CAD3A /* CheckoutCell.xib */,
-				1A742A6D1C499C2F006CAD3A /* CheckoutCell.swift */,
-				1AD045661C4B0D2700D1696C /* PaymentInfoViewController.swift */,
-				1AD045681C4B0D8F00D1696C /* PaymentInfo.swift */,
 			);
 			path = WatervilleFood;
 			sourceTree = "<group>";
@@ -178,6 +175,85 @@
 				1ABEB1AE1C42C92000EC0331 /* Info.plist */,
 			);
 			path = WatervilleFoodUITests;
+			sourceTree = "<group>";
+		};
+		1AD045761C4C9D0500D1696C /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				1ABEB18E1C42C92000EC0331 /* MainMenuViewController.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		1AD045771C4C9D1600D1696C /* Ordering */ = {
+			isa = PBXGroup;
+			children = (
+				1A11EDB21C4433AA00A612DB /* CustomItemTableViewCell.swift */,
+				1A11EDB41C4433DE00A612DB /* MenuTableViewController.swift */,
+				1A11EDB61C4472DC00A612DB /* OptionsTableViewController.swift */,
+				1A11EDB81C45672D00A612DB /* CustomOptionTableViewCell.swift */,
+			);
+			name = Ordering;
+			sourceTree = "<group>";
+		};
+		1AD045781C4C9D3700D1696C /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				1AD0457C1C4C9E1D00D1696C /* Checkout */,
+				1AD0457B1C4C9DD000D1696C /* Delivery */,
+				1AD0457A1C4C9DAD00D1696C /* Payment */,
+				1AD045791C4C9D8800D1696C /* Summary */,
+			);
+			name = Checkout;
+			sourceTree = "<group>";
+		};
+		1AD045791C4C9D8800D1696C /* Summary */ = {
+			isa = PBXGroup;
+			children = (
+				1A742A631C483FFB006CAD3A /* OrderSummaryViewController.swift */,
+			);
+			name = Summary;
+			sourceTree = "<group>";
+		};
+		1AD0457A1C4C9DAD00D1696C /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				1AD045661C4B0D2700D1696C /* PaymentInfoViewController.swift */,
+				1AD045681C4B0D8F00D1696C /* PaymentInfo.swift */,
+			);
+			name = Payment;
+			sourceTree = "<group>";
+		};
+		1AD0457B1C4C9DD000D1696C /* Delivery */ = {
+			isa = PBXGroup;
+			children = (
+				1AD0456C1C4C934A00D1696C /* DeliveryAddressViewController.swift */,
+				1AD0456E1C4C935E00D1696C /* DeliveryInfo.swift */,
+				1AD045721C4C988A00D1696C /* DeliveryTableCell.swift */,
+				1AD045741C4C9CB100D1696C /* DeliveryTableCell.xib */,
+			);
+			name = Delivery;
+			sourceTree = "<group>";
+		};
+		1AD0457C1C4C9E1D00D1696C /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				1A742A651C484450006CAD3A /* CustomCartCell.xib */,
+				1A742A671C4847A5006CAD3A /* CustomCartCell.swift */,
+				1A742A6B1C499C0B006CAD3A /* CheckoutCell.xib */,
+				1A742A6D1C499C2F006CAD3A /* CheckoutCell.swift */,
+				1A742A691C49913A006CAD3A /* CheckoutViewController.swift */,
+			);
+			name = Checkout;
+			sourceTree = "<group>";
+		};
+		1AD0457D1C4C9E5600D1696C /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				1A3CAC611C461A7D007E5D1C /* JSSAlertView.swift */,
+				1ABEB18C1C42C92000EC0331 /* AppDelegate.swift */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		1B641957B67385C5C069856D /* Frameworks */ = {
@@ -300,6 +376,7 @@
 				1ABEB1941C42C92000EC0331 /* Assets.xcassets in Resources */,
 				1ABEB1921C42C92000EC0331 /* Main.storyboard in Resources */,
 				1A742A661C484450006CAD3A /* CustomCartCell.xib in Resources */,
+				1AD045751C4C9CB100D1696C /* DeliveryTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,15 +452,18 @@
 				1A11EDB71C4472DC00A612DB /* OptionsTableViewController.swift in Sources */,
 				1A742A6E1C499C2F006CAD3A /* CheckoutCell.swift in Sources */,
 				1ABEB18F1C42C92000EC0331 /* MainMenuViewController.swift in Sources */,
+				1AD0456D1C4C934A00D1696C /* DeliveryAddressViewController.swift in Sources */,
 				1ABEB18D1C42C92000EC0331 /* AppDelegate.swift in Sources */,
 				1A11EDB91C45672D00A612DB /* CustomOptionTableViewCell.swift in Sources */,
 				1A742A641C483FFB006CAD3A /* OrderSummaryViewController.swift in Sources */,
 				1A11EDB51C4433DE00A612DB /* MenuTableViewController.swift in Sources */,
 				1A742A681C4847A5006CAD3A /* CustomCartCell.swift in Sources */,
+				1AD0456F1C4C935E00D1696C /* DeliveryInfo.swift in Sources */,
 				1A742A6A1C49913A006CAD3A /* CheckoutViewController.swift in Sources */,
 				1A11EDB31C4433AA00A612DB /* CustomItemTableViewCell.swift in Sources */,
 				1AD045691C4B0D8F00D1696C /* PaymentInfo.swift in Sources */,
 				1A3CAC621C461A7D007E5D1C /* JSSAlertView.swift in Sources */,
+				1AD045731C4C988A00D1696C /* DeliveryTableCell.swift in Sources */,
 				1AD045671C4B0D2700D1696C /* PaymentInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

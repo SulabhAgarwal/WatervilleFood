@@ -52,7 +52,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         CheckoutButton.layer.backgroundColor = UIColor.blackColor().CGColor
         CheckoutButton.addTarget(self, action: "checkoutPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         if (Order.items.count == 0) {
-            CheckoutButton.alpha = 0.5
+            CheckoutButton.alpha = 0.2
             CheckoutButton.enabled = false
         }
         self.view.addSubview(CheckoutButton)
@@ -69,7 +69,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     
     func createTableArray() {
         TABLE_NAMES = [String]()
-        TABLE_NAMES.append(Order.Restaurant.valueForKey("Name") as! String!)
+        TABLE_NAMES.append("Test")
         if (PmtInfo.lastFour == nil) {
             print("\n\nnil")
             TABLE_NAMES.append("Add Payment Method")
@@ -157,6 +157,11 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
             if (indexPath.row == 1) {
                 let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("PaymentVC") as? PaymentInfoViewController
                 mapViewControllerObejct!.delegate = self
+                self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
+            }
+            if (indexPath.row == 2) {
+                let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("DeliveryVC") as? DeliveryAddressViewController
+                //mapViewControllerObejct!.delegate = self
                 self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
             }
         }
