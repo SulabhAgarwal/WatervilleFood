@@ -64,10 +64,15 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ZFRippleButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4FEA51AA16639058275BE7AA9896E034</key>
+		<key>1ED2EC0D78DADC76B0208B68431BBFE8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -78,6 +83,11 @@
 			<true/>
 		</dict>
 		<key>63A18C6A528BD7E47DDAF39B2AEAF1D1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7A34B0ED3B6F0F8B6FF23F13184DE70F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,12 +107,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C1BB3F8B932B2269AFE79A0AF41932A8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C4E223133A2570D22C39D53B49A2ADC3</key>
+		<key>BB5E4170CB3238553FD7C2C813F73636</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,12 +117,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E0DCE87B72CFF8CEDF5B6116F6AEBDFC</key>
+		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
+		<key>E7C0EE7CAF92275858B974BC03EC1236</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EEF55077ACE558F0C2A27B8003CF2A24</key>
 		<dict>
 			<key>primary</key>
 			<true/>

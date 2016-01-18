@@ -7,10 +7,11 @@ target ‘WatervilleFood’ do
 	pod 'ParseUI'
 	pod 'ParseCrashReporting'
 	pod 'ParseFacebookUtilsV4'
-    	pod 'Stripe'
-	pod ‘SwiftSpinner’
+    pod 'Stripe'
+	pod 'SwiftSpinner'
 	pod 'AIFlatSwitch', '~> 0.0.1'
-	pod ‘UIColor_Hex_Swift’
+	pod 'UIColor_Hex_Swift'
+    pod 'ZFRippleButton'
 end
 
 post_install do |installer|

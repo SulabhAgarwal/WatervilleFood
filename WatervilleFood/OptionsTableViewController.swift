@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Parse
 import Stripe
+import ZFRippleButton
 
 
 class OptionsTableViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -45,7 +46,7 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
         titleButton.addTarget(self, action: "titlePressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.titleView = titleButton
         
-        let addToOrderButton : UIButton = UIButton(frame: CGRectMake(20,bounds.height-50,bounds.width-40,40))
+        let addToOrderButton : ZFRippleButton = ZFRippleButton(frame: CGRectMake(20,bounds.height-50,bounds.width-40,40))
         addToOrderButton.setTitle("Add To Order", forState: UIControlState.Normal)
         addToOrderButton.layer.backgroundColor = UIColor.blackColor().CGColor
         addToOrderButton.addTarget(self, action: "checkoutPressed:", forControlEvents: UIControlEvents.TouchUpInside)

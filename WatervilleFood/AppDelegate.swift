@@ -29,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Stripe.setDefaultPublishableKey("pk_test_UwUtbAoSnJxzVhC2roJKOoUx")
 
+        Theme.applyButton()
+        Theme.applyLabel()
+        Theme.applyBarButton()
+        
 
         
         return true
@@ -56,6 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
 }
+
 

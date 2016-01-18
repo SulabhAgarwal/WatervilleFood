@@ -30,7 +30,6 @@ class MenuTableViewController: UITableViewController {
         titleButton.setTitle("Menu Items", forState: UIControlState.Normal)
         titleButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 25.0)
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        titleButton.addTarget(self, action: "titlePressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.titleView = titleButton
     }
     

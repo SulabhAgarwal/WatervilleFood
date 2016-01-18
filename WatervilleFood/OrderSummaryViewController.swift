@@ -89,14 +89,8 @@ class OrderSummaryViewController: UIViewController, UITableViewDelegate, UITable
             JSSAlertView().danger(self, title: "Item deleted from order", text: "")
         }
         delete.backgroundColor = UIColor.redColor()
-
         
-        let favorite = UITableViewRowAction(style: .Normal, title: "Info") { action, index in
-            print("favorite button tapped")
-        }
-        favorite.backgroundColor = UIColor.lightGrayColor()
-        
-        return [delete, favorite]
+        return [delete]
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

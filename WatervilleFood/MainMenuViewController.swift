@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import SwiftSpinner
 import UIColor_Hex_Swift
+import ZFRippleButton
 
 struct Order {
     //[["<order item>","[<options>]","price"], ["<order item>","[<options>]","price"]]
@@ -82,7 +83,7 @@ class MainMenuViewController: UIViewController {
                 var count:Int = 0
                 for object in objects! {
                     self.RestaurantArray.append(object)
-                    let imageView = UIButton()
+                    let imageView = ZFRippleButton()
                     imageView.frame = CGRectMake(2, CGFloat(66 + 102*(count)), self.screenBounds.width-4, 100)
                     imageView.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
                     imageView.setTitle(object.valueForKey("Name") as! String!, forState: UIControlState.Normal)
