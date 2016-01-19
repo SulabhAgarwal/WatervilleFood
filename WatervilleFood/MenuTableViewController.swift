@@ -25,6 +25,7 @@ class MenuTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 44
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView(frame: CGRectZero)
         self.title = "Menu Items"
         let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
         titleButton.setTitle("Menu Items", forState: UIControlState.Normal)

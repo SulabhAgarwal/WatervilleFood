@@ -59,6 +59,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>TextFieldEffects.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UIColor_Hex_Swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,7 +77,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1ED2EC0D78DADC76B0208B68431BBFE8</key>
+		<key>1856A8723282D823BDA135F399E1D647</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>25425A4EE4456D6B44FEFAB3A6964BD9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,17 +92,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>628E42E8622E6D23ACC21DD9688BB4A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>63A18C6A528BD7E47DDAF39B2AEAF1D1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7A34B0ED3B6F0F8B6FF23F13184DE70F</key>
+		<key>75D1E7D3012291AD8F071E474A3DDCA7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>79B53F2F031D2D83B0AC343756E7C6D8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>8978C7FB7007A28B676AB1EA004C3923</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AF8FB77E01C5665D033A4F0742F3F921</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,27 +132,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BB5E4170CB3238553FD7C2C813F73636</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>CE9387695D2BA7F9FC4492ACE5896A30</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E7C0EE7CAF92275858B974BC03EC1236</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EEF55077ACE558F0C2A27B8003CF2A24</key>
 		<dict>
 			<key>primary</key>
 			<true/>

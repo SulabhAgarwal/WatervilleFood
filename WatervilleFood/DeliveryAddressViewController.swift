@@ -8,13 +8,15 @@
 
 import Foundation
 import UIKit
+import TextFieldEffects
+import UIColor_Hex_Swift
 
 class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     let tableView:UITableView = UITableView()
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
-    let PLACEHOLDERS:[String] = ["Address", "Apt/Suite", "Zip", "Phone", "Country", "Comments"]
-    var AddressDict:[String:String] = ["Address":"", "Apt/Suite":"","Zip":"", "Phone":"", "Country":"", "Comments":""]
+    let PLACEHOLDERS:[String] = ["Address*", "Town*", "Apt/Suite","Zip*", "Phone*", "Comments"]
+    var AddressDict:[String:String] = ["Address*":"", "Town*":"", "Apt/Suite":"","Zip*":"", "Phone*":"", "Comments":""]
     let addAddressButton : UIButton = UIButton()
     
     
@@ -35,6 +37,8 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
         self.view.addSubview(tableView)
         
         tableView.registerNib(UINib(nibName: "DeliveryTableCell", bundle: nil), forCellReuseIdentifier: "DeliveryCell")
+        tableView.separatorColor = UIColor.blackColor()
+        tableView.tableFooterView = UIView(frame: CGRectZero)
         
          addAddressButton.frame = CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40)
         addAddressButton.setTitle("Use this address", forState: UIControlState.Normal)
@@ -50,11 +54,21 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("DeliveryCell", forIndexPath: indexPath) as! DeliveryTableCell
+        let textField:HoshiTextField = HoshiTextField(frame: CGRectMake(0,0,cell.bounds.width,cell.bounds.height))
+        let attributes = [
+            NSForegroundColorAttributeName: UIColor.blackColor(),
+            NSFontAttributeName : UIFont(name: "Futura", size: 13)!
+        ]
+        textField.attributedPlaceholder = NSAttributedString(string: Array(AddressDict.keys)[indexPath.row], attributes:attributes)
+        textField.font = UIFont(name: "Futura", size: 13)!
+        textField.autocorrectionType = .No
+
         
-        cell.fieldInput.delegate = self // theField is your IBOutlet UITextfield in your custom cell
+        cell.addSubview(textField)
         
-        cell.fieldName.text = PLACEHOLDERS[indexPath.row]
-        cell.fieldInput.placeholder = PLACEHOLDERS[indexPath.row]
+        textField.delegate = self // theField is your IBOutlet UITextfield in your custom cell
+        
+        textField.placeholder = PLACEHOLDERS[indexPath.row]
         
         return cell
     }

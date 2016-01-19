@@ -29,6 +29,7 @@ class OrderSummaryViewController: UIViewController, UITableViewDelegate, UITable
         tableView.dataSource    =   self
         tableView.scrollEnabled = false
         tableView.registerNib(UINib(nibName: "CustomCartCell", bundle: nil), forCellReuseIdentifier: "CartCell")
+        tableView.tableFooterView = UIView(frame: CGRectZero)
         self.view.addSubview(tableView)
         
         CheckoutButton.frame = CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40)

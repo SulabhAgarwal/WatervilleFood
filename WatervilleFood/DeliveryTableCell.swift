@@ -8,10 +8,11 @@
 
 import Foundation
 import UIKit
+import TextFieldEffects
 
 class DeliveryTableCell: UITableViewCell {
     
-    @IBOutlet weak var fieldName: UILabel!
-    @IBOutlet weak var fieldInput: UITextField!
+    
+
     
 }
