@@ -11,6 +11,10 @@ import UIKit
 import TextFieldEffects
 import UIColor_Hex_Swift
 
+protocol DeliveryInfoDelegate {
+    func didFinishDeliveryVC(controller: DeliveryAddressViewController, DelInfo: DeliveryInfo)
+}
+
 class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     let tableView:UITableView = UITableView()
@@ -18,10 +22,14 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
     let PLACEHOLDERS:[String] = ["Address*", "Town*", "Apt/Suite","Zip*", "Phone*", "Comments"]
     var AddressDict:[String:String] = ["Address*":"", "Town*":"", "Apt/Suite":"","Zip*":"", "Phone*":"", "Comments":""]
     let addAddressButton : UIButton = UIButton()
+    var DelInfo = DeliveryInfo()
+    var delegate:DeliveryInfoDelegate! = nil
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         self.title = "Address Entry"
         let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
@@ -99,7 +107,15 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func saveAddressPressed(sender:UIButton) {
+        self.DelInfo.address = AddressDict["Address*"]
+        self.DelInfo.apt = AddressDict["Apt/Suite"]
+        self.DelInfo.comments = AddressDict["Comments"]
+        self.DelInfo.town = AddressDict["Town*"]
+        self.DelInfo.phone = AddressDict["Phone*"]
+        self.DelInfo.zip = AddressDict["Zip*"]
         self.navigationController?.popViewControllerAnimated(true)
+        self.delegate.didFinishDeliveryVC(self, DelInfo: self.DelInfo)
+
     }
 
 

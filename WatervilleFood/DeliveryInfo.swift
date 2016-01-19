@@ -10,10 +10,10 @@ import Foundation
 
 class DeliveryInfo {
     var address:String!
+    var town:String!
     var apt:String!
     var zip:String!
     var phone:String!
-    var country:String!
     var comments:String!
     
 }

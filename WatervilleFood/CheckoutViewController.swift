@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Stripe
 
-class CheckoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PaymentInfoDelegate {
+class CheckoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PaymentInfoDelegate, DeliveryInfoDelegate {
 
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     var TABLE_NAMES:[String] = []
@@ -18,6 +18,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     let detailsTableView:UITableView = UITableView()
     let orderTableView:UITableView = UITableView()
     var PmtInfo:PaymentInfo = PaymentInfo()
+    var DelInfo:DeliveryInfo = DeliveryInfo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,22 +63,32 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     
     func didFinishPaymentVC(controller: PaymentInfoViewController, PmtInfo: PaymentInfo) {
         self.PmtInfo = PmtInfo
-        print(self.PmtInfo.lastFour)
+        self.createTableArray()
+        detailsTableView.reloadData()
+    }
+    
+    func didFinishDeliveryVC(controller: DeliveryAddressViewController, DelInfo: DeliveryInfo) {
+        print("sldkfj")
+        self.DelInfo = DelInfo
         self.createTableArray()
         detailsTableView.reloadData()
     }
     
     func createTableArray() {
         TABLE_NAMES = [String]()
-        TABLE_NAMES.append("Test")
+        TABLE_NAMES.append(Order.Restaurant.valueForKey("Name") as! String!)
         if (PmtInfo.lastFour == nil) {
-            print("\n\nnil")
             TABLE_NAMES.append("Add Payment Method")
         } else {
-            print("\n\nnot nil")
             TABLE_NAMES.append("Card ending in \(PmtInfo.lastFour)")
         }
-        TABLE_NAMES.append("Add Delivery Address")
+        if (DelInfo.address == nil) {
+            TABLE_NAMES.append("Add Delivery Address")
+        }
+        else {
+            TABLE_NAMES.append(DelInfo.address)
+        }
+        
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -161,7 +172,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
             }
             if (indexPath.row == 2) {
                 let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("DeliveryVC") as? DeliveryAddressViewController
-                //mapViewControllerObejct!.delegate = self
+                mapViewControllerObejct!.delegate = self
                 self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
             }
         }
