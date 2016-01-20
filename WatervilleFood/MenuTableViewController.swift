@@ -32,6 +32,19 @@ class MenuTableViewController: UITableViewController {
         titleButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 25.0)
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.navigationItem.titleView = titleButton
+        
+        let cartButton = UIButton()
+        cartButton.setImage(UIImage(named: "shoppingCart"), forState: .Normal)
+        cartButton.frame = CGRectMake(0, 0, 30, 30)
+        cartButton.addTarget(self, action: "toCheckout:", forControlEvents: .TouchUpInside)
+        let rightButton = UIBarButtonItem()
+        rightButton.customView = cartButton
+        self.navigationItem.rightBarButtonItem = rightButton
+    }
+    
+    func toCheckout(sender:UIButton) {
+        let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("OrderSummaryVC") as? OrderSummaryViewController
+        self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

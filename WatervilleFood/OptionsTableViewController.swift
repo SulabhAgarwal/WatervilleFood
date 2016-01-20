@@ -52,7 +52,21 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
         addToOrderButton.layer.backgroundColor = UIColor.blackColor().CGColor
         addToOrderButton.addTarget(self, action: "checkoutPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(addToOrderButton)
+        
+        let cartButton = UIButton()
+        cartButton.setImage(UIImage(named: "shoppingCart"), forState: .Normal)
+        cartButton.frame = CGRectMake(0, 0, 30, 30)
+        cartButton.addTarget(self, action: "toCheckout:", forControlEvents: .TouchUpInside)
+        let rightButton = UIBarButtonItem()
+        rightButton.customView = cartButton
+        self.navigationItem.rightBarButtonItem = rightButton
     }
+    
+    func toCheckout(sender:UIButton) {
+        let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("OrderSummaryVC") as? OrderSummaryViewController
+        self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
+    }
+    
     
     func checkoutPressed(sender: UIButton) {
         //check number of buttons pressed?
