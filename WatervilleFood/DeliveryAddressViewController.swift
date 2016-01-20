@@ -57,6 +57,15 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
         self.view.addSubview(addAddressButton)
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if (textField.tag == 5) {
+            return false
+        }
+        self.view.viewWithTag(textField.tag + 1)?.becomeFirstResponder()
+        return true
+    }
+    
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -70,6 +79,7 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
         textField.attributedPlaceholder = NSAttributedString(string: Array(AddressDict.keys)[indexPath.row], attributes:attributes)
         textField.font = UIFont(name: "Futura", size: 13)!
         textField.autocorrectionType = .No
+        textField.tag = indexPath.row
 
         
         cell.addSubview(textField)
