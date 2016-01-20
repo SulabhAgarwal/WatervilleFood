@@ -63,7 +63,10 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
         let options = getOptionsForOrder()
         Order.items.append([item,options,price])
         self.navigationController?.popViewControllerAnimated(true)
-        JSSAlertView().success(self, title: "Great success", text: "Item added to order!")
+        let alertview = JSSAlertView().success(self, title: "Great success", text: "Item added to order!")
+        alertview.setTitleFont("Futura")
+        alertview.setTextFont("Futura")
+        alertview.setButtonFont("Futura")
         
     }
     
@@ -73,17 +76,26 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
             let sectionSelected = returnSelectedInSection(section)
             if (specifier[0] == specifier[1]) {
                 if (sectionSelected.count != specifier[0]) {
-                    JSSAlertView().warning(self, title: "\(optionArray[section][1]) Error", text: "Must pick \(specifier[0])")
+                    let alertview = JSSAlertView().warning(self, title: "\(optionArray[section][1]) Error", text: "Must pick \(specifier[0])")
+                    alertview.setTitleFont("Futura")
+                    alertview.setTextFont("Futura")
+                    alertview.setButtonFont("Futura")
                     return false
                 }
             }
             else {
                 if (sectionSelected.count < specifier[0]) {
-                    JSSAlertView().warning(self, title: "\(optionArray[section][1]) Error", text: "Must pick at least \(specifier[0])")
+                    let alertview = JSSAlertView().warning(self, title: "\(optionArray[section][1]) Error", text: "Must pick at least \(specifier[0])")
+                    alertview.setTitleFont("Futura")
+                    alertview.setTextFont("Futura")
+                    alertview.setButtonFont("Futura")
                     return false
                 }
                 else if (sectionSelected.count > specifier[1]) {
-                    JSSAlertView().warning(self, title: "\(optionArray[section][1]) Error", text: "Cannot pick more than \(specifier[1])")
+                    let alertview = JSSAlertView().warning(self, title: "\(optionArray[section][1]) Error", text: "Cannot pick more than \(specifier[1])")
+                    alertview.setTitleFont("Futura")
+                    alertview.setTextFont("Futura")
+                    alertview.setButtonFont("Futura")
                     return false
                 }
             }

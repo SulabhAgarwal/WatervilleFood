@@ -87,7 +87,10 @@ class OrderSummaryViewController: UIViewController, UITableViewDelegate, UITable
                 self.CheckoutButton.enabled = false
             }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            JSSAlertView().danger(self, title: "Item deleted from order", text: "")
+            let alertview = JSSAlertView().danger(self, title: "Item deleted from order", text: "")
+            alertview.setTitleFont("Futura")
+            alertview.setTextFont("Futura")
+            alertview.setButtonFont("Futura")
         }
         delete.backgroundColor = UIColor.redColor()
         

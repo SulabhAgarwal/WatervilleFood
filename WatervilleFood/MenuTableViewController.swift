@@ -49,7 +49,7 @@ class MenuTableViewController: UITableViewController {
         
         cell.labUerName.text = ItemArray![indexPath.row].valueForKey("Item") as! String!
         cell.labMessage.text = "$\(String.localizedStringWithFormat("%.2f %@", ItemArray![indexPath.row].valueForKey("Price") as! Double!,""))"
-        cell.labTime.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .ShortStyle, timeStyle: .ShortStyle)
+        
         
         return cell
     }
