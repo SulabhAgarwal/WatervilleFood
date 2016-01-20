@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A0AEDAF1C4D895D00640979 /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0AEDAE1C4D895C00640979 /* Customization.swift */; };
 		1A0AEDB11C4D8A1B00640979 /* CustomizationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0AEDB01C4D8A1B00640979 /* CustomizationTheme.swift */; };
+		1A0AEDB41C50106400640979 /* MenuArray.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1A0AEDB31C50106400640979 /* MenuArray.txt */; };
 		1A11EDB31C4433AA00A612DB /* CustomItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A11EDB21C4433AA00A612DB /* CustomItemTableViewCell.swift */; };
 		1A11EDB51C4433DE00A612DB /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A11EDB41C4433DE00A612DB /* MenuTableViewController.swift */; };
 		1A11EDB71C4472DC00A612DB /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A11EDB61C4472DC00A612DB /* OptionsTableViewController.swift */; };
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		1A0AEDAE1C4D895C00640979 /* Customization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customization.swift; sourceTree = "<group>"; };
 		1A0AEDB01C4D8A1B00640979 /* CustomizationTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizationTheme.swift; sourceTree = "<group>"; };
+		1A0AEDB31C50106400640979 /* MenuArray.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MenuArray.txt; sourceTree = "<group>"; };
 		1A11EDB21C4433AA00A612DB /* CustomItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomItemTableViewCell.swift; sourceTree = "<group>"; };
 		1A11EDB41C4433DE00A612DB /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		1A11EDB61C4472DC00A612DB /* OptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTableViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			children = (
 				1A0AEDAE1C4D895C00640979 /* Customization.swift */,
 				1A0AEDB01C4D8A1B00640979 /* CustomizationTheme.swift */,
+				1A3CAC611C461A7D007E5D1C /* JSSAlertView.swift */,
 			);
 			name = Customization;
 			sourceTree = "<group>";
@@ -264,7 +267,7 @@
 		1AD0457D1C4C9E5600D1696C /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				1A3CAC611C461A7D007E5D1C /* JSSAlertView.swift */,
+				1A0AEDB31C50106400640979 /* MenuArray.txt */,
 				1ABEB18C1C42C92000EC0331 /* AppDelegate.swift */,
 			);
 			name = Other;
@@ -386,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ABEB1971C42C92000EC0331 /* LaunchScreen.storyboard in Resources */,
+				1A0AEDB41C50106400640979 /* MenuArray.txt in Resources */,
 				1A742A6C1C499C0B006CAD3A /* CheckoutCell.xib in Resources */,
 				1ABEB1941C42C92000EC0331 /* Assets.xcassets in Resources */,
 				1ABEB1921C42C92000EC0331 /* Main.storyboard in Resources */,
