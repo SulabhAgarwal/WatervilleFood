@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Stripe
+import Parse
 
 class CheckoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PaymentInfoDelegate, DeliveryInfoDelegate {
 
@@ -48,16 +49,46 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         orderTableView.layer.borderWidth = 2
         self.view.addSubview(orderTableView)
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
         let CheckoutButton : UIButton = UIButton(frame: CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40))
         CheckoutButton.setTitle("Tap to pay: $\(String.localizedStringWithFormat("%.2f %@", (self.calculateTotalPrice()),""))", forState: UIControlState.Normal)
         CheckoutButton.layer.backgroundColor = UIColor.blackColor().CGColor
         CheckoutButton.addTarget(self, action: "checkoutPressed:", forControlEvents: UIControlEvents.TouchUpInside)
-        if (Order.items.count == 0) {
+        if (PmtInfo.lastFour == nil || DelInfo.address == nil) {
             CheckoutButton.alpha = 0.2
             CheckoutButton.enabled = false
         }
+        else {
+            CheckoutButton.alpha = 1
+            CheckoutButton.enabled = true
+        }
+        print("\n\nTABLE RELOAD")
         self.view.addSubview(CheckoutButton)
-        
+    }
+    
+    func checkoutPressed(sender: UIButton) {
+        let order = PFObject(className:"Orders")
+        order["filled"] = false
+        order["address"] = DelInfo.address
+        order["order_total"] = self.calculateTotalPrice()
+        order["delivery"] = true
+        order["phone"] = DelInfo.phone
+        order["details"] = Order.items 
+        order["restaurant"] = Order.Restaurant.valueForKey("Name") as! String!
+        order.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            if (success) {
+                let alertview = JSSAlertView().success(self, title: "Great success", text: "Order completed!")
+                alertview.setTitleFont("Futura")
+                alertview.setTextFont("Futura")
+                alertview.setButtonFont("Futura")
+            } else {
+                print("error")
+            }
+        }
     }
     
     
@@ -120,6 +151,14 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
             
             cell.itemName.text = TABLE_NAMES[indexPath.row]
             cell.itemImage.image = TABLE_ICONS[indexPath.row]
+            
+            if (TABLE_NAMES[indexPath.row] == "Add Payment Method" || TABLE_NAMES[indexPath.row] == "Add Delivery Address") {
+                cell.itemName.textColor = UIColor.redColor()
+            }
+            else {
+                cell.itemName.textColor = UIColor.blackColor()
+            }
+            
 
             return cell
         }

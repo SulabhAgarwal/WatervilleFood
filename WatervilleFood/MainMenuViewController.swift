@@ -70,6 +70,7 @@ class MainMenuViewController: UIViewController {
     func createImages() {
         SwiftSpinner.show("")
         let query = PFQuery(className: "Restaurants")
+        query.addDescendingOrder("createdAt")
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if let error = error {
@@ -82,6 +83,7 @@ class MainMenuViewController: UIViewController {
                 SwiftSpinner.hide()
                 var count:Int = 0
                 for object in objects! {
+                    print(object)
                     self.RestaurantArray.append(object)
                     let imageView = ZFRippleButton()
                     imageView.frame = CGRectMake(2, CGFloat(66 + 102*(count)), self.screenBounds.width-4, 100)

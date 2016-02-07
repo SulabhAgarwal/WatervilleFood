@@ -1,3 +1,5 @@
+PadThaiToo
+
 Fresh Rolls, 4.50
 [
 [[1,1],"Shrimp",["Yes","No"]],
@@ -13,4 +15,15 @@ Shrimp and Mango Rolls, 7.25
 [
 [[0,9], "Options", ["rice paper", "noodles", "lettuce", "carrot", "cukes", "shrimp", "fresh mango", "slightly spicy", "sweet &
 salty sauce w/ nuts"]]
+]
+
+
+Amicis Cucina
+Stuffed Ciabatta, 7.95
+
+Margarita Pizza, 10.95
+
+Cheese Pizza, 9.95
+[
+[[1,1], "Pepperoni (+$2.00)", ["Yes", "No"]]
 ]
