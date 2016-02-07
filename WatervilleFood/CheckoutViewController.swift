@@ -74,7 +74,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         order["filled"] = false
         order["address"] = DelInfo.address
         order["order_total"] = self.calculateTotalPrice()
-        order["delivery"] = true
+        order["delivery"] = "delivery"
         order["phone"] = DelInfo.phone
         order["details"] = Order.items 
         order["restaurant"] = Order.Restaurant.valueForKey("Name") as! String!
@@ -86,7 +86,10 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                 alertview.setTextFont("Futura")
                 alertview.setButtonFont("Futura")
             } else {
-                print("error")
+                let alertview = JSSAlertView().danger(self, title: "Error", text: "Order could not be submitted. Check your internet connectivity.")
+                alertview.setTitleFont("Futura")
+                alertview.setTextFont("Futura")
+                alertview.setButtonFont("Futura")
             }
         }
     }
