@@ -181,10 +181,10 @@
             </objects>
             <point key="canvasLocation" x="2728" y="218"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Side Menu Navigation Controller-->
         <scene sceneID="thy-fE-Dux">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="x8R-0c-Wv9" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="x8R-0c-Wv9" customClass="ENSideMenuNavigationController" customModule="ENSwiftSideMenu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jx0-fO-G3X">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

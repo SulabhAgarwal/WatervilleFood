@@ -32,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Theme.applyButton()
         Theme.applyLabel()
         Theme.applyBarButton()
-        
 
         
         return true

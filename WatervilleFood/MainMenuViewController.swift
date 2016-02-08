@@ -47,7 +47,7 @@ class MainMenuViewController: UIViewController {
         rightButton.customView = cartButton
         self.navigationItem.rightBarButtonItem = rightButton
         
-        
+
         
         self.createImages()
     }
