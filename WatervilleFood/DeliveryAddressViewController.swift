@@ -74,10 +74,10 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
         let textField:HoshiTextField = HoshiTextField(frame: CGRectMake(0,0,cell.bounds.width,cell.bounds.height))
         let attributes = [
             NSForegroundColorAttributeName: UIColor.blackColor(),
-            NSFontAttributeName : UIFont(name: "Futura", size: 13)!
+            NSFontAttributeName : UIFont(name: "Futura", size: 16)!
         ]
         textField.attributedPlaceholder = NSAttributedString(string: Array(AddressDict.keys)[indexPath.row], attributes:attributes)
-        textField.font = UIFont(name: "Futura", size: 13)!
+        textField.font = UIFont(name: "Futura", size: 16)!
         textField.autocorrectionType = .No
         textField.tag = indexPath.row
 

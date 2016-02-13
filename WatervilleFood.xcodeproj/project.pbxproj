@@ -14,6 +14,9 @@
 		1A11EDB51C4433DE00A612DB /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A11EDB41C4433DE00A612DB /* MenuTableViewController.swift */; };
 		1A11EDB71C4472DC00A612DB /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A11EDB61C4472DC00A612DB /* OptionsTableViewController.swift */; };
 		1A11EDB91C45672D00A612DB /* CustomOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A11EDB81C45672D00A612DB /* CustomOptionTableViewCell.swift */; };
+		1A3AF5151C6EACAC0054035B /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3AF5141C6EACAC0054035B /* PaymentMethodViewController.swift */; };
+		1A3AF5171C6ED6DB0054035B /* CardInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A3AF5161C6ED6DB0054035B /* CardInfoCell.xib */; };
+		1A3AF5191C6ED73E0054035B /* CardInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3AF5181C6ED73E0054035B /* CardInfoCell.swift */; };
 		1A3CAC621C461A7D007E5D1C /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CAC611C461A7D007E5D1C /* JSSAlertView.swift */; };
 		1A742A641C483FFB006CAD3A /* OrderSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A742A631C483FFB006CAD3A /* OrderSummaryViewController.swift */; };
 		1A742A661C484450006CAD3A /* CustomCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A742A651C484450006CAD3A /* CustomCartCell.xib */; };
@@ -62,6 +65,9 @@
 		1A11EDB41C4433DE00A612DB /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		1A11EDB61C4472DC00A612DB /* OptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTableViewController.swift; sourceTree = "<group>"; };
 		1A11EDB81C45672D00A612DB /* CustomOptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOptionTableViewCell.swift; sourceTree = "<group>"; };
+		1A3AF5141C6EACAC0054035B /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
+		1A3AF5161C6ED6DB0054035B /* CardInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardInfoCell.xib; sourceTree = "<group>"; };
+		1A3AF5181C6ED73E0054035B /* CardInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardInfoCell.swift; sourceTree = "<group>"; };
 		1A3CAC611C461A7D007E5D1C /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
 		1A742A631C483FFB006CAD3A /* OrderSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderSummaryViewController.swift; sourceTree = "<group>"; };
 		1A742A651C484450006CAD3A /* CustomCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCartCell.xib; sourceTree = "<group>"; };
@@ -237,6 +243,9 @@
 			children = (
 				1AD045661C4B0D2700D1696C /* PaymentInfoViewController.swift */,
 				1AD045681C4B0D8F00D1696C /* PaymentInfo.swift */,
+				1A3AF5141C6EACAC0054035B /* PaymentMethodViewController.swift */,
+				1A3AF5161C6ED6DB0054035B /* CardInfoCell.xib */,
+				1A3AF5181C6ED73E0054035B /* CardInfoCell.swift */,
 			);
 			name = Payment;
 			sourceTree = "<group>";
@@ -395,6 +404,7 @@
 				1ABEB1921C42C92000EC0331 /* Main.storyboard in Resources */,
 				1A742A661C484450006CAD3A /* CustomCartCell.xib in Resources */,
 				1AD045751C4C9CB100D1696C /* DeliveryTableCell.xib in Resources */,
+				1A3AF5171C6ED6DB0054035B /* CardInfoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +480,8 @@
 				1A11EDB71C4472DC00A612DB /* OptionsTableViewController.swift in Sources */,
 				1A742A6E1C499C2F006CAD3A /* CheckoutCell.swift in Sources */,
 				1ABEB18F1C42C92000EC0331 /* MainMenuViewController.swift in Sources */,
+				1A3AF5191C6ED73E0054035B /* CardInfoCell.swift in Sources */,
+				1A3AF5151C6EACAC0054035B /* PaymentMethodViewController.swift in Sources */,
 				1AD0456D1C4C934A00D1696C /* DeliveryAddressViewController.swift in Sources */,
 				1ABEB18D1C42C92000EC0331 /* AppDelegate.swift in Sources */,
 				1A11EDB91C45672D00A612DB /* CustomOptionTableViewCell.swift in Sources */,

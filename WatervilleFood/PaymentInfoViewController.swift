@@ -10,12 +10,15 @@ import Foundation
 import UIKit
 import Stripe
 import AIFlatSwitch
+import Parse
+import TextFieldEffects
 
 protocol PaymentInfoDelegate {
     func didFinishPaymentVC(controller: PaymentInfoViewController, PmtInfo: PaymentInfo)
 }
 
 class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDelegate {
+    
     let paymentTextField = STPPaymentCardTextField()
     let flatSwitch = AIFlatSwitch()
     var isValid:Bool = false
@@ -26,12 +29,24 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        paymentTextField.frame = CGRectMake(20, 100, SCREEN_BOUNDS.width-40, 45)
+        let textField = HoshiTextField(frame: CGRectMake(20,80,SCREEN_BOUNDS.width-40,50))
+        var bottomLine = CALayer()
+        bottomLine.frame = CGRectMake(0.0, textField.frame.height - 1, textField.frame.width, 1.0)
+        bottomLine.backgroundColor = UIColor.blackColor().CGColor
+        textField.borderStyle = UITextBorderStyle.None
+        textField.layer.addSublayer(bottomLine)
+        let attributes = [
+            NSForegroundColorAttributeName: UIColor.blackColor(),
+            NSFontAttributeName : UIFont(name: "Futura", size: 17)!
+        ]
+        textField.attributedPlaceholder = NSAttributedString(string: "Card Name", attributes:attributes)
+        view.addSubview(textField)
+        
+        paymentTextField.frame = CGRectMake(20, 140, SCREEN_BOUNDS.width-40, 45)
         paymentTextField.delegate = self
         view.addSubview(paymentTextField)
         
-        
-        flatSwitch.frame = CGRectMake(SCREEN_BOUNDS.width/2-25, 170, 50, 50)
+        flatSwitch.frame = CGRectMake(SCREEN_BOUNDS.width/2-25, 210, 50, 50)
         flatSwitch.lineWidth = 2.0
         flatSwitch.strokeColor = UIColor.redColor()
         flatSwitch.trailStrokeColor = UIColor.redColor()
@@ -40,19 +55,21 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
         self.title = "Payment"
         let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
         titleButton.setTitle("Payment", forState: UIControlState.Normal)
-        titleButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 25.0)
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.navigationItem.titleView = titleButton
         
-        AddPaymentButton.frame = CGRectMake(20,245,SCREEN_BOUNDS.width-40,40)
+        AddPaymentButton.frame = CGRectMake(20,295,SCREEN_BOUNDS.width-40,40)
         AddPaymentButton.setTitle("Add Payment Method", forState: UIControlState.Normal)
         AddPaymentButton.layer.backgroundColor = UIColor.blackColor().CGColor
         AddPaymentButton.addTarget(self, action: "addPaymentPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(AddPaymentButton)
+        
         if (!isValid) {
             AddPaymentButton.enabled = false
             AddPaymentButton.alpha = 0.2
         }
-        self.view.addSubview(AddPaymentButton)
+        
+
     }
     
     func addPaymentPressed(sender:UIButton) {
@@ -95,26 +112,7 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
             }
         }
     }
-    
-    
-    func createBackendChargeWithToken(token: STPToken, completion: PKPaymentAuthorizationStatus -> ()) {
-        let url = NSURL(string: "https://example.com/token")!
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
-        let body = "stripeToken=(token.tokenId)"
-        request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding)
-        let configuration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
-        let session = NSURLSession(configuration: configuration)
-        let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
-            if error != nil {
-                completion(PKPaymentAuthorizationStatus.Failure)
-            }
-            else {
-                completion(PKPaymentAuthorizationStatus.Success)
-            }
-        }
-        task.resume()
-    }
+
     
     
 }

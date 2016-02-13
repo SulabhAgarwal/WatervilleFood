@@ -208,8 +208,8 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
             if (indexPath.row == 1) {
-                let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("PaymentVC") as? PaymentInfoViewController
-                mapViewControllerObejct!.delegate = self
+                let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("PaymentMethodVC") as? PaymentMethodViewController
+                //mapViewControllerObejct!.delegate = self
                 self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
             }
             if (indexPath.row == 2) {
