@@ -12,6 +12,10 @@ import Stripe
 import Parse
 import SwiftSpinner
 
+protocol PaymentInfoDelegate {
+    func didFinishPaymentVC(controller: PaymentMethodViewController, PmtInfo: PaymentInfo)
+}
+
 
 class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -20,6 +24,8 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     var SavedCardNames:[String]!
     var SavedLastFours:[String]!
     var StripeTokens:[String]!
+    let PmtInfo:PaymentInfo = PaymentInfo()
+    var delegate:PaymentInfoDelegate! = nil
     
     override func viewDidLoad() {
         SwiftSpinner.show("")
@@ -27,12 +33,16 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
         PmtTableView.layer.borderWidth = 2
         PmtTableView.delegate = self
         PmtTableView.dataSource = self
-        PmtTableView.scrollEnabled = false
         PmtTableView.registerNib(UINib(nibName: "CardInfoCell", bundle: nil), forCellReuseIdentifier: "CardInfoCell")
         self.view.addSubview(PmtTableView)
         
         print("/n/n\(UIDevice.currentDevice().identifierForVendor!.UUIDString)\n\n")
         
+        
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         let query = PFQuery(className: "CardInformation")
         query.whereKey("Device_ID", equalTo: UIDevice.currentDevice().identifierForVendor!.UUIDString)
         query.getFirstObjectInBackgroundWithBlock {
@@ -42,15 +52,13 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
                 return
             } else {
                 SwiftSpinner.hide()
+                print("getting stuff")
                 self.SavedCardNames = object!.valueForKey("CardName") as! NSArray as! [String]
                 self.SavedLastFours = object!.valueForKey("LastFour") as! NSArray as! [String]
                 self.StripeTokens = object!.valueForKey("StripeToken") as! NSArray as! [String]
+                self.PmtTableView.reloadData()
             }
         }
-
-        
-        
-        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -76,6 +84,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
                 return 0
             }
             else {
+                print("count: \(StripeTokens.count)")
                 return StripeTokens.count
             }
         }
@@ -84,6 +93,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CardInfoCell", forIndexPath: indexPath) as! CardInfoCell
+        print(indexPath.section)
         if (indexPath.section == 0) {
             
             cell.cardName.text = "Add New Payment Method"
@@ -93,8 +103,8 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
             
             
         }
-        else if (indexPath.section == 1) {
-
+        else {
+            print(SavedCardNames[indexPath.row])
             cell.cardName.text = SavedCardNames[indexPath.row]
             cell.cardDesc.text = "****\(SavedLastFours[indexPath.row])"
 
@@ -110,6 +120,13 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
             let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("PaymentVC") as? PaymentInfoViewController
             //mapViewControllerObejct!.delegate = self
             self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
+        }
+        else {
+            self.PmtInfo.tokenId = StripeTokens[indexPath.row]
+            self.PmtInfo.name = SavedCardNames[indexPath.row]
+            self.PmtInfo.lastFour = SavedLastFours[indexPath.row]
+            self.navigationController?.popViewControllerAnimated(true)
+            self.delegate.didFinishPaymentVC(self, PmtInfo: self.PmtInfo)
         }
     }
         

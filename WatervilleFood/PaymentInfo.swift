@@ -10,6 +10,7 @@ import Foundation
 import Stripe
 
 class PaymentInfo {
-    var token: STPToken!
+    var name: String!
+    var tokenId: String!
     var lastFour: String!
 }

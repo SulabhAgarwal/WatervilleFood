@@ -11,10 +11,9 @@ import UIKit
 import Stripe
 import Parse
 import TextFieldEffects
+import SwiftSpinner
 
-protocol PaymentInfoDelegate {
-    func didFinishPaymentVC(controller: PaymentInfoViewController, PmtInfo: PaymentInfo)
-}
+
 
 class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDelegate {
     
@@ -23,8 +22,6 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
     var hasName:Bool = false
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     let AddPaymentButton:UIButton = UIButton()
-    var PmtInfo = PaymentInfo()
-    var delegate:PaymentInfoDelegate! = nil
     var nameField:UITextField!
     
     override func viewDidLoad() {
@@ -86,21 +83,70 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
     }
     
     func addPaymentPressed(sender:UIButton) {
+        SwiftSpinner.show("Saving Card...")
         if let card = paymentTextField.card {
             STPAPIClient.sharedClient().createTokenWithCard(card) { (token, error) -> Void in
                 if let error = error  {
-                    print(error.description)
+                    SwiftSpinner.hide()
+                    print("\n\n\(error.description)\n\n")
                 }
                 else if let token = token {
-                    self.PmtInfo.token = token
-                    self.PmtInfo.lastFour = card.last4()!
-                    self.navigationController?.popViewControllerAnimated(true)
-                    self.delegate.didFinishPaymentVC(self, PmtInfo: self.PmtInfo)
-                    
+                    let query = PFQuery(className: "CardInformation")
+                    query.whereKey("Device_ID", equalTo: UIDevice.currentDevice().identifierForVendor!.UUIDString)
+                    query.getFirstObjectInBackgroundWithBlock{
+                        (object, error) -> Void in
+                        if error != nil {
+                            let cardSave = PFObject(className: "CardInformation")
+                            cardSave["LastFour"] = card.last4()!
+                            cardSave["CardName"] = self.nameField.text!
+                            cardSave["StripeToken"] = token
+                            cardSave.saveInBackgroundWithBlock {
+                                (success: Bool, error: NSError?) -> Void in
+                                if (success) {
+                                    SwiftSpinner.hide()
+                                    self.navigationController?.popViewControllerAnimated(true)
+                                    let alertview = JSSAlertView().success(self, title: "Great success", text: "Card Saved!")
+                                    alertview.setTitleFont("Futura")
+                                    alertview.setTextFont("Futura")
+                                    alertview.setButtonFont("Futura")
+                                    
+                                }
+                                else {
+                                    SwiftSpinner.hide()
+                                    let alertview = JSSAlertView().danger(self, title: "Error", text: "\(error?.description)")
+                                    alertview.setTitleFont("Futura")
+                                    alertview.setTextFont("Futura")
+                                    alertview.setButtonFont("Futura")
+                                }
+                            }
+                        }
+                        else {
+                            object?.addObject(card.last4()!, forKey: "LastFour")
+                            object?.addObject(self.nameField.text!, forKey: "CardName")
+                            object?.addObject(token.tokenId, forKey:"StripeToken")
+                            object?.saveInBackgroundWithBlock{
+                                (success: Bool, error: NSError?) -> Void in
+                                if (success) {
+                                    SwiftSpinner.hide()
+                                    self.navigationController?.popViewControllerAnimated(true)
+                                    let alertview = JSSAlertView().success(self, title: "Great success", text: "Card Saved!")
+                                    alertview.setTitleFont("Futura")
+                                    alertview.setTextFont("Futura")
+                                    alertview.setButtonFont("Futura")
+                                }
+                                else {
+                                    SwiftSpinner.hide()
+                                    let alertview = JSSAlertView().danger(self, title: "Error", text: "\(error?.code)")
+                                    alertview.setTitleFont("Futura")
+                                    alertview.setTextFont("Futura")
+                                    alertview.setButtonFont("Futura")
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
-        
     }
     
     func paymentCardTextFieldDidChange(textField: STPPaymentCardTextField) {
@@ -119,6 +165,7 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
             }
         }
     }
+
     
     
 

@@ -70,32 +70,44 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func checkoutPressed(sender: UIButton) {
-        let order = PFObject(className:"Orders")
-        order["filled"] = false
-        order["address"] = DelInfo.address
-        order["order_total"] = self.calculateTotalPrice()
-        order["delivery"] = "delivery"
-        order["phone"] = DelInfo.phone
-        order["details"] = Order.items 
-        order["restaurant"] = Order.Restaurant.valueForKey("Name") as! String!
-        order.saveInBackgroundWithBlock {
-            (success: Bool, error: NSError?) -> Void in
-            if (success) {
-                let alertview = JSSAlertView().success(self, title: "Great success", text: "Order completed!")
-                alertview.setTitleFont("Futura")
-                alertview.setTextFont("Futura")
-                alertview.setButtonFont("Futura")
-            } else {
-                let alertview = JSSAlertView().danger(self, title: "Error", text: "Order could not be submitted. Check your internet connectivity.")
-                alertview.setTitleFont("Futura")
-                alertview.setTextFont("Futura")
-                alertview.setButtonFont("Futura")
+        func postStripeToken(tokenID:String, amount:Double) {
+            let params: [String: NSObject] = ["stripeToken": tokenID,
+                "amount": amount ]
+            PFCloud.callFunctionInBackground("purchase", withParameters: params) { (result, error) -> Void in
+                if error == nil {
+                    print(result)
+                    let order = PFObject(className:"Orders")
+                    order["filled"] = false
+                    order["address"] = self.DelInfo.address
+                    order["order_total"] = self.calculateTotalPrice()
+                    order["delivery"] = "delivery"
+                    order["phone"] = self.DelInfo.phone
+                    order["details"] = Order.items
+                    order["restaurant"] = Order.Restaurant.valueForKey("Name") as! String!
+                    order.saveInBackgroundWithBlock {
+                        (success: Bool, error: NSError?) -> Void in
+                        if (success) {
+                            let alertview = JSSAlertView().success(self, title: "Great success", text: "Order completed!")
+                            alertview.setTitleFont("Futura")
+                            alertview.setTextFont("Futura")
+                            alertview.setButtonFont("Futura")
+                        } else {
+                            let alertview = JSSAlertView().danger(self, title: "Error", text: "Order could not be submitted. Check your internet connectivity.")
+                            alertview.setTitleFont("Futura")
+                            alertview.setTextFont("Futura")
+                            alertview.setButtonFont("Futura")
+                        }
+                    }
+                } else {
+                    print(error)
+                }
             }
         }
+        
     }
     
     
-    func didFinishPaymentVC(controller: PaymentInfoViewController, PmtInfo: PaymentInfo) {
+    func didFinishPaymentVC(controller: PaymentMethodViewController, PmtInfo: PaymentInfo) {
         self.PmtInfo = PmtInfo
         self.createTableArray()
         detailsTableView.reloadData()
@@ -114,7 +126,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         if (PmtInfo.lastFour == nil) {
             TABLE_NAMES.append("Add Payment Method")
         } else {
-            TABLE_NAMES.append("Card ending in \(PmtInfo.lastFour)")
+            TABLE_NAMES.append("\(PmtInfo.name)")
         }
         if (DelInfo.address == nil) {
             TABLE_NAMES.append("Add Delivery Address")
@@ -209,7 +221,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
             }
             if (indexPath.row == 1) {
                 let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("PaymentMethodVC") as? PaymentMethodViewController
-                //mapViewControllerObejct!.delegate = self
+                mapViewControllerObejct!.delegate = self
                 self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
             }
             if (indexPath.row == 2) {
@@ -228,6 +240,18 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         sum += Order.tax
         sum += Order.tip
         return sum
+    }
+    
+    func postStripeToken(token: STPToken) {
+        let params: [String: NSObject] = ["stripeToken": token.tokenId,
+            "amount": 10 ]
+        PFCloud.callFunctionInBackground("purchase", withParameters: params) { (result, error) -> Void in
+            if error == nil {
+                print(result)
+            } else {
+                print(error)
+            }
+        }
     }
     
     
