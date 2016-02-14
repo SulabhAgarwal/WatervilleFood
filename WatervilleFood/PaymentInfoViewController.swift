@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import Stripe
-import AIFlatSwitch
 import Parse
 import TextFieldEffects
 
@@ -20,37 +19,36 @@ protocol PaymentInfoDelegate {
 class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDelegate {
     
     let paymentTextField = STPPaymentCardTextField()
-    let flatSwitch = AIFlatSwitch()
     var isValid:Bool = false
+    var hasName:Bool = false
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     let AddPaymentButton:UIButton = UIButton()
     var PmtInfo = PaymentInfo()
     var delegate:PaymentInfoDelegate! = nil
+    var nameField:UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        let textField = HoshiTextField(frame: CGRectMake(20,80,SCREEN_BOUNDS.width-40,50))
-        var bottomLine = CALayer()
-        bottomLine.frame = CGRectMake(0.0, textField.frame.height - 1, textField.frame.width, 1.0)
+        
+        nameField = HoshiTextField(frame: CGRectMake(20,80,SCREEN_BOUNDS.width-40,50))
+        
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRectMake(0.0, nameField.frame.height - 1, nameField.frame.width, 1.0)
         bottomLine.backgroundColor = UIColor.blackColor().CGColor
-        textField.borderStyle = UITextBorderStyle.None
-        textField.layer.addSublayer(bottomLine)
+        nameField.borderStyle = UITextBorderStyle.None
+        nameField.layer.addSublayer(bottomLine)
         let attributes = [
             NSForegroundColorAttributeName: UIColor.blackColor(),
             NSFontAttributeName : UIFont(name: "Futura", size: 17)!
         ]
-        textField.attributedPlaceholder = NSAttributedString(string: "Card Name", attributes:attributes)
-        view.addSubview(textField)
+        nameField.attributedPlaceholder = NSAttributedString(string: "Card Name", attributes:attributes)
+        nameField.addTarget(self, action: "nameDidChange:", forControlEvents: .EditingChanged)
+        view.addSubview(nameField)
         
         paymentTextField.frame = CGRectMake(20, 140, SCREEN_BOUNDS.width-40, 45)
         paymentTextField.delegate = self
         view.addSubview(paymentTextField)
         
-        flatSwitch.frame = CGRectMake(SCREEN_BOUNDS.width/2-25, 210, 50, 50)
-        flatSwitch.lineWidth = 2.0
-        flatSwitch.strokeColor = UIColor.redColor()
-        flatSwitch.trailStrokeColor = UIColor.redColor()
-        view.addSubview(flatSwitch)
         
         self.title = "Payment"
         let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
@@ -70,6 +68,21 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
         }
         
 
+    }
+    
+    func nameDidChange(sender: UITextField) {
+        if (sender.text == "") {
+            hasName = false
+            AddPaymentButton.enabled = false
+            AddPaymentButton.alpha = 0.2
+        }
+        else {
+            hasName = true
+            if (isValid) {
+                AddPaymentButton.enabled = true
+                AddPaymentButton.alpha = 1
+            }
+        }
     }
     
     func addPaymentPressed(sender:UIButton) {
@@ -92,10 +105,7 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
     
     func paymentCardTextFieldDidChange(textField: STPPaymentCardTextField) {
         // Toggle navigation, for example
-        if (textField.valid) {
-            flatSwitch.strokeColor = UIColor.greenColor()
-            flatSwitch.trailStrokeColor = UIColor.greenColor()
-            flatSwitch.setSelected(true, animated: true)
+        if (textField.valid && hasName) {
             isValid = true
             AddPaymentButton.enabled = true
             AddPaymentButton.alpha = 1
@@ -103,15 +113,14 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
         }
         else {
             if (isValid) {
-                flatSwitch.strokeColor = UIColor.redColor()
-                flatSwitch.trailStrokeColor = UIColor.redColor()
-                flatSwitch.setSelected(false, animated: true)
                 isValid = false
                 AddPaymentButton.enabled = false
                 AddPaymentButton.alpha = 0.2
             }
         }
     }
+    
+    
 
     
     
