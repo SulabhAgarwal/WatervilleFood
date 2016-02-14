@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "NorthEats": {
+      "applicationId": "QXX0CFJvmsjlZ3EY7vyIVG8VuwWmawqzDlzTRWh3"
+    },
+    "_default": {
+      "link": "NorthEats"
+    }
+  }
+}
