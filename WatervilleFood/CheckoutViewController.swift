@@ -70,9 +70,8 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func checkoutPressed(sender: UIButton) {
-        func postStripeToken(tokenID:String, amount:Double) {
-            let params: [String: NSObject] = ["stripeToken": tokenID,
-                "amount": amount ]
+            let params: [String: NSObject] = ["stripeToken": self.PmtInfo.tokenId,
+                "amount": self.calculateTotalPrice() ]
             PFCloud.callFunctionInBackground("purchase", withParameters: params) { (result, error) -> Void in
                 if error == nil {
                     print(result)
@@ -102,8 +101,6 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                     print(error)
                 }
             }
-        }
-        
     }
     
     
@@ -240,18 +237,6 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         sum += Order.tax
         sum += Order.tip
         return sum
-    }
-    
-    func postStripeToken(token: STPToken) {
-        let params: [String: NSObject] = ["stripeToken": token.tokenId,
-            "amount": 10 ]
-        PFCloud.callFunctionInBackground("purchase", withParameters: params) { (result, error) -> Void in
-            if error == nil {
-                print(result)
-            } else {
-                print(error)
-            }
-        }
     }
     
     
