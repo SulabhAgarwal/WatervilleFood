@@ -1,14 +1,18 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "143637E58FF9373717B35728D0A8F20CF880E403",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "143637E58FF9373717B35728D0A8F20CF880E403+++3DABC4B",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "143637E58FF9373717B35728D0A8F20CF880E403" : 0
+    "143637E58FF9373717B35728D0A8F20CF880E403+++E968586" : 0,
+    "143637E58FF9373717B35728D0A8F20CF880E403+++B629AEB" : 0,
+    "143637E58FF9373717B35728D0A8F20CF880E403+++3DABC4B" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "36DE59AA-58C5-4AD5-928D-8239BD06918D",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "143637E58FF9373717B35728D0A8F20CF880E403" : ""
+    "143637E58FF9373717B35728D0A8F20CF880E403+++E968586" : "",
+    "143637E58FF9373717B35728D0A8F20CF880E403+++B629AEB" : "",
+    "143637E58FF9373717B35728D0A8F20CF880E403+++3DABC4B" : "WatervilleFood\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "WatervilleFood",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -17,12 +21,17 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:dhvogel\/WatervilleFood.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "143637E58FF9373717B35728D0A8F20CF880E403"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "143637E58FF9373717B35728D0A8F20CF880E403+++3DABC4B"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:dhvogel\/WatervilleFood.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "143637E58FF9373717B35728D0A8F20CF880E403"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "143637E58FF9373717B35728D0A8F20CF880E403+++B629AEB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:dhvogel\/WatervilleFood.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "143637E58FF9373717B35728D0A8F20CF880E403+++E968586"
     }
   ]
 }

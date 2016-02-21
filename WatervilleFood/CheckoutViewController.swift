@@ -11,7 +11,7 @@ import UIKit
 import Stripe
 import Parse
 
-class CheckoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PaymentInfoDelegate, DeliveryInfoDelegate {
+class CheckoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PaymentInfoDelegate, DeliveryInfoDelegate, PKPaymentAuthorizationViewControllerDelegate {
 
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     var TABLE_NAMES:[String] = []
@@ -20,6 +20,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     let orderTableView:UITableView = UITableView()
     var PmtInfo:PaymentInfo = PaymentInfo()
     var DelInfo:DeliveryInfo = DeliveryInfo()
+    let backendChargeURLString = "https://danvtest.herokuapp.com/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +103,69 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
     }
+    
+    
+    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: ((PKPaymentAuthorizationStatus) -> Void)) {
+        print("Payment Auth")
+        let apiClient = STPAPIClient.sharedClient()
+        apiClient.createTokenWithPayment(payment, completion: { (token, error) -> Void in
+            if error == nil {
+                if let token = token {
+                    self.createBackendChargeWithToken(token, completion: { (result, error) -> Void in
+                        if result == STPBackendChargeResult.Success {
+                            completion(PKPaymentAuthorizationStatus.Success)
+                        }
+                        else {
+                            print(error?.description)
+                            completion(PKPaymentAuthorizationStatus.Failure)
+                        }
+                    })
+                }
+            }
+            else {
+                print("error creating token")
+                completion(PKPaymentAuthorizationStatus.Failure)
+            }
+        })
+    }
+    
+    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func createBackendChargeWithToken(token: STPToken, completion: STPTokenSubmissionHandler) {
+        if backendChargeURLString != "" {
+            if let url = NSURL(string: backendChargeURLString  + "/charge") {
+                
+                let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+                let request = NSMutableURLRequest(URL: url)
+                request.HTTPMethod = "POST"
+                let postBody = "stripeToken=\(token.tokenId)&amount=100"
+                let postData = postBody.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+                session.uploadTaskWithRequest(request, fromData: postData, completionHandler: { data, response, error in
+                    let successfulResponse = (response as? NSHTTPURLResponse)?.statusCode == 200
+                    if successfulResponse && error == nil {
+                        completion(.Success, nil)
+                    } else {
+                        if error != nil {
+                            completion(.Failure, error)
+                        } else {
+                            completion(.Failure, NSError(domain: StripeDomain, code: 50, userInfo: [NSLocalizedDescriptionKey: "There was an error communicating with your payment backend."]))
+                        }
+                        
+                    }
+                }).resume()
+                
+                return
+            }
+        }
+        completion(STPBackendChargeResult.Failure, NSError(domain: StripeDomain, code: 50, userInfo: [NSLocalizedDescriptionKey: "You created a token! Its value is \(token.tokenId). Now configure your backend to accept this token and complete a charge."]))
+    }
+    
+    
+    
+    
+    
     
     
     func didFinishPaymentVC(controller: PaymentMethodViewController, PmtInfo: PaymentInfo) {

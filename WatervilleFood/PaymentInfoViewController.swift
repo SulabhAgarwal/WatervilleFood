@@ -84,69 +84,56 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
     
     func addPaymentPressed(sender:UIButton) {
         SwiftSpinner.show("Saving Card...")
-        if let card = paymentTextField.card {
-            STPAPIClient.sharedClient().createTokenWithCard(card) { (token, error) -> Void in
-                if let error = error  {
-                    SwiftSpinner.hide()
-                    print("\n\n\(error.description)\n\n")
-                }
-                else if let token = token {
-                    let query = PFQuery(className: "CardInformation")
-                    query.whereKey("Device_ID", equalTo: UIDevice.currentDevice().identifierForVendor!.UUIDString)
-                    query.getFirstObjectInBackgroundWithBlock{
-                        (object, error) -> Void in
-                        if error != nil {
-                            let cardSave = PFObject(className: "CardInformation")
-                            cardSave["LastFour"] = card.last4()!
-                            cardSave["CardName"] = self.nameField.text!
-                            cardSave["StripeToken"] = token
-                            cardSave.saveInBackgroundWithBlock {
-                                (success: Bool, error: NSError?) -> Void in
-                                if (success) {
-                                    SwiftSpinner.hide()
-                                    self.navigationController?.popViewControllerAnimated(true)
-                                    let alertview = JSSAlertView().success(self, title: "Great success", text: "Card Saved!")
-                                    alertview.setTitleFont("Futura")
-                                    alertview.setTextFont("Futura")
-                                    alertview.setButtonFont("Futura")
-                                    
+            if let card = self.paymentTextField.card {
+                STPAPIClient.sharedClient().createTokenWithCard(card) { (token, error) -> Void in
+                    if let error = error  {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            SwiftSpinner.hide()
+                            let alertview = JSSAlertView().danger(self, title: "Error", text: "\(error.code)")
+                            alertview.setTitleFont("Futura")
+                            alertview.setTextFont("Futura")
+                            alertview.setButtonFont("Futura")
+                        })
+                    }
+                    else if let token = token {
+                        if let url = NSURL(string: "http://localhost:4567/create-customer") {
+                            
+                            let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+                            let request = NSMutableURLRequest(URL: url)
+                            request.HTTPMethod = "POST"
+                            let postBody = "stripeToken=\(token.tokenId)&amount=10000&deviceID=\(UIDevice.currentDevice().identifierForVendor!.UUIDString)"
+                            let postData = postBody.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+                            session.uploadTaskWithRequest(request, fromData: postData, completionHandler: { data, response, error in
+                                let successfulResponse = (response as? NSHTTPURLResponse)?.statusCode == 200
+                                print(successfulResponse)
+                                print((response as? NSHTTPURLResponse)?.description)
+                                if successfulResponse && error == nil {
+                                    dispatch_async(dispatch_get_main_queue(), {
+                                        SwiftSpinner.hide()
+                                        self.navigationController?.popViewControllerAnimated(true)
+                                        let alertview = JSSAlertView().success(self, title: "Great success", text: "Card Saved!")
+                                        alertview.setTitleFont("Futura")
+                                        alertview.setTextFont("Futura")
+                                        alertview.setButtonFont("Futura")
+                                    })
+                                } else {
+                                    if error != nil {
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            SwiftSpinner.hide()
+                                            let alertview = JSSAlertView().danger(self, title: "Error", text: "\(error?.code)")
+                                            alertview.setTitleFont("Futura")
+                                            alertview.setTextFont("Futura")
+                                            alertview.setButtonFont("Futura")
+                                        })
+                                    }
                                 }
-                                else {
-                                    SwiftSpinner.hide()
-                                    let alertview = JSSAlertView().danger(self, title: "Error", text: "\(error?.description)")
-                                    alertview.setTitleFont("Futura")
-                                    alertview.setTextFont("Futura")
-                                    alertview.setButtonFont("Futura")
-                                }
-                            }
-                        }
-                        else {
-                            object?.addObject(card.last4()!, forKey: "LastFour")
-                            object?.addObject(self.nameField.text!, forKey: "CardName")
-                            object?.addObject(token.tokenId, forKey:"StripeToken")
-                            object?.saveInBackgroundWithBlock{
-                                (success: Bool, error: NSError?) -> Void in
-                                if (success) {
-                                    SwiftSpinner.hide()
-                                    self.navigationController?.popViewControllerAnimated(true)
-                                    let alertview = JSSAlertView().success(self, title: "Great success", text: "Card Saved!")
-                                    alertview.setTitleFont("Futura")
-                                    alertview.setTextFont("Futura")
-                                    alertview.setButtonFont("Futura")
-                                }
-                                else {
-                                    SwiftSpinner.hide()
-                                    let alertview = JSSAlertView().danger(self, title: "Error", text: "\(error?.code)")
-                                    alertview.setTitleFont("Futura")
-                                    alertview.setTextFont("Futura")
-                                    alertview.setButtonFont("Futura")
-                                }
-                            }
+                            }).resume()
+                            
+                            return
                         }
                     }
                 }
             }
-        }
     }
     
     func paymentCardTextFieldDidChange(textField: STPPaymentCardTextField) {

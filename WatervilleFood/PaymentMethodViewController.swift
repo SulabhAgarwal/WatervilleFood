@@ -21,9 +21,9 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     let PmtTableView = UITableView()
-    var SavedCardNames:[String]!
-    var SavedLastFours:[String]!
-    var StripeTokens:[String]!
+    var SavedCardNames:[String]! = []
+    var SavedLastFours:[String]! = []
+    var StripeTokens:[String]! = []
     let PmtInfo:PaymentInfo = PaymentInfo()
     var delegate:PaymentInfoDelegate! = nil
     
@@ -43,21 +43,56 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     }
     
     override func viewWillAppear(animated: Bool) {
-        let query = PFQuery(className: "CardInformation")
-        query.whereKey("Device_ID", equalTo: UIDevice.currentDevice().identifierForVendor!.UUIDString)
-        query.getFirstObjectInBackgroundWithBlock {
-            (object, error) -> Void in
-            if (error != nil)  {
-                SwiftSpinner.hide()
-                return
-            } else {
-                SwiftSpinner.hide()
-                print("getting stuff")
-                self.SavedCardNames = object!.valueForKey("CardName") as! NSArray as! [String]
-                self.SavedLastFours = object!.valueForKey("LastFour") as! NSArray as! [String]
-                self.StripeTokens = object!.valueForKey("StripeToken") as! NSArray as! [String]
-                self.PmtTableView.reloadData()
-            }
+        SwiftSpinner.hide()
+        if let url = NSURL(string: "http://localhost:4567/cards/get") {
+            
+            let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+            let request = NSMutableURLRequest(URL: url)
+            request.HTTPMethod = "POST"
+            let postBody = "deviceID=\(UIDevice.currentDevice().identifierForVendor!.UUIDString)"
+            let postData = postBody.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            session.uploadTaskWithRequest(request, fromData: postData, completionHandler: { data, response, error in
+                let successfulResponse = (response as? NSHTTPURLResponse)?.statusCode == 200
+                print(successfulResponse)
+                do {
+                    if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
+                        print(json)
+                        let success = json.valueForKey("success")!                                  // Okay, the `json` is here, let's get the value for 'success' out of it
+                        print("Success: \(success)")
+                    } else {
+                        let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)    // No error thrown, but not NSDictionary
+                        print("Error could not parse JSON: \(jsonStr)")
+                    }
+                } catch let parseError {
+                    print(parseError)                                                          // Log the error thrown by `JSONObjectWithData`
+                    let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                    print("Error could not parse JSON: '\(jsonStr)'")
+                }
+                
+                
+//                if successfulResponse && error == nil {
+//                    dispatch_async(dispatch_get_main_queue(), {
+//                        SwiftSpinner.hide()
+//                        self.navigationController?.popViewControllerAnimated(true)
+//                        let alertview = JSSAlertView().success(self, title: "Great success", text: "Card Saved!")
+//                        alertview.setTitleFont("Futura")
+//                        alertview.setTextFont("Futura")
+//                        alertview.setButtonFont("Futura")
+//                    })
+//                } else {
+//                    if error != nil {
+//                        dispatch_async(dispatch_get_main_queue(), {
+//                            SwiftSpinner.hide()
+//                            let alertview = JSSAlertView().danger(self, title: "Error", text: "\(error?.code)")
+//                            alertview.setTitleFont("Futura")
+//                            alertview.setTextFont("Futura")
+//                            alertview.setButtonFont("Futura")
+//                        })
+//                    }
+//                }
+            }).resume()
+            
+            return
         }
     }
     
