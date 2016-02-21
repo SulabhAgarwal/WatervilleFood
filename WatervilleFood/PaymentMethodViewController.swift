@@ -21,7 +21,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     let PmtTableView = UITableView()
-    var SavedCardNames:[String]! = []
+    var SavedCardBrands:[String]! = []
     var SavedLastFours:[String]! = []
     var StripeTokens:[String]! = []
     let PmtInfo:PaymentInfo = PaymentInfo()
@@ -57,8 +57,12 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
                 do {
                     if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
                         print(json)
-                        let success = json.valueForKey("success")!                                  // Okay, the `json` is here, let's get the value for 'success' out of it
-                        print("Success: \(success)")
+                        let cards = json.valueForKey("cardInfo")!                                  // Okay, the `json` is here, let's get
+                        for i in 0...(cards.count-1) {
+                            self.SavedCardBrands.append(cards[i][0]["brand"] as! String!)
+                            self.SavedLastFours.append(cards[i][0]["lastFour"] as! String!)
+                            self.PmtTableView.reloadData()
+                        }
                     } else {
                         let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)    // No error thrown, but not NSDictionary
                         print("Error could not parse JSON: \(jsonStr)")
@@ -68,28 +72,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
                     let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
                     print("Error could not parse JSON: '\(jsonStr)'")
                 }
-                
-                
-//                if successfulResponse && error == nil {
-//                    dispatch_async(dispatch_get_main_queue(), {
-//                        SwiftSpinner.hide()
-//                        self.navigationController?.popViewControllerAnimated(true)
-//                        let alertview = JSSAlertView().success(self, title: "Great success", text: "Card Saved!")
-//                        alertview.setTitleFont("Futura")
-//                        alertview.setTextFont("Futura")
-//                        alertview.setButtonFont("Futura")
-//                    })
-//                } else {
-//                    if error != nil {
-//                        dispatch_async(dispatch_get_main_queue(), {
-//                            SwiftSpinner.hide()
-//                            let alertview = JSSAlertView().danger(self, title: "Error", text: "\(error?.code)")
-//                            alertview.setTitleFont("Futura")
-//                            alertview.setTextFont("Futura")
-//                            alertview.setButtonFont("Futura")
-//                        })
-//                    }
-//                }
+
             }).resume()
             
             return
@@ -139,8 +122,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
             
         }
         else {
-            print(SavedCardNames[indexPath.row])
-            cell.cardName.text = SavedCardNames[indexPath.row]
+            cell.cardName.text = SavedCardBrands[indexPath.row]
             cell.cardDesc.text = "****\(SavedLastFours[indexPath.row])"
 
             
@@ -158,7 +140,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
         }
         else {
             self.PmtInfo.tokenId = StripeTokens[indexPath.row]
-            self.PmtInfo.name = SavedCardNames[indexPath.row]
+            self.PmtInfo.name = SavedCardBrands[indexPath.row]
             self.PmtInfo.lastFour = SavedLastFours[indexPath.row]
             self.navigationController?.popViewControllerAnimated(true)
             self.delegate.didFinishPaymentVC(self, PmtInfo: self.PmtInfo)
