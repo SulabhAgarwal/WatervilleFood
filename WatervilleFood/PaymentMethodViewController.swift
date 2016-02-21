@@ -17,7 +17,7 @@ protocol PaymentInfoDelegate {
 }
 
 
-class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, CardInfoDelegate {
     
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     let PmtTableView = UITableView()
@@ -43,7 +43,6 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     }
     
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         SwiftSpinner.show("Retrieving Cards...")
         if let url = NSURL(string: "http://localhost:4567/cards/get") {
             
@@ -57,6 +56,10 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
                 print(successfulResponse)
                 do {
                     if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
+                        
+                        self.SavedCardNames = []
+                        self.SavedLastFours = []
+                        self.StripeTokens = []
                         
                         let cards = json.valueForKey("cardInfo")!
                         if (cards.count > 0) {
@@ -88,8 +91,9 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
         }
     }
     
-    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
-        self.viewWillAppear(animated)
+    func didFinishCardInfo(controller: PaymentInfoViewController) {
+        print("VIEW WILL APPEAR")
+        self.viewWillAppear(true)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -135,6 +139,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
             
         }
         else {
+            cell.layer.borderWidth = 0
             print("\n\nCARD BRANDS\n\n\(SavedCardNames)")
             cell.cardName.text = SavedCardNames[indexPath.row]
             cell.cardDesc.text = "****\(SavedLastFours[indexPath.row])"
@@ -149,8 +154,9 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == 0) {
             let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("PaymentVC") as? PaymentInfoViewController
-            //mapViewControllerObejct!.delegate = self
+            mapViewControllerObejct!.delegate = self
             self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
+            
         }
         else {
             self.PmtInfo.tokenId = StripeTokens[indexPath.row]

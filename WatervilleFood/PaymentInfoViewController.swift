@@ -14,6 +14,9 @@ import TextFieldEffects
 import SwiftSpinner
 
 
+protocol CardInfoDelegate {
+    func didFinishCardInfo(controller: PaymentInfoViewController)
+}
 
 class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDelegate {
     
@@ -22,6 +25,7 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
     var hasName:Bool = false
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     let AddPaymentButton:UIButton = UIButton()
+    var delegate:CardInfoDelegate! = nil
     var nameField:UITextField!
     
     override func viewDidLoad() {
@@ -111,6 +115,7 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
                                     dispatch_async(dispatch_get_main_queue(), {
                                         SwiftSpinner.hide()
                                         self.navigationController?.popViewControllerAnimated(true)
+                                        self.delegate.didFinishCardInfo(self)
                                         let alertview = JSSAlertView().success(self, title: "Great success", text: "Card Saved!")
                                         alertview.setTitleFont("Futura")
                                         alertview.setTextFont("Futura")

@@ -187,7 +187,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         if (PmtInfo.lastFour == nil) {
             TABLE_NAMES.append("Add Payment Method")
         } else {
-            TABLE_NAMES.append("\(PmtInfo.name)")
+            TABLE_NAMES.append("\(PmtInfo.name) ending in \(PmtInfo.lastFour)")
         }
         if (DelInfo.address == nil) {
             TABLE_NAMES.append("Add Delivery Address")
