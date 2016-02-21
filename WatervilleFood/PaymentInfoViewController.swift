@@ -96,12 +96,12 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
                         })
                     }
                     else if let token = token {
-                        if let url = NSURL(string: "http://localhost:4567/create-customer") {
+                        if let url = NSURL(string: "http://localhost:4567/cards/create") {
                             
                             let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
                             let request = NSMutableURLRequest(URL: url)
                             request.HTTPMethod = "POST"
-                            let postBody = "stripeToken=\(token.tokenId)&amount=10000&deviceID=\(UIDevice.currentDevice().identifierForVendor!.UUIDString)"
+                            let postBody = "stripeToken=\(token.tokenId)&name=\(self.nameField.text!)&deviceID=\(UIDevice.currentDevice().identifierForVendor!.UUIDString)"
                             let postData = postBody.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
                             session.uploadTaskWithRequest(request, fromData: postData, completionHandler: { data, response, error in
                                 let successfulResponse = (response as? NSHTTPURLResponse)?.statusCode == 200
@@ -124,6 +124,12 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
                                             alertview.setTitleFont("Futura")
                                             alertview.setTextFont("Futura")
                                             alertview.setButtonFont("Futura")
+                                        })
+                                    }
+                                    else {
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            SwiftSpinner.hide()
+                                            print("Success?")
                                         })
                                     }
                                 }

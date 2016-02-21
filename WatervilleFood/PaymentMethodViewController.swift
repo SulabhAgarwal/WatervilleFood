@@ -21,7 +21,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     let PmtTableView = UITableView()
-    var SavedCardBrands:[String]! = []
+    var SavedCardNames:[String]! = []
     var SavedLastFours:[String]! = []
     var StripeTokens:[String]! = []
     let PmtInfo:PaymentInfo = PaymentInfo()
@@ -43,7 +43,8 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     }
     
     override func viewWillAppear(animated: Bool) {
-        SwiftSpinner.hide()
+        super.viewWillAppear(animated)
+        SwiftSpinner.show("Retrieving Cards...")
         if let url = NSURL(string: "http://localhost:4567/cards/get") {
             
             let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
@@ -56,27 +57,39 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
                 print(successfulResponse)
                 do {
                     if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
-                        print(json)
-                        let cards = json.valueForKey("cardInfo")!                                  // Okay, the `json` is here, let's get
-                        for i in 0...(cards.count-1) {
-                            self.SavedCardBrands.append(cards[i][0]["brand"] as! String!)
-                            self.SavedLastFours.append(cards[i][0]["lastFour"] as! String!)
-                            self.PmtTableView.reloadData()
+                        
+                        let cards = json.valueForKey("cardInfo")!
+                        if (cards.count > 0) {
+                            for i in 0...(cards.count-1) {
+                                self.SavedCardNames.append(cards[i][0]["brand"] as! String!)
+                                self.SavedLastFours.append(cards[i][0]["lastFour"] as! String!)
+                                self.StripeTokens.append(cards[i][0]["token"] as! String!)
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    self.PmtTableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .None)
+                                    SwiftSpinner.hide()
+                                })
+                            }
+                        }
+                        else {
+                            SwiftSpinner.hide()
                         }
                     } else {
-                        let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)    // No error thrown, but not NSDictionary
-                        print("Error could not parse JSON: \(jsonStr)")
+                        SwiftSpinner.hide()
+                        print("Error could not parse JSON:")
                     }
                 } catch let parseError {
-                    print(parseError)                                                          // Log the error thrown by `JSONObjectWithData`
-                    let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                    print("Error could not parse JSON: '\(jsonStr)'")
+                    SwiftSpinner.hide()
+                    print(parseError)                                                         // Log the error thrown by `JSONObjectWithData`
                 }
 
             }).resume()
             
             return
         }
+    }
+    
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        self.viewWillAppear(animated)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -103,7 +116,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
             }
             else {
                 print("count: \(StripeTokens.count)")
-                return StripeTokens.count
+                return SavedLastFours.count
             }
         }
     }
@@ -111,7 +124,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CardInfoCell", forIndexPath: indexPath) as! CardInfoCell
-        print(indexPath.section)
+        print("SECTION\(indexPath.section)")
         if (indexPath.section == 0) {
             
             cell.cardName.text = "Add New Payment Method"
@@ -122,7 +135,8 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
             
         }
         else {
-            cell.cardName.text = SavedCardBrands[indexPath.row]
+            print("\n\nCARD BRANDS\n\n\(SavedCardNames)")
+            cell.cardName.text = SavedCardNames[indexPath.row]
             cell.cardDesc.text = "****\(SavedLastFours[indexPath.row])"
 
             
@@ -140,7 +154,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
         }
         else {
             self.PmtInfo.tokenId = StripeTokens[indexPath.row]
-            self.PmtInfo.name = SavedCardBrands[indexPath.row]
+            self.PmtInfo.name = SavedCardNames[indexPath.row]
             self.PmtInfo.lastFour = SavedLastFours[indexPath.row]
             self.navigationController?.popViewControllerAnimated(true)
             self.delegate.didFinishPaymentVC(self, PmtInfo: self.PmtInfo)
