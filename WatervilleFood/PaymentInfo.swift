@@ -13,4 +13,5 @@ class PaymentInfo {
     var name: String!
     var tokenId: String!
     var lastFour: String!
+    var customerId: String!
 }

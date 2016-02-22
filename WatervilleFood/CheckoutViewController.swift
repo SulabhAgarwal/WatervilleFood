@@ -11,7 +11,7 @@ import UIKit
 import Stripe
 import Parse
 
-class CheckoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PaymentInfoDelegate, DeliveryInfoDelegate, PKPaymentAuthorizationViewControllerDelegate {
+class CheckoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PaymentInfoDelegate, DeliveryInfoDelegate {
 
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     var TABLE_NAMES:[String] = []
@@ -71,11 +71,21 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func checkoutPressed(sender: UIButton) {
-            let params: [String: NSObject] = ["stripeToken": self.PmtInfo.tokenId,
-                "amount": self.calculateTotalPrice() ]
-            PFCloud.callFunctionInBackground("purchase", withParameters: params) { (result, error) -> Void in
-                if error == nil {
-                    print(result)
+        if let url = NSURL(string: "http://localhost:4567/charge") {
+            
+            let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+            let request = NSMutableURLRequest(URL: url)
+            request.HTTPMethod = "POST"
+            let customerID = self.PmtInfo.customerId
+            let amount = calculateTotalPrice()
+            let description = "<Description>"
+            let token = self.PmtInfo.tokenId
+            let accountID = Order.Restaurant.valueForKey("StripeAccountID") as! String!
+            let postBody = "stripeToken=\(token)&amount=\(Int(round(amount*100)))&description=\(description)&customerID=\(customerID)&accountID=\(accountID)"
+            let postData = postBody.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            session.uploadTaskWithRequest(request, fromData: postData, completionHandler: { data, response, error in
+                let successfulResponse = (response as? NSHTTPURLResponse)?.statusCode == 200
+                if successfulResponse && error == nil {
                     let order = PFObject(className:"Orders")
                     order["filled"] = false
                     order["address"] = self.DelInfo.address
@@ -87,7 +97,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                     order.saveInBackgroundWithBlock {
                         (success: Bool, error: NSError?) -> Void in
                         if (success) {
-                            let alertview = JSSAlertView().success(self, title: "Great success", text: "Order completed!")
+                            let alertview = JSSAlertView().success(self, title: "Great success", text: "Order completed. You'll be notified when the restaurant accepts your order!")
                             alertview.setTitleFont("Futura")
                             alertview.setTextFont("Futura")
                             alertview.setButtonFont("Futura")
@@ -98,76 +108,23 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                             alertview.setButtonFont("Futura")
                         }
                     }
+
                 } else {
-                    print(error)
-                }
-            }
-    }
-    
-    
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: ((PKPaymentAuthorizationStatus) -> Void)) {
-        print("Payment Auth")
-        let apiClient = STPAPIClient.sharedClient()
-        apiClient.createTokenWithPayment(payment, completion: { (token, error) -> Void in
-            if error == nil {
-                if let token = token {
-                    self.createBackendChargeWithToken(token, completion: { (result, error) -> Void in
-                        if result == STPBackendChargeResult.Success {
-                            completion(PKPaymentAuthorizationStatus.Success)
-                        }
-                        else {
-                            print(error?.description)
-                            completion(PKPaymentAuthorizationStatus.Failure)
-                        }
-                    })
-                }
-            }
-            else {
-                print("error creating token")
-                completion(PKPaymentAuthorizationStatus.Failure)
-            }
-        })
-    }
-    
-    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func createBackendChargeWithToken(token: STPToken, completion: STPTokenSubmissionHandler) {
-        if backendChargeURLString != "" {
-            if let url = NSURL(string: backendChargeURLString  + "/charge") {
-                
-                let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-                let request = NSMutableURLRequest(URL: url)
-                request.HTTPMethod = "POST"
-                let postBody = "stripeToken=\(token.tokenId)&amount=100"
-                let postData = postBody.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-                session.uploadTaskWithRequest(request, fromData: postData, completionHandler: { data, response, error in
-                    let successfulResponse = (response as? NSHTTPURLResponse)?.statusCode == 200
-                    if successfulResponse && error == nil {
-                        completion(.Success, nil)
+                    if error != nil {
+                        print("error \(error?.description)")
+                        //completion(.Failure, error)
                     } else {
-                        if error != nil {
-                            completion(.Failure, error)
-                        } else {
-                            completion(.Failure, NSError(domain: StripeDomain, code: 50, userInfo: [NSLocalizedDescriptionKey: "There was an error communicating with your payment backend."]))
-                        }
-                        
+                        print("error(s)")
+                        //completion(.Failure, NSError(domain: StripeDomain, code: 50, userInfo: [NSLocalizedDescriptionKey: "There was an error communicating with your payment backend."]))
                     }
-                }).resume()
-                
-                return
-            }
+                    
+                }
+            }).resume()
+            
+            return
         }
-        completion(STPBackendChargeResult.Failure, NSError(domain: StripeDomain, code: 50, userInfo: [NSLocalizedDescriptionKey: "You created a token! Its value is \(token.tokenId). Now configure your backend to accept this token and complete a charge."]))
     }
-    
-    
-    
-    
-    
-    
-    
+
     func didFinishPaymentVC(controller: PaymentMethodViewController, PmtInfo: PaymentInfo) {
         self.PmtInfo = PmtInfo
         self.createTableArray()
@@ -175,7 +132,6 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func didFinishDeliveryVC(controller: DeliveryAddressViewController, DelInfo: DeliveryInfo) {
-        print("sldkfj")
         self.DelInfo = DelInfo
         self.createTableArray()
         detailsTableView.reloadData()

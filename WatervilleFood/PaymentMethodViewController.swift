@@ -24,6 +24,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     var SavedCardNames:[String]! = []
     var SavedLastFours:[String]! = []
     var StripeTokens:[String]! = []
+    var CustomerID:String!
     let PmtInfo:PaymentInfo = PaymentInfo()
     var delegate:PaymentInfoDelegate! = nil
     
@@ -62,7 +63,9 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
                         self.StripeTokens = []
                         
                         let cards = json.valueForKey("cardInfo")!
+                        self.CustomerID = json.valueForKey("customerID")! as! String
                         if (cards.count > 0) {
+                            
                             for i in 0...(cards.count-1) {
                                 self.SavedCardNames.append(cards[i][0]["brand"] as! String!)
                                 self.SavedLastFours.append(cards[i][0]["lastFour"] as! String!)
@@ -92,7 +95,6 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     }
     
     func didFinishCardInfo(controller: PaymentInfoViewController) {
-        print("VIEW WILL APPEAR")
         self.viewWillAppear(true)
     }
     
@@ -162,6 +164,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
             self.PmtInfo.tokenId = StripeTokens[indexPath.row]
             self.PmtInfo.name = SavedCardNames[indexPath.row]
             self.PmtInfo.lastFour = SavedLastFours[indexPath.row]
+            self.PmtInfo.customerId = self.CustomerID
             self.navigationController?.popViewControllerAnimated(true)
             self.delegate.didFinishPaymentVC(self, PmtInfo: self.PmtInfo)
         }
