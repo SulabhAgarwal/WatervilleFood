@@ -14,7 +14,7 @@ import ZFRippleButton
 
 struct Order {
     //[["<order item>","[<options>]","price"], ["<order item>","[<options>]","price"]]
-    //[["Danny Special", [["Stuff", ["Bless Up"]]], 69.69]]
+    //[[[0,2],"Topping",["Pepperoni","Sausage","Peppers"]]]
     static var items:[[AnyObject]] = [[AnyObject]]()
     static var tax:Double = 1.00
     static var tip:Double = 1.00
@@ -26,6 +26,7 @@ class MainMenuViewController: UIViewController {
     let screenBounds = UIScreen.mainScreen().bounds
     var array:[PFObject]?
     var RestaurantArray:[PFObject]! = [PFObject]()
+    let cartButton:MIBadgeButton = MIBadgeButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,7 @@ class MainMenuViewController: UIViewController {
         titleButton.addTarget(self, action: "titlePressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.titleView = titleButton
         
-        let cartButton = UIButton()
+        
         cartButton.setImage(UIImage(named: "shoppingCart"), forState: .Normal)
         cartButton.frame = CGRectMake(0, 0, 30, 30)
         cartButton.addTarget(self, action: "toCheckout:", forControlEvents: .TouchUpInside)
@@ -47,9 +48,16 @@ class MainMenuViewController: UIViewController {
         rightButton.customView = cartButton
         self.navigationItem.rightBarButtonItem = rightButton
         
-
-        
         self.createImages()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if (Order.items.count > 0) {
+            cartButton.badgeString = String(Order.items.count)
+        }
+        else {
+            cartButton.badgeString = nil
+        }
     }
     
     func toCheckout(sender:UIButton) {

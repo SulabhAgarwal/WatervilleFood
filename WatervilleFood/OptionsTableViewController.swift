@@ -12,6 +12,9 @@ import Parse
 import Stripe
 import ZFRippleButton
 
+protocol OptionsVCDelegate {
+    func didFinishOptionsVC(controller: OptionsTableViewController)
+}
 
 class OptionsTableViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -20,7 +23,9 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
     internal var item : String = String()
     internal var price : Double = Double()
     var checkBoxArray:[[Bool]] = []
+    var delegate:OptionsVCDelegate! = nil
     let bounds = UIScreen.mainScreen().bounds
+    let cartButton:MIBadgeButton = MIBadgeButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,13 +58,21 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
         addToOrderButton.addTarget(self, action: "checkoutPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(addToOrderButton)
         
-        let cartButton = UIButton()
         cartButton.setImage(UIImage(named: "shoppingCart"), forState: .Normal)
         cartButton.frame = CGRectMake(0, 0, 30, 30)
         cartButton.addTarget(self, action: "toCheckout:", forControlEvents: .TouchUpInside)
         let rightButton = UIBarButtonItem()
         rightButton.customView = cartButton
         self.navigationItem.rightBarButtonItem = rightButton
+    }
+    
+    override func viewWillAppear(animated:Bool) {
+        if (Order.items.count > 0) {
+            cartButton.badgeString = String(Order.items.count)
+        }
+        else {
+            cartButton.badgeString = nil
+        }
     }
     
     func toCheckout(sender:UIButton) {
@@ -77,6 +90,7 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
         let options = getOptionsForOrder()
         Order.items.append([item,options,price])
         self.navigationController?.popViewControllerAnimated(true)
+        delegate.didFinishOptionsVC(self)
         let alertview = JSSAlertView().success(self, title: "Great success", text: "Item added to order!")
         alertview.setTitleFont("Futura")
         alertview.setTextFont("Futura")
@@ -145,7 +159,14 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "\(self.optionArray[section][1])"
+        var amtStr = ""
+        if (self.optionArray[section][0][0] as! Int! == self.optionArray[section][0][1] as! Int!) {
+            amtStr = "(must pick \(self.optionArray[section][0][0]))"
+        }
+        else {
+            amtStr = "(must pick between \(self.optionArray[section][0][0]) and \(self.optionArray[section][0][1]))"
+        }
+        return "\(self.optionArray[section][1]) \(amtStr)"
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

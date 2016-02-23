@@ -18,6 +18,7 @@
 		1A3AF5171C6ED6DB0054035B /* CardInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A3AF5161C6ED6DB0054035B /* CardInfoCell.xib */; };
 		1A3AF5191C6ED73E0054035B /* CardInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3AF5181C6ED73E0054035B /* CardInfoCell.swift */; };
 		1A3CAC621C461A7D007E5D1C /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CAC611C461A7D007E5D1C /* JSSAlertView.swift */; };
+		1A56C3961C7C27D0002737E0 /* MIBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56C3951C7C27D0002737E0 /* MIBadgeButton.swift */; };
 		1A742A641C483FFB006CAD3A /* OrderSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A742A631C483FFB006CAD3A /* OrderSummaryViewController.swift */; };
 		1A742A661C484450006CAD3A /* CustomCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A742A651C484450006CAD3A /* CustomCartCell.xib */; };
 		1A742A681C4847A5006CAD3A /* CustomCartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A742A671C4847A5006CAD3A /* CustomCartCell.swift */; };
@@ -69,6 +70,7 @@
 		1A3AF5161C6ED6DB0054035B /* CardInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardInfoCell.xib; sourceTree = "<group>"; };
 		1A3AF5181C6ED73E0054035B /* CardInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardInfoCell.swift; sourceTree = "<group>"; };
 		1A3CAC611C461A7D007E5D1C /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
+		1A56C3951C7C27D0002737E0 /* MIBadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MIBadgeButton.swift; path = ../../../../Downloads/MIBadgeButton.swift; sourceTree = "<group>"; };
 		1A742A631C483FFB006CAD3A /* OrderSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderSummaryViewController.swift; sourceTree = "<group>"; };
 		1A742A651C484450006CAD3A /* CustomCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCartCell.xib; sourceTree = "<group>"; };
 		1A742A671C4847A5006CAD3A /* CustomCartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCartCell.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			children = (
 				1A0AEDAE1C4D895C00640979 /* Customization.swift */,
 				1A0AEDB01C4D8A1B00640979 /* CustomizationTheme.swift */,
+				1A56C3951C7C27D0002737E0 /* MIBadgeButton.swift */,
 				1A3CAC611C461A7D007E5D1C /* JSSAlertView.swift */,
 			);
 			name = Customization;
@@ -487,6 +490,7 @@
 				1A11EDB91C45672D00A612DB /* CustomOptionTableViewCell.swift in Sources */,
 				1A742A641C483FFB006CAD3A /* OrderSummaryViewController.swift in Sources */,
 				1A11EDB51C4433DE00A612DB /* MenuTableViewController.swift in Sources */,
+				1A56C3961C7C27D0002737E0 /* MIBadgeButton.swift in Sources */,
 				1A742A681C4847A5006CAD3A /* CustomCartCell.swift in Sources */,
 				1A0AEDAF1C4D895D00640979 /* Customization.swift in Sources */,
 				1AD0456F1C4C935E00D1696C /* DeliveryInfo.swift in Sources */,

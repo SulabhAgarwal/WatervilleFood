@@ -12,11 +12,12 @@ import UIKit
 
 
 
-class MenuTableViewController: UITableViewController {
+class MenuTableViewController: UITableViewController, OptionsVCDelegate {
     
     internal var ItemArray : [PFObject]?
     var options : AnyObject?
     let screenBounds = UIScreen.mainScreen().bounds
+    let cartButton:MIBadgeButton = MIBadgeButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,18 +33,33 @@ class MenuTableViewController: UITableViewController {
         titleButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 25.0)
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.navigationItem.titleView = titleButton
-        
-        let cartButton = UIButton()
+
         cartButton.setImage(UIImage(named: "shoppingCart"), forState: .Normal)
         cartButton.frame = CGRectMake(0, 0, 30, 30)
         cartButton.addTarget(self, action: "toCheckout:", forControlEvents: .TouchUpInside)
         let rightButton = UIBarButtonItem()
         rightButton.customView = cartButton
         self.navigationItem.rightBarButtonItem = rightButton
+        if (Order.items.count > 0) {
+            cartButton.badgeString = String(Order.items.count)
+        }
+        else {
+            cartButton.badgeString = nil
+        }
+    }
+    
+    func didFinishOptionsVC(controller: OptionsTableViewController) {
+        if (Order.items.count > 0) {
+            cartButton.badgeString = String(Order.items.count)
+        }
+        else {
+            cartButton.badgeString = nil
+        }
     }
     
     func toCheckout(sender:UIButton) {
         let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("OrderSummaryVC") as? OrderSummaryViewController
+        
         self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
     }
     
@@ -74,6 +90,7 @@ class MenuTableViewController: UITableViewController {
         mapViewControllerObejct?.optionArray = optionsArray as! NSArray
         mapViewControllerObejct?.item = ItemArray![indexPath.row].valueForKey("Item") as! String!
         mapViewControllerObejct?.price = ItemArray![indexPath.row].valueForKey("Price") as! Double!
+        mapViewControllerObejct!.delegate = self
         self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
     }
     
