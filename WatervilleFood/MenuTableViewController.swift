@@ -9,6 +9,7 @@
 import Foundation
 import Parse
 import UIKit
+import Parse
 
 
 
@@ -18,6 +19,7 @@ class MenuTableViewController: UITableViewController, OptionsVCDelegate {
     var options : AnyObject?
     let screenBounds = UIScreen.mainScreen().bounds
     let cartButton:MIBadgeButton = MIBadgeButton()
+    var Restaurant:PFObject!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +93,7 @@ class MenuTableViewController: UITableViewController, OptionsVCDelegate {
         mapViewControllerObejct?.item = ItemArray![indexPath.row].valueForKey("Item") as! String!
         mapViewControllerObejct?.price = ItemArray![indexPath.row].valueForKey("Price") as! Double!
         mapViewControllerObejct!.delegate = self
+        mapViewControllerObejct!.Restaurant = self.Restaurant
         self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
     }
     

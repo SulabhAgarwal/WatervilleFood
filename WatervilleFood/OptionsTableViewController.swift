@@ -26,6 +26,7 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
     var delegate:OptionsVCDelegate! = nil
     let bounds = UIScreen.mainScreen().bounds
     let cartButton:MIBadgeButton = MIBadgeButton()
+    var Restaurant:PFObject!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +90,7 @@ class OptionsTableViewController : UIViewController, UITableViewDataSource, UITa
 
         let options = getOptionsForOrder()
         Order.items.append([item,options,price])
+        Order.Restaurant = self.Restaurant
         self.navigationController?.popViewControllerAnimated(true)
         delegate.didFinishOptionsVC(self)
         let alertview = JSSAlertView().success(self, title: "Great success", text: "Item added to order!")

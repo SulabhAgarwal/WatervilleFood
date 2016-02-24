@@ -93,6 +93,7 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
     
     func textFieldDidEndEditing(textField: UITextField) {
         AddressDict[textField.placeholder!] = textField.text!
+        print(textField.placeholder!)
         if (checkEntries()) {
             addAddressButton.enabled = true
             addAddressButton.alpha = 1
@@ -120,6 +121,7 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
         self.DelInfo.address = AddressDict["Address*"]
         self.DelInfo.apt = AddressDict["Apt/Suite"]
         self.DelInfo.comments = AddressDict["Comments"]
+        print("COMMENTS\(self.DelInfo.comments)")
         self.DelInfo.town = AddressDict["Town*"]
         self.DelInfo.phone = AddressDict["Phone*"]
         self.DelInfo.zip = AddressDict["Zip*"]

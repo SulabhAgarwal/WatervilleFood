@@ -41,17 +41,18 @@ class MainMenuViewController: UIViewController {
         self.navigationItem.titleView = titleButton
         
         
+        
+        
+        self.createImages()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         cartButton.setImage(UIImage(named: "shoppingCart"), forState: .Normal)
         cartButton.frame = CGRectMake(0, 0, 30, 30)
         cartButton.addTarget(self, action: "toCheckout:", forControlEvents: .TouchUpInside)
         let rightButton = UIBarButtonItem()
         rightButton.customView = cartButton
         self.navigationItem.rightBarButtonItem = rightButton
-        
-        self.createImages()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
         if (Order.items.count > 0) {
             cartButton.badgeString = String(Order.items.count)
         }
@@ -126,9 +127,16 @@ class MainMenuViewController: UIViewController {
                 return
             } else {
                 SwiftSpinner.hide()
+                if (Order.Restaurant != self.RestaurantArray[sender.tag] && Order.Restaurant != nil) {
+                    let alertview = JSSAlertView().danger(self, title: "Error", text: "Can only order from one restaurant at a time. Delete the items in your cart to continue with this restaurant.")
+                    alertview.setTitleFont("Futura")
+                    alertview.setTextFont("Futura")
+                    alertview.setButtonFont("Futura")
+                    return
+                }
                 let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("MenuTableVC") as? MenuTableViewController
                 mapViewControllerObejct?.ItemArray = objects
-                Order.Restaurant = self.RestaurantArray[sender.tag]
+                mapViewControllerObejct!.Restaurant = self.RestaurantArray[sender.tag]
                 self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
             }
         }

@@ -89,6 +89,10 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                     let order = PFObject(className:"Orders")
                     order["filled"] = false
                     order["address"] = self.DelInfo.address
+                    order["town"] = self.DelInfo.town
+                    order["zip"] = self.DelInfo.zip
+                    order["apt"] = self.DelInfo.apt
+                    order["comments"] = self.DelInfo.comments
                     order["order_total"] = self.calculateTotalPrice()
                     order["delivery"] = "delivery"
                     order["phone"] = self.DelInfo.phone
@@ -97,6 +101,9 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                     order.saveInBackgroundWithBlock {
                         (success: Bool, error: NSError?) -> Void in
                         if (success) {
+                            Order.items = [[AnyObject]]()
+                            Order.Restaurant = nil
+                            self.navigationController?.popToRootViewControllerAnimated(true)
                             let alertview = JSSAlertView().success(self, title: "Great success", text: "Order completed. You'll be notified when the restaurant accepts your order!")
                             alertview.setTitleFont("Futura")
                             alertview.setTextFont("Futura")

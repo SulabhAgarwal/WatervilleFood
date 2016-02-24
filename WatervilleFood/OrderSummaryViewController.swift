@@ -85,6 +85,7 @@ class OrderSummaryViewController: UIViewController, UITableViewDelegate, UITable
             if (Order.items.count == 0) {
                 self.CheckoutButton.alpha = 0.5
                 self.CheckoutButton.enabled = false
+                Order.Restaurant = nil
             }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             let alertview = JSSAlertView().danger(self, title: "Item deleted from order", text: "")
