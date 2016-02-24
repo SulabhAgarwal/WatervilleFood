@@ -45,7 +45,7 @@ class PaymentMethodViewController : UIViewController, UITableViewDelegate, UITab
     
     override func viewWillAppear(animated: Bool) {
         SwiftSpinner.show("Retrieving Cards...")
-        if let url = NSURL(string: "http://localhost:4567/cards/get") {
+        if let url = NSURL(string: "http://northeatspaymentbackend.herokuapp.com/cards/get") {
             
             let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
             let request = NSMutableURLRequest(URL: url)

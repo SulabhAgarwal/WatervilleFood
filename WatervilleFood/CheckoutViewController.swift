@@ -71,7 +71,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func checkoutPressed(sender: UIButton) {
-        if let url = NSURL(string: "http://localhost:4567/charge") {
+        if let url = NSURL(string: "http://northeatspaymentbackend.herokuapp.com/charge") {
             
             let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
             let request = NSMutableURLRequest(URL: url)

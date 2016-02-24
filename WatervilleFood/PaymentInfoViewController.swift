@@ -100,7 +100,7 @@ class PaymentInfoViewController : UIViewController , STPPaymentCardTextFieldDele
                         })
                     }
                     else if let token = token {
-                        if let url = NSURL(string: "http://localhost:4567/cards/create") {
+                        if let url = NSURL(string: "http://northeatspaymentbackend.herokuapp.com/cards/create") {
                             
                             let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
                             let request = NSMutableURLRequest(URL: url)
