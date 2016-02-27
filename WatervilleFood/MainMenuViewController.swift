@@ -21,25 +21,34 @@ struct Order {
     static var Restaurant:PFObject!
 }
 
-class MainMenuViewController: UIViewController {
+class MainMenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     let screenBounds = UIScreen.mainScreen().bounds
     var array:[PFObject]?
     var RestaurantArray:[PFObject]! = [PFObject]()
     let cartButton:MIBadgeButton = MIBadgeButton()
+    let keyView:UITableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "Main"
         
-        let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,100,32))
+        let titleButton: UIButton = UIButton(frame: CGRectMake(0,0,20,32))
         titleButton.setTitle("Restaurants", forState: UIControlState.Normal)
-        titleButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 25.0)
+        titleButton.titleLabel?.font = UIFont(name: "Futura", size: 25.0)
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        titleButton.addTarget(self, action: "titlePressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.titleView = titleButton
         
+        
+        keyView.frame = CGRectMake(2, 66, screenBounds.width-4, 60)
+        keyView.layer.borderWidth = 2
+        self.keyView.delegate = self
+        self.keyView.dataSource = self
+        keyView.scrollEnabled = false
+        keyView.registerNib(UINib(nibName: "KeyImage", bundle: nil), forCellReuseIdentifier: "KeyImage")
+        keyView.contentInset = UIEdgeInsets(top: -62, left: 0, bottom: 0, right: 0)
+        self.view.addSubview(keyView)
         
         
         
@@ -95,14 +104,26 @@ class MainMenuViewController: UIViewController {
                     print(object)
                     self.RestaurantArray.append(object)
                     let imageView = ZFRippleButton()
-                    imageView.frame = CGRectMake(2, CGFloat(66 + 102*(count)), self.screenBounds.width-4, 100)
+                    imageView.frame = CGRectMake(2, CGFloat(128 + 102*(count)), self.screenBounds.width-4, 100)
                     imageView.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
                     imageView.setTitle(object.valueForKey("Name") as! String!, forState: UIControlState.Normal)
                     imageView.titleLabel!.font =  UIFont(name: "Helvetica Neue", size: 20)
+                    imageView.titleEdgeInsets = UIEdgeInsetsMake(-40, 0, 0, 0)
                     imageView.setTitleColor(UIColor.whiteColor(), forState: .Normal)
                     imageView.backgroundColor = UIColor(rgba: object.valueForKey("Color") as! String!)
                     self.view.addSubview(imageView)
                     imageView.tag = count
+                    
+                    let openIconView = UIImageView()
+                    openIconView.frame = CGRectMake(imageView.bounds.width/2+10, imageView.bounds.height - 40, 30, 30)
+                    openIconView.image = UIImage(named: "signWhite")
+                    imageView.addSubview(openIconView)
+                    
+                    let deliveryIconView = UIImageView()
+                    deliveryIconView.frame = CGRectMake(imageView.bounds.width/2-40, imageView.bounds.height - 40, 30, 30)
+                    deliveryIconView.image = UIImage(named: "transportWhite")
+                    imageView.addSubview(deliveryIconView)
+                    
                     count++
                 }
             }
@@ -142,7 +163,38 @@ class MainMenuViewController: UIViewController {
         }
     }
     
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        print("TEST")
+        return "Key"
+    }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("KeyImage", forIndexPath: indexPath) as! KeyImage
+        cell.KeyIconOne.image = UIImage(named: "transport")
+        cell.KeyIconTwo.image = UIImage(named: "sign")
+        cell.KeyLabelOne.text = "Delivery"
+        cell.KeyLabelTwo.text = "Open now"
+        print("\n\nCELL INSTANTIATED")
+        
+        return cell
+        
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
+    }
     
 
 }
