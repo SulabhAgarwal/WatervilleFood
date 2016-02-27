@@ -114,15 +114,25 @@ class MainMenuViewController: UIViewController, UITableViewDataSource, UITableVi
                     self.view.addSubview(imageView)
                     imageView.tag = count
                     
-                    let openIconView = UIImageView()
-                    openIconView.frame = CGRectMake(imageView.bounds.width/2+10, imageView.bounds.height - 40, 30, 30)
-                    openIconView.image = UIImage(named: "signWhite")
-                    imageView.addSubview(openIconView)
+                    let restaurantHours = object.valueForKey("Hours") as! NSArray as Array
+                    let hoursForCurrentDay = restaurantHours[self.getCurrentDayOfWeek()-1]
+                    let currentTime = self.getCurrentTime()
+
                     
-                    let deliveryIconView = UIImageView()
-                    deliveryIconView.frame = CGRectMake(imageView.bounds.width/2-40, imageView.bounds.height - 40, 30, 30)
-                    deliveryIconView.image = UIImage(named: "transportWhite")
-                    imageView.addSubview(deliveryIconView)
+                    if (self.isRestaurantOpen(hoursForCurrentDay as! [[Int]], currentTime: currentTime)) {
+                        let openIconView = UIImageView()
+                        openIconView.frame = CGRectMake(imageView.bounds.width/2+10, imageView.bounds.height - 40, 30, 30)
+                        openIconView.image = UIImage(named: "signWhite")
+                        imageView.addSubview(openIconView)
+                    }
+                    
+                    let doesDeliver = object.valueForKey("Delivers") as! Bool!
+                    if (doesDeliver == true) {
+                        let deliveryIconView = UIImageView()
+                        deliveryIconView.frame = CGRectMake(imageView.bounds.width/2-40, imageView.bounds.height - 40, 30, 30)
+                        deliveryIconView.image = UIImage(named: "transportWhite")
+                        imageView.addSubview(deliveryIconView)
+                    }
                     
                     count++
                 }
@@ -130,11 +140,41 @@ class MainMenuViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func back(sender: UIBarButtonItem) {
-    //segue back
-        print("BACK")
+    func isRestaurantOpen(hoursForCurrentDay:[[Int]], currentTime:[Int]) -> Bool {
+        let openHour = hoursForCurrentDay[0][0]
+        let openMinute = hoursForCurrentDay[0][1]
+        let closeHour = hoursForCurrentDay[1][0]
+        let closeMinute = hoursForCurrentDay[1][1]
+        let currentMinute = currentTime[1]
+        let currentHour = currentTime[0]
+        
+        
+        
+        if (currentHour >= openHour && currentHour <= closeHour) {
+            if (currentHour == openHour) {
+                if (currentMinute > openMinute) {
+                    return true
+                } else {
+                    return false
+                }
+            } else if (currentHour == closeHour) {
+                if (currentMinute < closeMinute) {
+                    return true
+                }
+                else {
+                    return false
+                }
+            } else {
+                return true
+            }
+        } else {
+            print("\(currentHour) \(currentMinute)")
+            print("\(openHour) \(closeHour)")
+            print("\(openMinute) \(closeMinute)")
+            return false
+        }
     }
-    
+
     func imageTapped(sender: UIButton) {
         SwiftSpinner.show("")
         let query = PFQuery(className: self.RestaurantArray[sender.tag].valueForKey("ClassAccessName") as! String!)
@@ -194,6 +234,27 @@ class MainMenuViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
+    }
+    
+    func getCurrentDayOfWeek() -> Int! {
+        //Current day of week as int
+        let date = NSDate()
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let myComponents = myCalendar.components(.Weekday, fromDate: date)
+        let weekDay = myComponents.weekday
+        return weekDay
+    }
+    
+    func getCurrentTime() -> [Int] {
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([ .Hour, .Minute, .Second], fromDate: date)
+        let hour = components.hour
+        let minutes = components.minute
+        
+        return [hour, minutes]
     }
     
 
