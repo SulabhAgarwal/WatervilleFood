@@ -45,7 +45,7 @@ class OrderSummaryViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func checkoutPressed(sender: UIButton) {
-        let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("CheckoutVC") as? CheckoutViewController
+        let mapViewControllerObejct = self.storyboard?.instantiateViewControllerWithIdentifier("TransportTypeVC") as? TransportTypeViewController
         self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
     }
     

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Stripe
 import Parse
+import SwiftSpinner
 
 class CheckoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PaymentInfoDelegate, DeliveryInfoDelegate {
 
@@ -21,6 +22,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     var PmtInfo:PaymentInfo = PaymentInfo()
     var DelInfo:DeliveryInfo = DeliveryInfo()
     let backendChargeURLString = "https://danvtest.herokuapp.com/"
+    var delivery:Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +73,41 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func checkoutPressed(sender: UIButton) {
+        //must query again in order to double-check that the restaurant is still open. If not, no order
+        SwiftSpinner.show("")
+        let query = PFQuery(className: "Restaurants")
+        query.whereKey("Name", equalTo: Order.Restaurant.valueForKey("Name") as! String!)
+        query.getFirstObjectInBackgroundWithBlock {
+            (object, error) -> Void in
+            if let error = error {
+                SwiftSpinner.hide()
+                let alertController = UIAlertController(title:"Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+                return
+            } else {
+                SwiftSpinner.hide()
+                let restaurantHours = object!.valueForKey("Hours") as! NSArray as Array
+                let hoursForCurrentDay = restaurantHours[self.getCurrentDayOfWeek()-1]
+                let currentTime = self.getCurrentTime()
+                    
+                    
+                if (!self.isRestaurantOpen(hoursForCurrentDay as! [[Int]], currentTime: currentTime)) {
+                    let alertview = JSSAlertView().danger(self, title: "Error", text: "Restaurant is currently closed. Please order from a restaurant that is open.")
+                    alertview.setTitleFont("Futura")
+                    alertview.setTextFont("Futura")
+                    alertview.setButtonFont("Futura")
+                }
+                else {
+                    print("OPEN!")
+                    self.completeOrder()
+                }
+            }
+        }
+    }
+    
+    func completeOrder() {
+        print("OPEN")
         if let url = NSURL(string: "http://northeatspaymentbackend.herokuapp.com/charge") {
             
             let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
@@ -176,7 +213,12 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if (tableView == detailsTableView) {
-            return 3
+            if (delivery == true) {
+                return 3
+            }
+            else {
+                return 2
+            }
         }
         else {
             return Order.items.count + 3
@@ -265,7 +307,61 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         sum += Order.tip
         return sum
     }
+
+    func getCurrentDayOfWeek() -> Int! {
+        //Current day of week as int
+        let date = NSDate()
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let myComponents = myCalendar.components(.Weekday, fromDate: date)
+        let weekDay = myComponents.weekday
+        return weekDay
+    }
+
+    func getCurrentTime() -> [Int] {
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([ .Hour, .Minute, .Second], fromDate: date)
+        let hour = components.hour
+        let minutes = components.minute
+        
+        return [hour, minutes]
+    }
     
-    
-    
+    func isRestaurantOpen(hoursForCurrentDay:[[Int]], currentTime:[Int]) -> Bool {
+        let openHour = hoursForCurrentDay[0][0]
+        let openMinute = hoursForCurrentDay[0][1]
+        let closeHour = hoursForCurrentDay[1][0]
+        let closeMinute = hoursForCurrentDay[1][1]
+        let currentMinute = currentTime[1]
+        let currentHour = currentTime[0]
+        
+        
+        
+        if (currentHour >= openHour && currentHour <= closeHour) {
+            if (currentHour == openHour) {
+                if (currentMinute > openMinute) {
+                    return true
+                } else {
+                    return false
+                }
+            } else if (currentHour == closeHour) {
+                if (currentMinute < closeMinute) {
+                    return true
+                }
+                else {
+                    return false
+                }
+            } else {
+                return true
+            }
+        } else {
+            return false
+        }
+    }
+
+
+
+
 }

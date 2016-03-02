@@ -101,7 +101,6 @@ class MainMenuViewController: UIViewController, UITableViewDataSource, UITableVi
                 SwiftSpinner.hide()
                 var count:Int = 0
                 for object in objects! {
-                    print(object)
                     self.RestaurantArray.append(object)
                     let imageView = ZFRippleButton()
                     imageView.frame = CGRectMake(2, CGFloat(128 + 102*(count)), self.screenBounds.width-4, 100)
@@ -168,9 +167,6 @@ class MainMenuViewController: UIViewController, UITableViewDataSource, UITableVi
                 return true
             }
         } else {
-            print("\(currentHour) \(currentMinute)")
-            print("\(openHour) \(closeHour)")
-            print("\(openMinute) \(closeMinute)")
             return false
         }
     }

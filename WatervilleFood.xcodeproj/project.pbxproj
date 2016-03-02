@@ -21,6 +21,7 @@
 		1A56C3961C7C27D0002737E0 /* MIBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56C3951C7C27D0002737E0 /* MIBadgeButton.swift */; };
 		1A5A9B1F1C8201DD00430BD7 /* KeyImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A5A9B1E1C8201DD00430BD7 /* KeyImage.xib */; };
 		1A5A9B211C8204C000430BD7 /* KeyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5A9B201C8204C000430BD7 /* KeyImage.swift */; };
+		1A5A9B231C83D2C300430BD7 /* TransportTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5A9B221C83D2C300430BD7 /* TransportTypeViewController.swift */; };
 		1A742A641C483FFB006CAD3A /* OrderSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A742A631C483FFB006CAD3A /* OrderSummaryViewController.swift */; };
 		1A742A661C484450006CAD3A /* CustomCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A742A651C484450006CAD3A /* CustomCartCell.xib */; };
 		1A742A681C4847A5006CAD3A /* CustomCartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A742A671C4847A5006CAD3A /* CustomCartCell.swift */; };
@@ -75,6 +76,7 @@
 		1A56C3951C7C27D0002737E0 /* MIBadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MIBadgeButton.swift; path = ../../../../Downloads/MIBadgeButton.swift; sourceTree = "<group>"; };
 		1A5A9B1E1C8201DD00430BD7 /* KeyImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyImage.xib; sourceTree = "<group>"; };
 		1A5A9B201C8204C000430BD7 /* KeyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyImage.swift; sourceTree = "<group>"; };
+		1A5A9B221C83D2C300430BD7 /* TransportTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportTypeViewController.swift; sourceTree = "<group>"; };
 		1A742A631C483FFB006CAD3A /* OrderSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderSummaryViewController.swift; sourceTree = "<group>"; };
 		1A742A651C484450006CAD3A /* CustomCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCartCell.xib; sourceTree = "<group>"; };
 		1A742A671C4847A5006CAD3A /* CustomCartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCartCell.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				1A742A6B1C499C0B006CAD3A /* CheckoutCell.xib */,
 				1A742A6D1C499C2F006CAD3A /* CheckoutCell.swift */,
 				1A742A691C49913A006CAD3A /* CheckoutViewController.swift */,
+				1A5A9B221C83D2C300430BD7 /* TransportTypeViewController.swift */,
 			);
 			name = Checkout;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A5A9B231C83D2C300430BD7 /* TransportTypeViewController.swift in Sources */,
 				1A11EDB71C4472DC00A612DB /* OptionsTableViewController.swift in Sources */,
 				1A742A6E1C499C2F006CAD3A /* CheckoutCell.swift in Sources */,
 				1ABEB18F1C42C92000EC0331 /* MainMenuViewController.swift in Sources */,

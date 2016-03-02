@@ -84,6 +84,24 @@
             </objects>
             <point key="canvasLocation" x="3487" y="218"/>
         </scene>
+        <!--Transport Type View Controller-->
+        <scene sceneID="vvX-Dh-WEd">
+            <objects>
+                <viewController storyboardIdentifier="TransportTypeVC" id="yOA-UQ-TTe" customClass="TransportTypeViewController" customModule="WatervilleFood" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rhs-jh-aeH"/>
+                        <viewControllerLayoutGuide type="bottom" id="pAf-1q-7Uh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rQG-9S-rZk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bag-qA-n0L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4140" y="225"/>
+        </scene>
         <!--Checkout View Controller-->
         <scene sceneID="1Xw-eF-I5J">
             <objects>
@@ -100,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdF-V8-xUg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4138" y="218"/>
+            <point key="canvasLocation" x="4778" y="234"/>
         </scene>
         <!--Payment Method View Controller-->
         <scene sceneID="lPk-az-zZO">
@@ -118,7 +136,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1c6-Zz-of3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4824" y="-439"/>
+            <point key="canvasLocation" x="5464" y="-423"/>
         </scene>
         <!--Payment Info View Controller-->
         <scene sceneID="CBd-F0-qou">
@@ -136,7 +154,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXM-fb-NFp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5470" y="-445"/>
+            <point key="canvasLocation" x="6110" y="-429"/>
         </scene>
         <!--Delivery Address View Controller-->
         <scene sceneID="uO0-6r-1LE">
@@ -154,7 +172,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R8u-by-0Ut" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4782" y="503"/>
+            <point key="canvasLocation" x="5422" y="519"/>
         </scene>
         <!--Options Table View Controller-->
         <scene sceneID="PJJ-M7-38e">

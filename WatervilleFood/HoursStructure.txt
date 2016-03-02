@@ -1,0 +1,18 @@
+STRUCTURE
+Week:
+[
+DAY:
+[[Hour Open, Minute Open], [Hour Close, Minute Close]] (Sunday),
+[[Hour Open, Minute Open], [Hour Close, Minute Close]] (Monday),
+etc. (7 days)
+]
+
+[
+[[3,0],[3,0]],
+[[3,0],[3,0]],
+[[16,30],[21,0]],
+[[16,30],[21,0]],
+[[16,30],[21,0]],
+[[16,30],[22,0]],
+[[16,30],[22,0]]
+]
