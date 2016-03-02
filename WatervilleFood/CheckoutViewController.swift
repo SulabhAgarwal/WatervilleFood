@@ -36,7 +36,14 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.navigationItem.titleView = titleButton
         
-        detailsTableView.frame = CGRectMake(5,5,SCREEN_BOUNDS.width-10,214)
+        var detailsHeight:CGFloat
+        if (delivery == true) {
+            detailsHeight = 214
+        }
+        else {
+            detailsHeight = 180
+        }
+        detailsTableView.frame = CGRectMake(5,5,SCREEN_BOUNDS.width-10,detailsHeight)
         detailsTableView.layer.borderWidth = 2
         detailsTableView.delegate      =   self
         detailsTableView.dataSource    =   self
@@ -60,7 +67,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         CheckoutButton.setTitle("Tap to pay: $\(String.localizedStringWithFormat("%.2f %@", (self.calculateTotalPrice()),""))", forState: UIControlState.Normal)
         CheckoutButton.layer.backgroundColor = UIColor.blackColor().CGColor
         CheckoutButton.addTarget(self, action: "checkoutPressed:", forControlEvents: UIControlEvents.TouchUpInside)
-        if (PmtInfo.lastFour == nil || DelInfo.address == nil) {
+        if (PmtInfo.lastFour == nil || (DelInfo.address == nil && delivery == true)) {
             CheckoutButton.alpha = 0.2
             CheckoutButton.enabled = false
         }
@@ -107,7 +114,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func completeOrder() {
-        print("OPEN")
+        
         if let url = NSURL(string: "http://northeatspaymentbackend.herokuapp.com/charge") {
             
             let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
@@ -124,6 +131,15 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                 let successfulResponse = (response as? NSHTTPURLResponse)?.statusCode == 200
                 if successfulResponse && error == nil {
                     let order = PFObject(className:"Orders")
+                    //need to do the same for DelInfo
+                    var delStr:String = ""
+                    if (self.delivery == true) {
+                        delStr = "delivery"
+                    }
+                    else {
+                        delStr = "carryout"
+                    }
+                    
                     order["filled"] = false
                     order["address"] = self.DelInfo.address
                     order["town"] = self.DelInfo.town
@@ -131,7 +147,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                     order["apt"] = self.DelInfo.apt
                     order["comments"] = self.DelInfo.comments
                     order["order_total"] = self.calculateTotalPrice()
-                    order["delivery"] = "delivery"
+                    order["delivery"] = delStr
                     order["phone"] = self.DelInfo.phone
                     order["details"] = Order.items
                     order["restaurant"] = Order.Restaurant.valueForKey("Name") as! String!
