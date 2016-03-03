@@ -1,4 +1,5 @@
 PODS:
+  - ActionSheetPicker-3.0 (2.0.5)
   - AIFlatSwitch (0.0.4)
   - Bolts (1.6.0):
     - Bolts/AppLinks (= 1.6.0)
@@ -33,6 +34,7 @@ PODS:
   - ZFRippleButton (0.5.1)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0 (~> 2.0.5)
   - AIFlatSwitch (~> 0.0.1)
   - Bolts
   - Parse
@@ -46,6 +48,7 @@ DEPENDENCIES:
   - ZFRippleButton
 
 SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: 8312778b6815578e6a86d630fbcf31dc94c534e7
   AIFlatSwitch: 30b67439ed2d695fdb81ec5ae26f0b004fa83c66
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   FBSDKCoreKit: d49cbf69741e3c5732166ec9ff4cbd9b288dd53e

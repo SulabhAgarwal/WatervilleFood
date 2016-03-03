@@ -11,6 +11,7 @@ import UIKit
 import Stripe
 import Parse
 import SwiftSpinner
+import ActionSheetPicker_3_0
 
 class CheckoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PaymentInfoDelegate, DeliveryInfoDelegate {
 
@@ -26,6 +27,9 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Order.tax = calculateItemsTotal() * 0.08
+        Order.tip = calculateItemsTotal() * 0.10
         
         self.createTableArray()
         
@@ -63,6 +67,8 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(animated: Bool) {
         
+        
+        
         let CheckoutButton : UIButton = UIButton(frame: CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40))
         CheckoutButton.setTitle("Tap to pay: $\(String.localizedStringWithFormat("%.2f %@", (self.calculateTotalPrice()),""))", forState: UIControlState.Normal)
         CheckoutButton.layer.backgroundColor = UIColor.blackColor().CGColor
@@ -77,6 +83,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         }
         print("\n\nTABLE RELOAD")
         self.view.addSubview(CheckoutButton)
+        
     }
     
     func checkoutPressed(sender: UIButton) {
@@ -132,23 +139,29 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                 if successfulResponse && error == nil {
                     let order = PFObject(className:"Orders")
                     //need to do the same for DelInfo
-                    var delStr:String = ""
+                    var delStr="", address="", town="", zip="", apt="", comments=""
                     if (self.delivery == true) {
                         delStr = "delivery"
+                        address = self.DelInfo.address
+                        town = self.DelInfo.town
+                        zip = self.DelInfo.zip
+                        apt = self.DelInfo.apt
+                        comments = self.DelInfo.comments
                     }
                     else {
                         delStr = "carryout"
+                        address = "CARRYOUT"
                     }
                     
                     order["filled"] = false
-                    order["address"] = self.DelInfo.address
-                    order["town"] = self.DelInfo.town
-                    order["zip"] = self.DelInfo.zip
-                    order["apt"] = self.DelInfo.apt
-                    order["comments"] = self.DelInfo.comments
+                    order["address"] = address
+                    order["town"] = town
+                    order["zip"] = zip
+                    order["apt"] = apt
+                    order["comments"] = comments
                     order["order_total"] = self.calculateTotalPrice()
                     order["delivery"] = delStr
-                    order["phone"] = self.DelInfo.phone
+                    order["phone"] = "Test Phone"
                     order["details"] = Order.items
                     order["restaurant"] = Order.Restaurant.valueForKey("Name") as! String!
                     order.saveInBackgroundWithBlock {
@@ -279,7 +292,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.itemPrice.text = "$\(String.localizedStringWithFormat("%.2f %@", (Order.tax),""))"
             }
             else if (indexPath.row == Order.items.count + 1) {
-                cell.itemName.text = "Tip"
+                cell.itemName.text = "Tip (tap to change)"
                 cell.itemPrice.text = "$\(String.localizedStringWithFormat("%.2f %@", (Order.tip),""))"
             }
             else if (indexPath.row == Order.items.count + 2) {
@@ -312,6 +325,24 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                 self.navigationController?.pushViewController(mapViewControllerObejct!, animated: true)
             }
         }
+        else {
+            if (indexPath.row == Order.items.count + 1) {
+                self.showTipPickerView(orderTableView.cellForRowAtIndexPath(indexPath)!)
+            }
+        }
+    }
+    
+    func showTipPickerView(sender: UITableViewCell) {
+        let total = calculateItemsTotal()
+        ActionSheetStringPicker.showPickerWithTitle("Multiple String Picker", rows:
+            ["No Tip - $0.00", "5% - $\(total*0.05)", "10% - $\(total*0.10)", "15% - $\(total*0.15)", "20% - $\(total*0.20)", "25% - $\(total*0.25)"], initialSelection: 1, doneBlock: {
+                picker, values, indexes in
+                
+                print("values = \(values)")
+                print("indexes = \(indexes)")
+                print("picker = \(picker)")
+                return
+            }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
     
     func calculateTotalPrice() -> Double {
@@ -321,6 +352,14 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         }
         sum += Order.tax
         sum += Order.tip
+        return sum
+    }
+    
+    func calculateItemsTotal() -> Double {
+        var sum:Double = 0
+        for item in Order.items {
+            sum += (item[2] as? Double)!
+        }
         return sum
     }
 

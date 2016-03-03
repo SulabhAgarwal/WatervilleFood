@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WatervilleFood/AIFlatSwitch.framework"
+  install_framework "Pods-WatervilleFood/ActionSheetPicker_3_0.framework"
   install_framework "Pods-WatervilleFood/Bolts.framework"
   install_framework "Pods-WatervilleFood/FBSDKCoreKit.framework"
   install_framework "Pods-WatervilleFood/FBSDKLoginKit.framework"
@@ -100,6 +101,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WatervilleFood/AIFlatSwitch.framework"
+  install_framework "Pods-WatervilleFood/ActionSheetPicker_3_0.framework"
   install_framework "Pods-WatervilleFood/Bolts.framework"
   install_framework "Pods-WatervilleFood/FBSDKCoreKit.framework"
   install_framework "Pods-WatervilleFood/FBSDKLoginKit.framework"

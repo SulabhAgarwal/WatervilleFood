@@ -13,6 +13,7 @@ target ‘WatervilleFood’ do
 	pod 'UIColor_Hex_Swift'
     pod 'ZFRippleButton'
     pod 'TextFieldEffects'
+    pod 'ActionSheetPicker-3.0', '~> 2.0.5'
 end
 
 post_install do |installer|
