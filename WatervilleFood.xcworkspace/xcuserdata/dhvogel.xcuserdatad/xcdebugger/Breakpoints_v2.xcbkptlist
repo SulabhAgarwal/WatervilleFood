@@ -111,5 +111,69 @@
             endingLineNumber = "13">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WatervilleFood/CheckoutViewController.swift"
+            timestampString = "478717767.646438"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
+            landmarkName = "showTipPickerView(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WatervilleFood.CheckoutViewController.showTipPickerView (WatervilleFood.CheckoutViewController)(__ObjC.UITableViewCell) -&gt; ()"
+                  moduleName = "WatervilleFood"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dhvogel/Documents/WatervilleFood/WatervilleFood/WatervilleFood/CheckoutViewController.swift"
+                  timestampString = "478716978.860917"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "338"
+                  endingLineNumber = "338"
+                  offsetFromSymbolStart = "225">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WatervilleFood.CheckoutViewController.(showTipPickerView (WatervilleFood.CheckoutViewController) -&gt; (__ObjC.UITableViewCell) -&gt; ()).(closure #1)"
+                  moduleName = "WatervilleFood"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dhvogel/Documents/WatervilleFood/WatervilleFood/WatervilleFood/CheckoutViewController.swift"
+                  timestampString = "478716978.935314"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "341"
+                  endingLineNumber = "341"
+                  offsetFromSymbolStart = "30">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WatervilleFood/CheckoutViewController.swift"
+            timestampString = "478717767.646438"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
+            landmarkName = "showTipPickerView(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

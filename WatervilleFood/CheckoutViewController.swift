@@ -24,6 +24,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     var DelInfo:DeliveryInfo = DeliveryInfo()
     let backendChargeURLString = "https://danvtest.herokuapp.com/"
     var delivery:Bool!
+    let CheckoutButton : UIButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +70,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         
-        let CheckoutButton : UIButton = UIButton(frame: CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40))
+        CheckoutButton.frame = CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40)
         CheckoutButton.setTitle("Tap to pay: $\(String.localizedStringWithFormat("%.2f %@", (self.calculateTotalPrice()),""))", forState: UIControlState.Normal)
         CheckoutButton.layer.backgroundColor = UIColor.blackColor().CGColor
         CheckoutButton.addTarget(self, action: "checkoutPressed:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -273,6 +274,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
             return cell
         }
         else {
+            print("RELOADED!")
             let cell = tableView.dequeueReusableCellWithIdentifier("CartCell", forIndexPath: indexPath) as! CustomCartCell
             if (indexPath.row < Order.items.count) {
                 
@@ -288,6 +290,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
             else if (indexPath.row == Order.items.count) {
+                print(Order.tax)
                 cell.itemName.text = "Tax"
                 cell.itemPrice.text = "$\(String.localizedStringWithFormat("%.2f %@", (Order.tax),""))"
             }
@@ -335,14 +338,19 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     func showTipPickerView(sender: UITableViewCell) {
         let total = calculateItemsTotal()
         ActionSheetStringPicker.showPickerWithTitle("Multiple String Picker", rows:
-            ["No Tip - $0.00", "5% - $\(total*0.05)", "10% - $\(total*0.10)", "15% - $\(total*0.15)", "20% - $\(total*0.20)", "25% - $\(total*0.25)"], initialSelection: 1, doneBlock: {
-                picker, values, indexes in
+            ["No Tip - $0.00", "5% - $\(createRoundedDollarString(total*0.05))", "10% - $\(createRoundedDollarString(total*0.10))", "15% - $\(createRoundedDollarString(total*0.15))", "20% - $\(createRoundedDollarString(total*0.20))", "25% - $\(createRoundedDollarString(total*0.25))"], initialSelection: 2, doneBlock: {
+                picker, value, indexes in
                 
-                print("values = \(values)")
-                print("indexes = \(indexes)")
-                print("picker = \(picker)")
+                Order.tip = (Double(value)*0.05) * self.calculateItemsTotal()
+                self.CheckoutButton.setTitle("Tap to pay: $\(String.localizedStringWithFormat("%.2f %@", (self.calculateTotalPrice()),""))", forState: UIControlState.Normal)
+                self.orderTableView.reloadData()
+                
                 return
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
+    }
+    
+    func createRoundedDollarString(amount:Double) -> String {
+        return String.localizedStringWithFormat("%.2f %@", (amount),"")
     }
     
     func calculateTotalPrice() -> Double {
