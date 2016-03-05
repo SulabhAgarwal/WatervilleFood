@@ -24,6 +24,7 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
     let addAddressButton : UIButton = UIButton()
     var DelInfo = DeliveryInfo()
     var delegate:DeliveryInfoDelegate! = nil
+    var KeyboardHeight:CGFloat! = nil
     
     
     override func viewDidLoad() {
@@ -38,15 +39,14 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.navigationItem.titleView = titleButton
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        
-        tableView.frame = CGRectMake(5, 0, SCREEN_BOUNDS.width-10, SCREEN_BOUNDS.height/2)
+        tableView.frame = CGRectMake(5,2,SCREEN_BOUNDS.width-10,259)
         tableView.layer.borderWidth = 2
         tableView.dataSource = self
         tableView.delegate = self
         tableView.scrollEnabled = false
         tableView.separatorStyle = .None
         tableView.rowHeight = 23
+        
         self.view.addSubview(tableView)
         
         tableView.registerNib(UINib(nibName: "DeliveryTableCell", bundle: nil), forCellReuseIdentifier: "DeliveryCell")
@@ -71,13 +71,7 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
         self.view.viewWithTag(textField.tag + 1)?.becomeFirstResponder()
         return true
     }
-    
-    func keyboardWillShow(notification:NSNotification) {
-        let userInfo:NSDictionary = notification.userInfo!
-        let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
-        let keyboardRectangle = keyboardFrame.CGRectValue()
-        tableView.frame = CGRectMake(5,2,SCREEN_BOUNDS.width-10, SCREEN_BOUNDS.height - keyboardRectangle.height - 5)
-    }
+
 
     
     
