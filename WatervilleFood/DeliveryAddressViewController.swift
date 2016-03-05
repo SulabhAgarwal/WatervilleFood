@@ -19,8 +19,8 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
     
     let tableView:UITableView = UITableView()
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
-    let PLACEHOLDERS:[String] = ["Address*", "Town*", "Apt/Suite","Zip*", "Phone*", "Comments"]
-    var AddressDict:[String:String] = ["Address*":"", "Town*":"", "Apt/Suite":"","Zip*":"", "Phone*":"", "Comments":""]
+    let PLACEHOLDERS:[String] = ["First Name*", "Last Name*", "Address*", "Town*", "Apt/Suite","Zip*", "Phone*", "Comments"]
+    var AddressDict:[String:String] = ["First Name*":"", "Last Name*":"", "Address*":"", "Town*":"", "Apt/Suite":"","Zip*":"", "Phone*":"", "Comments":""]
     let addAddressButton : UIButton = UIButton()
     var DelInfo = DeliveryInfo()
     var delegate:DeliveryInfoDelegate! = nil
@@ -38,17 +38,23 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.navigationItem.titleView = titleButton
         
-        tableView.frame = CGRectMake(5, 5, SCREEN_BOUNDS.width-10, SCREEN_BOUNDS.height-60)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        
+        tableView.frame = CGRectMake(5, 0, SCREEN_BOUNDS.width-10, SCREEN_BOUNDS.height/2)
+        tableView.layer.borderWidth = 2
         tableView.dataSource = self
         tableView.delegate = self
         tableView.scrollEnabled = false
+        tableView.separatorStyle = .None
+        tableView.rowHeight = 23
         self.view.addSubview(tableView)
         
         tableView.registerNib(UINib(nibName: "DeliveryTableCell", bundle: nil), forCellReuseIdentifier: "DeliveryCell")
         tableView.separatorColor = UIColor.blackColor()
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        self.view.viewWithTag(0)!.becomeFirstResponder()
         
-         addAddressButton.frame = CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40)
+        addAddressButton.frame = CGRectMake(20,SCREEN_BOUNDS.height-50,SCREEN_BOUNDS.width-40,40)
         addAddressButton.setTitle("Use this address", forState: UIControlState.Normal)
         addAddressButton.layer.backgroundColor = UIColor.blackColor().CGColor
         addAddressButton.addTarget(self, action: "saveAddressPressed:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -59,27 +65,38 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        if (textField.tag == 5) {
+        if (textField.tag == 7) {
             return false
         }
         self.view.viewWithTag(textField.tag + 1)?.becomeFirstResponder()
         return true
     }
     
+    func keyboardWillShow(notification:NSNotification) {
+        let userInfo:NSDictionary = notification.userInfo!
+        let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.CGRectValue()
+        tableView.frame = CGRectMake(5,2,SCREEN_BOUNDS.width-10, SCREEN_BOUNDS.height - keyboardRectangle.height - 5)
+    }
+
+    
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("DeliveryCell", forIndexPath: indexPath) as! DeliveryTableCell
-        let textField:HoshiTextField = HoshiTextField(frame: CGRectMake(0,0,cell.bounds.width,cell.bounds.height))
+        let textField:KaedeTextField = KaedeTextField(frame: CGRectMake(0,0,cell.bounds.width,cell.bounds.height))
         let attributes = [
-            NSForegroundColorAttributeName: UIColor.blackColor(),
             NSFontAttributeName : UIFont(name: "Futura", size: 16)!
         ]
-        textField.attributedPlaceholder = NSAttributedString(string: Array(AddressDict.keys)[indexPath.row], attributes:attributes)
+        textField.placeholder =  Array(AddressDict.keys)[indexPath.row]
         textField.font = UIFont(name: "Futura", size: 16)!
         textField.autocorrectionType = .No
         textField.tag = indexPath.row
+        
+        if (textField.tag == 0) {
+            textField.becomeFirstResponder()
+        }
 
         
         cell.addSubview(textField)
@@ -100,12 +117,13 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 50;
-    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 6
+        return PLACEHOLDERS.count
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
     }
     
     func checkEntries() -> Bool {

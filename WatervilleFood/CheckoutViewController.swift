@@ -46,7 +46,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
             detailsHeight = 214
         }
         else {
-            detailsHeight = 180
+            detailsHeight = 178
         }
         detailsTableView.frame = CGRectMake(5,5,SCREEN_BOUNDS.width-10,detailsHeight)
         detailsTableView.layer.borderWidth = 2
