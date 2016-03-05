@@ -9,6 +9,8 @@
 import Foundation
 
 class DeliveryInfo {
+    var fname:String!
+    var lname:String!
     var address:String!
     var town:String!
     var apt:String!

@@ -22,7 +22,7 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     let orderTableView:UITableView = UITableView()
     var PmtInfo:PaymentInfo = PaymentInfo()
     var DelInfo:DeliveryInfo = DeliveryInfo()
-    let backendChargeURLString = "https://danvtest.herokuapp.com/"
+    let backendChargeURLString = "https://localhost:4567"
     var delivery:Bool!
     let CheckoutButton : UIButton = UIButton()
     
@@ -122,8 +122,8 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func completeOrder() {
-        
-        if let url = NSURL(string: "http://northeatspaymentbackend.herokuapp.com/charge") {
+        //northeatspaymentbackend.herokuapp.com
+        if let url = NSURL(string: "http://localhost:4567/charge") {
             
             let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
             let request = NSMutableURLRequest(URL: url)
@@ -133,7 +133,8 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
             let description = "<Description>"
             let token = self.PmtInfo.tokenId
             let accountID = Order.Restaurant.valueForKey("StripeAccountID") as! String!
-            let postBody = "stripeToken=\(token)&amount=\(Int(round(amount*100)))&description=\(description)&customerID=\(customerID)&accountID=\(accountID)"
+            let email = Order.Restaurant.valueForKey("Email") as! String!
+            let postBody = "stripeToken=\(token)&amount=\(Int(round(amount*100)))&description=\(description)&customerID=\(customerID)&accountID=\(accountID)&email=\(email)"
             let postData = postBody.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             session.uploadTaskWithRequest(request, fromData: postData, completionHandler: { data, response, error in
                 let successfulResponse = (response as? NSHTTPURLResponse)?.statusCode == 200
@@ -164,6 +165,8 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
                     order["delivery"] = delStr
                     order["phone"] = "Test Phone"
                     order["details"] = Order.items
+//                    order["Fname"] = self.DelInfo.fname
+//                    order["Lname"] = self.DelInfo.lname
                     order["restaurant"] = Order.Restaurant.valueForKey("Name") as! String!
                     order.saveInBackgroundWithBlock {
                         (success: Bool, error: NSError?) -> Void in
@@ -185,11 +188,22 @@ class CheckoutViewController: UIViewController, UITableViewDelegate, UITableView
 
                 } else {
                     if error != nil {
-                        print("error \(error?.description)")
-                        //completion(.Failure, error)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            SwiftSpinner.hide()
+                            let alertview = JSSAlertView().danger(self, title: "Error", text: "Order could not be submitted. Check your internet connectivity.")
+                            alertview.setTitleFont("Futura")
+                            alertview.setTextFont("Futura")
+                            alertview.setButtonFont("Futura")
+                        })
+                        
                     } else {
-                        print("error(s)")
-                        //completion(.Failure, NSError(domain: StripeDomain, code: 50, userInfo: [NSLocalizedDescriptionKey: "There was an error communicating with your payment backend."]))
+                        dispatch_async(dispatch_get_main_queue(), {
+                            SwiftSpinner.hide()
+                            let alertview = JSSAlertView().danger(self, title: "Error", text: "Order could not be submitted. Check your internet connectivity.")
+                            alertview.setTitleFont("Futura")
+                            alertview.setTextFont("Futura")
+                            alertview.setButtonFont("Futura")
+                        })
                     }
                     
                 }

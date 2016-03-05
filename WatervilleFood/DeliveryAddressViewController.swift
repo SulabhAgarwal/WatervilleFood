@@ -19,8 +19,8 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
     
     let tableView:UITableView = UITableView()
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
-    let PLACEHOLDERS:[String] = ["First Name*", "Last Name*", "Address*", "Town*", "Apt/Suite","Zip*", "Phone*", "Comments"]
-    var AddressDict:[String:String] = ["First Name*":"", "Last Name*":"", "Address*":"", "Town*":"", "Apt/Suite":"","Zip*":"", "Phone*":"", "Comments":""]
+    let PLACEHOLDERS:[String] = ["First Name*", "Last Name*", "Address*", "Town*", "Apt/Suite/Dorm","Zip*", "Phone*", "Comments"]
+    var AddressDict:[String:String] = ["First Name*":"", "Last Name*":"", "Address*":"", "Town*":"", "Apt/Suite/Dorm":"","Zip*":"", "Phone*":"", "Comments":""]
     let addAddressButton : UIButton = UIButton()
     var DelInfo = DeliveryInfo()
     var delegate:DeliveryInfoDelegate! = nil
@@ -122,7 +122,7 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
     
     func checkEntries() -> Bool {
         for (key, value) in AddressDict {
-            if (value == "" && key != "Comments" && key != "Apt/Suite") {
+            if (value == "" && key != "Comments" && key != "Apt/Suite/Dorm") {
                 return false
             }
         }
@@ -131,8 +131,10 @@ class DeliveryAddressViewController: UIViewController, UITableViewDataSource, UI
     
     func saveAddressPressed(sender:UIButton) {
         self.DelInfo.address = AddressDict["Address*"]
-        self.DelInfo.apt = AddressDict["Apt/Suite"]
+        self.DelInfo.apt = AddressDict["Apt/Suite/Dorm"]
         self.DelInfo.comments = AddressDict["Comments"]
+        self.DelInfo.fname = AddressDict["First Name*"]
+        self.DelInfo.lname = AddressDict["Last Name*"]
         print("COMMENTS\(self.DelInfo.comments)")
         self.DelInfo.town = AddressDict["Town*"]
         self.DelInfo.phone = AddressDict["Phone*"]
